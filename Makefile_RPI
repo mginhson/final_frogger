@@ -64,4 +64,4 @@ High_scores.o: highScores/High_scores.h highScores/High_scores.c menus/top.h
 	gcc -Wall -c highScores/High_scores.c
 
 clean:
-	rm ${MODULES} ${EXEC_NAME} *.o
+	rm ${MODULES} ${EXEC_NAME} 
