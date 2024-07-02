@@ -332,7 +332,7 @@ int gameTick(int32_t ms_since_last_tick)
       //No collision, do nothing
     }
     
-    renderWorld(&map, iobjs, 1, time_left_on_level);
+    renderWorld(&map, iobjs, 1, time_left_on_level/1000);
 }
 
 
