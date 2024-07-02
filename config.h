@@ -39,6 +39,10 @@
     #define MS_BASE_OBJECT_SPEED 700
     #define TIME_PER_LEVEL_MS 32000
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> abd120907a2addb471ecc62f6da62f3c8170378c
 #endif
 
 

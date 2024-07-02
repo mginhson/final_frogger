@@ -51,6 +51,7 @@
     const object_kind_t lilypad_object_kind = {
         .hitbox_width=REZISE(NORMAL_SIZE),
         .attr = {.canKill = 1, .isEquippable = 0, .canMove = 0},
+        .lilyflag=1,
     };
 
 
@@ -261,11 +262,11 @@
             .background = finish_line,
             .kind = &lilypad_object_kind, //why not lilypad here?
             .objects = {
-                [0]={.position=REZISE(NORMAL_SIZE)*1,.doesExist=0,.lily_flag=1},
-                [1]={.position=REZISE(NORMAL_SIZE)*3,.doesExist=0,.lily_flag=1},
-                [2]={.position=REZISE(NORMAL_SIZE)*5,.doesExist=0,.lily_flag=1},
-                [3]={.position=REZISE(NORMAL_SIZE)*7,.doesExist=0,.lily_flag=1},
-                [4]={.position=REZISE(NORMAL_SIZE)*9,.doesExist=0,.lily_flag=1}
+                [0]={.position=REZISE(NORMAL_SIZE*1),.doesExist=0,},
+                [1]={.position=REZISE(NORMAL_SIZE*3),.doesExist=0,},
+                [2]={.position=REZISE(NORMAL_SIZE*5),.doesExist=0,},
+                [3]={.position=REZISE(NORMAL_SIZE*7),.doesExist=0,},
+                [4]={.position=REZISE(NORMAL_SIZE*9),.doesExist=0,}
             }   
             
         }
@@ -310,7 +311,8 @@
 
     const object_kind_t lilypad_object_kind = {
         .hitbox_width=1,
-        .attr = {.canKill = 1, .isEquippable = 0, .canMove = 0},
+        .attr = {.canKill = 0, .isEquippable = 0, .canMove = 0},
+        .lilyflag=1,
         
     };
     static const lane_t road_arquetypes[] = 
@@ -521,11 +523,11 @@
             .background = finish_line,
             .kind = &lilypad_object_kind,
             .objects = {
-                [0]={.position=ENDSLOT_1,.doesExist=0,.lily_flag = 1},
-                [1]={.position=ENDSLOT_2,.doesExist=0,.lily_flag = 1},
-                [2]={.position=ENDSLOT_3,.doesExist=0,.lily_flag = 1},
-                [3]={.position=ENDSLOT_4,.doesExist=0,.lily_flag = 1},
-                [4]={.position=ENDSLOT_5,.doesExist=0,.lily_flag = 1}
+                [0]={.position=ENDSLOT_1,.doesExist=0,},
+                [1]={.position=ENDSLOT_2,.doesExist=0,},
+                [2]={.position=ENDSLOT_3,.doesExist=0,},
+                [3]={.position=ENDSLOT_4,.doesExist=0,},
+                [4]={.position=ENDSLOT_5,.doesExist=0,}
             }   
         }
     };
@@ -565,7 +567,7 @@ int32_t fillMap(map_t *_map, uint32_t _level)
         switch(i)
         {
             case 0: //finish line
-                _map->lanes[i] = finish_line_arquetypes[rand() % finish_line_arquetypes_elements];
+                _map->lanes[i] = finish_line_arquetypes[0];
                 break;
 
             case 1:

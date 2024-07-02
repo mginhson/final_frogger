@@ -29,7 +29,7 @@ typedef struct{
 
 
 typedef struct{
-
+    const uint32_t lilyflag;
     const object_graphics_t graphics;
     const object_attributes_t attr;
     const uint32_t hitbox_width; //From left side, should correspond with graphics width!!!
@@ -41,7 +41,7 @@ typedef struct{
     int32_t position;
     animation_t animation;
     uint32_t doesExist :1;
-    uint32_t lily_flag :1;
+
 }object_t;
 
 typedef struct{
