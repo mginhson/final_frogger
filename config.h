@@ -32,7 +32,7 @@
     #define TIME_PER_LEVEL_MS 30000
     #define TIME_MICROSECONDS 10000
 
-#elif 
+#else
     #define RPI
     #define LANE_X_PIXELS 12
     #define LANE_Y_PIXELS 16
@@ -46,8 +46,7 @@
     #define MS_BASE_OBJECT_SPEED 700
     #define TIME_PER_LEVEL_MS 32000
 
-#else
-    #error "No platform defined"
+
 #endif
 
 

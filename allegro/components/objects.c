@@ -68,7 +68,7 @@ void draw_bus(char direction, float dx, float dy){
 void draw_final_frog(float dx, float dy){
     //assets_t * final_frog = get_special_assets() + spaecial
 }
-void draw_frog(independent_object_t * frog, float dx, float dy){
+void draw_frog(const independent_object_t * frog, float dx, float dy){
     assets_t * frogs_assets = get_frog_assets();
     float sx = frogs_assets->sx;
     float sy = frogs_assets->sy;
