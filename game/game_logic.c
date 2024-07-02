@@ -89,6 +89,7 @@ int gameTick(int32_t ms_since_last_tick)
 
      //puts("Map before executing gameTick:\n");
     printMap(&map,0);
+    
     ms_cooldown -= ms_since_last_tick;
     time_left_on_level -= ms_since_last_tick;
     
@@ -156,7 +157,6 @@ int gameTick(int32_t ms_since_last_tick)
 
     //Check for collisions after movement
     collision = collisionAnalysis();
-
 
     
     for(i=0; i < lane_bound; i++)
@@ -229,7 +229,7 @@ int gameTick(int32_t ms_since_last_tick)
     {
         collision=collisionAnalysis();
     }
-
+    
     if (collision != NULL && collision->attr.canKill)
     {
         if (--remainingLives == 0)
@@ -331,7 +331,7 @@ int gameTick(int32_t ms_since_last_tick)
     {
       //No collision, do nothing
     }
-    
+
     renderWorld(&map, iobjs, 1, time_left_on_level/1000);
 }
 
