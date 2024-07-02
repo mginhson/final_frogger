@@ -2,9 +2,22 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <time.h>
-#include "game_logic.h"
+#include <unistd.h>
+
+#if defined(PC)
+    #include "game_logic.h"
+    #include "../entities/entities.h"
+    #include "../allegro/input/input.h"
+    
+#elif defined(RPI)
+    #include "game_logic.h"
 #include "../entities/entities.h"
-#include "../allegro/input/input.h"
+#include "../input/input.h"
+#include "../finalAnimation/looseLife.h"
+#include "../finalAnimation/final.h"
+#include "../audio/soundTrack.h"
+#include "../mundo/renderWorld.h"
+#endif
 
 
 static void updateMap(void);
@@ -19,6 +32,7 @@ typedef enum{RANITA_UP,RANITA_DOWN,RANITA_LEFT,RANITA_RIGHT}ranita_logic_directi
 static void triggerRanitaMovement(ranita_logic_direction_t _direction);
 static void triggerDeath(void);
 static void gameOver(void);
+static char * intToString (int puntos);
 
 static uint32_t remainingLives = 3;
 static map_t map;
@@ -39,7 +53,22 @@ static int32_t time_left_on_level = 0;
         .values.position = 0,
     };
 #elif defined(RPI)
+    independent_object_t ranita = {
+    .params = {
+        .hitbox_width = 1,
+        .attr = {.canKill=0, .canMove=1, .isEquippable=0},
+                
+    }, 
+    .hitbox_height = LANE_PIXEL_HEIGHT,
+    .y_position = LANE_Y_PIXELS-1 - LANE_PIXEL_HEIGHT + 1,
+    .values.position = 0,
+    
+};
+
 #endif
+
+int pts = 0;
+
 
 static const independent_object_t * iobjs[10] = {[0]=&ranita,NULL,NULL,NULL,NULL,NULL};
 
@@ -56,9 +85,28 @@ void gameTick(int32_t ms_since_last_tick)
     int32_t start_object_x,end_object_x;
     const object_kind_t * collision ;
 
-
-    
+     //puts("Map before executing gameTick:\n");
+    printMap(&map,0);
     ms_cooldown -= ms_since_last_tick;
+    time_left_on_level -= ms_since_last_tick;
+    
+    if(time_left_on_level <= 0)
+    {
+        resetRanitaPosition();
+        time_left_on_level = TIME_PER_LEVEL_MS;
+        remainingLives--;
+        #if defined(RPI)
+            looseLife(remainingLives);
+        #endif
+        if(remainingLives == 0)
+        {
+            gameOver();
+            return MENU;
+        }
+        
+    }
+
+
     if(ms_cooldown <= 0) //we can check for movement again 
     {
         
@@ -96,6 +144,7 @@ void gameTick(int32_t ms_since_last_tick)
                 break;
                 
             case _PAUSE:
+                return PAUSAA;
                 break;
 
             default:
@@ -183,11 +232,18 @@ void gameTick(int32_t ms_since_last_tick)
     {
         if (--remainingLives == 0)
         {
+            #if defined(RPI)
+                onceDead(intToString(pts), pts);
+            #endif
             gameOver();
         }
         else
         {
             
+            #if defined(RPI)
+                looseLife(remainingLives);
+            #endif
+            time_left_on_level = TIME_PER_LEVEL_MS;
             resetRanitaPosition();
         }
             
@@ -205,6 +261,25 @@ void gameTick(int32_t ms_since_last_tick)
             {
                 ranita.values.position-=1;
             }
+
+            if(ranita.values.position < 0 || ranita.values.position >= LANE_X_PIXELS)
+            {
+                if(--remainingLives == 0)
+                {
+                    #if defined(RPI)
+                        onceDead(intToString(pts), pts);
+                    #endif
+                    return MENU;
+                }   
+                else
+                {
+                    time_left_on_level = TIME_PER_LEVEL_MS;
+                    #if defined(RPI)
+                        looseLife(remainingLives);
+                    #endif
+                    resetRanitaPosition();
+                }
+            }
         }   
         
     }
@@ -214,11 +289,17 @@ void gameTick(int32_t ms_since_last_tick)
         triggerDeath();
         if(--remainingLives == 0)
         {
-            gameOver();
+            #if defined(RPI)
+                onceDead(intToString(pts), pts);
+            #endif
+            return MENU;
         }
         else
         {
             time_left_on_level = TIME_PER_LEVEL_MS;
+            #if defined(RPI)
+                looseLife(remainingLives);
+            #endif
             resetRanitaPosition();
         }
     }
@@ -271,7 +352,11 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
             }
             else
             {
+                #if defined(RPI)
+                    stepSound();
+                #endif
                 ranita.y_position += ranita.hitbox_height;
+                pts--;
             }
             break;
 
@@ -284,7 +369,11 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
             }
             else
             {
+                #if defined(RPI)
+                    stepSound();
+                #endif
                 ranita.y_position -= ranita.hitbox_height;
+                pts++;
             }
 
             break;
@@ -432,11 +521,43 @@ static void gameOver(void)
 
 void initializeGameLogic(void)
 {
+    pts = 0;
     srand(time(NULL));
     level = 0;
+    remainingLives = 3;
+    time_left_on_level = TIME_PER_LEVEL_MS;
     fillMap(&map,level);
-    printMap(&map,1);
-
     resetRanitaPosition();
     printf("lane bound = %d\n",lane_bound);
+}
+
+static char * intToString (int puntos){
+    int arr_alpha [3];
+    static char arr_chars[3];
+    int cont=0;
+    int num_aux = puntos;
+    for (int j = 0; num_aux > 0; j++){
+        arr_alpha [j] = (num_aux%10);
+        num_aux /= 10;
+        cont++;
+    }
+    switch (cont){
+        case 3:
+            for (int k=0; k<cont; k++){
+                arr_chars[k] = arr_alpha[cont-1-k] + '0';
+            }
+            break;
+        case 2:
+            arr_chars[0] = '0';
+            for (int k=1; k<=cont; k++){
+                arr_chars[k] = arr_alpha [cont-k] + '0';
+            }
+            break;
+        case 1:
+            arr_chars[0] = '0';
+            arr_chars[1] = '0';
+            arr_chars[2] = arr_alpha[0] + '0';
+            break;
+    }
+    return arr_chars;
 }
