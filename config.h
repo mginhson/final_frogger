@@ -12,7 +12,7 @@
 
 
 
-#if defined(PC)
+#ifdef PC
     #define SHORT_SIZE 8
     #define NORMAL_SIZE 16
     #define BIG_SIZE 32
@@ -32,7 +32,8 @@
     #define TIME_PER_LEVEL_MS 30000
     #define TIME_MICROSECONDS 10000
 
-#elif defined(RPI)
+#elif 
+    #define RPI
     #define LANE_X_PIXELS 12
     #define LANE_Y_PIXELS 16
     #define ENDSLOT_1 2
