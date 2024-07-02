@@ -12,7 +12,7 @@ static void draw_lane_objects(lane_t * lane, int row);
 
 
 
-void renderWorld(map_t *map, independent_object_t* frog[], int size, int tiempo){
+void renderWorld(map_t *map, const independent_object_t* frog[], int size, int tiempo){
     
     int i;
     al_clear_to_color(al_map_rgb(0, 0, 0));

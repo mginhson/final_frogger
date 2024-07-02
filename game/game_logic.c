@@ -8,7 +8,7 @@
     #include "game_logic.h"
     #include "../entities/entities.h"
     #include "../allegro/input/input.h"
-
+    #include "../allegro/render.h"
 
 #elif defined(RPI)
     #include "game_logic.h"
@@ -333,6 +333,8 @@ int gameTick(int32_t ms_since_last_tick)
     }
 
     renderWorld(&map, iobjs, 1, time_left_on_level/1000);
+
+    return NONE;
 }
 
 
@@ -435,7 +437,7 @@ static const object_kind_t * collisionAnalysis(void)
     printf("ranita.y_position = %d\nranita.hitbox_height = %d\nranita.position = %d\nranita.params.hitbox_width=%d\n\n",ranita.y_position,ranita.hitbox_height,ranita.values.position,ranita.params.hitbox_width);
     
     end_ranita_y = ranita.y_position + ranita.hitbox_height - 1;//Porque ranita.y_position ya tienen en cuenta el primer pixel
-    printf("%d\n", start_ranita_y);
+    
     start_ranita_y = ranita.y_position; 
     start_ranita_x = ranita.values.position;
     end_ranita_x = ranita.values.position + ranita.params.hitbox_width - 1; //Porque position tiene en cuenta el primer pixel
