@@ -2,11 +2,21 @@ CC := gcc
 CFLAGS := -Wall
 DEFINE_ARGS := -DRPI
 EXEC_NAME := frogger
-MODULES := game_logic.o frogger.o entities.o inicialization/inicialization.o \
-		   driv/formas.o driv/disdrv.o driv/joydrv.o menus/menu.o menus/pause.o menus/top.o \
-		   finalAnimation/final.o mundo/renderWorld.o audio/soundTrack.o \
-		   audio/libAudioSDL2.o  input/input.o finalAnimation/looseLife.o menu_logic.o\
+MODULES_1 := game_logic.o frogger.o entities.o inicialization/inicialization.o \
+		   driv/formas.o  menus/menu.o menus/pause.o menus/top.o \
+		   finalAnimation/final.o mundo/renderWorld.o  \
+		   input/input.o finalAnimation/looseLife.o menu_logic.o\
 		   highScores/High_scores.o
+
+
+
+MODULES := driv/disdrv.o driv/joydrv.o audio/soundTrack.o audio/libAudioSDL2.o\
+		   game_logic.o frogger.o entities.o inicialization/inicialization.o \
+		   driv/formas.o  menus/menu.o menus/pause.o menus/top.o \
+		   finalAnimation/final.o mundo/renderWorld.o  \
+		   input/input.o finalAnimation/looseLife.o menu_logic.o\
+		   highScores/High_scores.o
+
 
 LIBRARIES := -lSDL2
 
@@ -64,4 +74,4 @@ High_scores.o: highScores/High_scores.h highScores/High_scores.c menus/top.h
 	gcc -Wall -c highScores/High_scores.c ${DEFINE_ARGS}
 
 clean:
-	rm ${MODULES} ${EXEC_NAME} 
+	rm ${MODULES_1} ${EXEC_NAME} 
