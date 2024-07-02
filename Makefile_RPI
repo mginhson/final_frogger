@@ -28,40 +28,40 @@ entities.o: entities/entities.c entities/entities.h config.h
 	${CC} -o entities.o -c entities/entities.c ${CFLAGS} ${DEFINE_ARGS} ${LIBRARIES}
 
 inicialization.o: inicialization/inicialization.c  inicialization/inicialization.h driv/formas.h driv/disdrv.h driv/joydrv.h  audio/audio.h
-	gcc -Wall -c inicialization/inicialization.c ${LIBRARIES}
+	gcc -Wall -c inicialization/inicialization.c ${LIBRARIES} ${DEFINE_ARGS}
 
 formas.o: driv/formas.c driv/formas.h driv/disdrv.h
-	gcc -Wall -c driv/formas.c ${LIBRARIES}
+	gcc -Wall -c driv/formas.c ${LIBRARIES} ${DEFINE_ARGS}
 
 menu.o: menus/menu.c menus/menu.h driv/disdrv.h driv/joydrv.h driv/formas.h
-	gcc -Wall -c menus/menu.c ${LIBRARIES}
+	gcc -Wall -c menus/menu.c ${LIBRARIES} ${DEFINE_ARGS}
 
 pause.o: menus/pause.c menus/pause.h driv/disdrv.h driv/joydrv.h driv/formas.h
-	gcc -Wall -c menus/pause.c ${LIBRARIES}
-
+	gcc -Wall -c menus/pause.c ${LIBRARIES} ${DEFINE_ARGS}
+ 
 top.o: menus/top.c menus/top.h driv/disdrv.h driv/joydrv.h driv/formas.h 
-	gcc -Wall -c menus/top.c ${LIBRARIES}
+	gcc -Wall -c menus/top.c ${LIBRARIES} ${DEFINE_ARGS}
 
 final.o: finalAnimation/final.c finalAnimation/final.h driv/disdrv.h driv/joydrv.h driv/formas.h highScores/High_scores.h
-	gcc -Wall -c finalAnimation/final.c ${LIBRARIES}
+	gcc -Wall -c finalAnimation/final.c ${LIBRARIES} ${DEFINE_ARGS}
 
 looseLife.o: finalAnimation/looseLife.c finalAnimation/looseLife.h driv/disdrv.h driv/joydrv.h driv/formas.h audio/soundTrack.h
-	gcc -Wall -c finalAnimation/looseLife.c ${LIBRARIES}
+	gcc -Wall -c finalAnimation/looseLife.c ${LIBRARIES} ${DEFINE_ARGS}
 
 soundTrack.o: audio/soundTrack.h audio/audio.h audio/soundTrack.c 
-	gcc -Wall -c audio/soundTrack.c ${LIBRARIES}
+	gcc -Wall -c audio/soundTrack.c ${LIBRARIES} ${DEFINE_ARGS}
 
 input.o: input/input.h input/input.c driv/joydrv.h
-	gcc -Wall -c input/input.c ${LIBRARIES}
+	gcc -Wall -c input/input.c ${LIBRARIES} ${DEFINE_ARGS}
 
 renderWorld.o: driv/disdrv.h driv/formas.h mundo/renderWorld.h mundo/renderWorld.c audio/soundTrack.h
-	gcc -Wall -c mundo/renderWorld.c ${LIBRARIES}
+	gcc -Wall -c mundo/renderWorld.c ${LIBRARIES} ${DEFINE_ARGS}
 
 menu_logic.o: menu_logic/menu_logic.c menu_logic/menu_logic.h menus/menu.h highScores/High_scores.h menus/top.h menus/pause.h game/game_logic.h audio/soundTrack.h driv/disdrv.h
-	gcc -Wall -c menu_logic/menu_logic.c  ${LIBRARIES}
+	gcc -Wall -c menu_logic/menu_logic.c  ${LIBRARIES} ${DEFINE_ARGS}
 
 High_scores.o: highScores/High_scores.h highScores/High_scores.c menus/top.h
-	gcc -Wall -c highScores/High_scores.c
+	gcc -Wall -c highScores/High_scores.c ${DEFINE_ARGS}
 
 clean:
 	rm ${MODULES} ${EXEC_NAME} 
