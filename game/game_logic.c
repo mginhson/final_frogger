@@ -8,7 +8,8 @@
     #include "game_logic.h"
     #include "../entities/entities.h"
     #include "../allegro/input/input.h"
-    
+
+
 #elif defined(RPI)
     #include "game_logic.h"
 #include "../entities/entities.h"
@@ -17,6 +18,7 @@
 #include "../finalAnimation/final.h"
 #include "../audio/soundTrack.h"
 #include "../mundo/renderWorld.h"
+
 #endif
 
 
@@ -262,7 +264,7 @@ void gameTick(int32_t ms_since_last_tick)
                 ranita.values.position-=1;
             }
 
-            if(ranita.values.position < 0 || ranita.values.position >= LANE_X_PIXELS)
+            if(ranita.values.position < 0 || ranita.values.position+ranita.params.hitbox_width-1 >= LANE_X_PIXELS)
             {
                 if(--remainingLives == 0)
                 {
@@ -340,9 +342,7 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
     int32_t temp, temp2;
     switch(_direction)
     {
-        case RANITA_DOWN:
-
-            
+        case RANITA_DOWN:            
             temp = ranita.y_position + ranita.hitbox_height - 1; //y position of the bottom
             printf("%d %d\n",temp, temp+ranita.hitbox_height);
            
