@@ -21,7 +21,7 @@ void menu_1 (int option){
             usleep(100000);
             initializeGameLogic(); 
             while(state == NONE)
-            {       
+            {   
                 state = gameTick(100);
                 usleep(100000);
             }

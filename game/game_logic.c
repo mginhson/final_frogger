@@ -147,12 +147,8 @@ int gameTick(int32_t ms_since_last_tick)
                 break;
                 
             case _PAUSE:
-<<<<<<< HEAD
                 
                 return PAUSAA;
-=======
-                //return PAUSAA;
->>>>>>> 2fbf88adffb3fe46ebf976e7dd61488f180a544c
                 break;
 
             default:
@@ -451,7 +447,6 @@ static const object_kind_t * collisionAnalysis(void)
     int32_t start_lane_y,end_lane_y;
     //puts("starting collision analysis");
     printf("ranita.y_position = %d\nranita.hitbox_height = %d\nranita.position = %d\nranita.params.hitbox_width=%d\n\n",ranita.y_position,ranita.hitbox_height,ranita.values.position,ranita.params.hitbox_width);
-    printf(")))))))))))))))))))))))))))))))))))))))");
     end_ranita_y = ranita.y_position + ranita.hitbox_height - 1;//Porque ranita.y_position ya tienen en cuenta el primer pixel
     
     start_ranita_y = ranita.y_position; 

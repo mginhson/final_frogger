@@ -17,7 +17,9 @@ static char * signIn (void);
 static void name (void);
 
 void onceDead (char * points, int pts){
+
     finalAnimation(points);
+
     char * arr = signIn();
     for(int i = 0; i < 3; i++){
         printf("%c", arr[i]);
