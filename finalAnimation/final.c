@@ -29,6 +29,7 @@ void onceDead (char * points){
 }
 
 static void finalAnimation (char * points){
+    disp_clear();
     int state = 0;
     for(int i = 0; i < 6; i++){
         if (!state){
