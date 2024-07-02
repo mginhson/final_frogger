@@ -29,7 +29,7 @@
     #define TIME_MICROSECONDS 10000
 
 #else
-    #define RPI
+    
     #define LANE_X_PIXELS 12
     #define LANE_Y_PIXELS 16
     #define ENDSLOT_1 2
