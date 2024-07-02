@@ -83,7 +83,7 @@ static const independent_object_t * iobjs[10] = {[0]=&ranita,NULL,NULL,NULL,NULL
 int gameTick(int32_t ms_since_last_tick)
 {
     uint32_t i,j;
-    static int64_t ms_cooldown=0;
+    static int64_t ms_cooldown=MS_RANITA_MOVEMENT_COOLDOWN;
     int32_t start_object_x,end_object_x;
     const object_kind_t * collision ;
 
@@ -146,7 +146,7 @@ int gameTick(int32_t ms_since_last_tick)
                 break;
                 
             case _PAUSE:
-                return PAUSAA;
+                //return PAUSAA;
                 break;
 
             default:
