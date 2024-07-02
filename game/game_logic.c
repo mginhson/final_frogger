@@ -67,6 +67,8 @@ static int32_t time_left_on_level = TIME_PER_LEVEL_MS;
     
 };
 
+#else 
+    #error "No platform defined!"
 #endif
 
 int pts = 0;

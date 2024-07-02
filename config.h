@@ -10,9 +10,7 @@
 
 
 
-#if !defined(PC) && !defined(RPI)
-    #define RPI
-#endif
+
 
 #if defined(PC)
     #define SHORT_SIZE 8
@@ -27,7 +25,7 @@
     #define TOTAL_WIDTH (REZISE(TOTAL_COLUMNS* NORMAL_SIZE))
     #define TOTAL_HEIGHT (REZISE(BOTTOM_SIZE + SHORT_SIZE + TOTAL_ROWS * NORMAL_SIZE))
     #define ROW(x) (REZISE(SHORT_SIZE + NORMAL_SIZE * (x)))
-    #define LANE_X_PIXELS (TOTAL_WIDTH)
+    #define LANE_X_PIXELS ((int32_t)TOTAL_WIDTH)
     #define LANE_Y_PIXELS ((int32_t)REZISE(NORMAL_SIZE * LANES_COUNT))
     #define MS_RANITA_MOVEMENT_COOLDOWN 20
     #define MS_BASE_OBJECT_SPEED 30
