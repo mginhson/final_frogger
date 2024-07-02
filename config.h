@@ -1,16 +1,12 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-
-
 #include <stdint.h>
 
 #define LANES_COUNT 16
 #define MAX_OBJECTS_PER_LANE 5
 
-
-
-
+#define RPI
 
 #ifdef PC
     #define SHORT_SIZE 8

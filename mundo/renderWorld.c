@@ -1,8 +1,9 @@
+#include "renderWorld.h"
 #include "../driv/disdrv.h"
 #include "../driv/formas.h"
 #include <stdio.h>
-#include "renderWorld.h"
 #include "../audio/soundTrack.h"
+
 #define OFFSET(v) (11 - v)
 #define OFFSET_y(v) (15 - v)
 #define COORDENADA(x,y) ((dcoord_t) {x, y})
@@ -40,10 +41,10 @@ void renderWorld (map_t * map, independent_object_t * frog[], int size, int tiem
                 horizontalLine(LANE_X_PIXELS,COORDENADA(2, OFFSET_y(row)));
                 break;
             case finish_line:
-                horizontalLine(12,COORDENADA(2, OFFSET_y(row))); 
+                horizontalLine(LANE_X_PIXELS,COORDENADA(2, OFFSET_y(row))); 
                 break;
             default:
-                horizontalLineOff(12,COORDENADA(2, OFFSET_y(row)) );
+                horizontalLineOff(LANE_X_PIXELS,COORDENADA(2, OFFSET_y(row)) );
                 break;
         }
         
