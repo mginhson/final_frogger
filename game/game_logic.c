@@ -237,7 +237,9 @@ int gameTick(int32_t ms_since_last_tick)
             #if defined(RPI)
                 onceDead(intToString(pts), pts);
             #endif
+
             gameOver();
+            return MENU;
         }
         else
         {
