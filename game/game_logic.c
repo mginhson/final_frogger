@@ -231,7 +231,7 @@ int gameTick(int32_t ms_since_last_tick)
     {
         
         collision=collisionAnalysis();
-        printf(")))))))))))))))))))))))))))))))))))))))");
+        
     }
     
     if (collision != NULL && collision->attr.canKill)
@@ -447,7 +447,7 @@ static const object_kind_t * collisionAnalysis(void)
     int32_t start_lane_y,end_lane_y;
     //puts("starting collision analysis");
     printf("ranita.y_position = %d\nranita.hitbox_height = %d\nranita.position = %d\nranita.params.hitbox_width=%d\n\n",ranita.y_position,ranita.hitbox_height,ranita.values.position,ranita.params.hitbox_width);
-    
+    printf(")))))))))))))))))))))))))))))))))))))))");
     end_ranita_y = ranita.y_position + ranita.hitbox_height - 1;//Porque ranita.y_position ya tienen en cuenta el primer pixel
     
     start_ranita_y = ranita.y_position; 
@@ -455,7 +455,7 @@ static const object_kind_t * collisionAnalysis(void)
     end_ranita_x = ranita.values.position + ranita.params.hitbox_width - 1; //Porque position tiene en cuenta el primer pixel
 
     //printf("start_x_ranita = %d\nend_x_ranita = %d\nstart_y_ranita = %d\nend_y_ranita = %d\n",start_ranita_x,end_ranita_x,start_ranita_y,end_ranita_y);
-
+    
     for(i=lane_bound-1;i>=0;i--)
     {
         if (map.lanes[i].kind == NULL || map.lanes[i].kind == &empty_object)
@@ -496,6 +496,7 @@ static const object_kind_t * collisionAnalysis(void)
                         return &freeSlot;
                         
                     }
+                    
                     return map.lanes[i].kind;
                 }
                 
@@ -503,7 +504,7 @@ static const object_kind_t * collisionAnalysis(void)
         }
     }
     //If no collision found, return NULLPTR
-
+    
     return NULL;
 }
 
