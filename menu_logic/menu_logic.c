@@ -9,11 +9,11 @@
 #include "../driv/disdrv.h"
 #include "../highScores/High_scores.h"
 
-// bestPlayers_t jugadores = {{"VIC","SAN","LOR","MARC","AGU","PAP","SOS","MAT","NO","JOR"},{"2021","100","89","76","67","43","25","10","7","3"}};
+bestPlayers_t jugadores = {{"VIC","SAN","LOR","MAR","AGU","PAP","SOS","MAT","NOA","JOR"},{"202","100","089","076","067","043","025","010","007","003"}};
 
-
-void menu_1 (int option){
-    bestPlayers_t jugadores = reading_top();
+// bestPlayers_t jugadores; 
+char arr[100];
+void menu_1 (int option){    
     int state = NONE;
     switch (option){
         case START:
@@ -21,7 +21,7 @@ void menu_1 (int option){
             usleep(100000);
             initializeGameLogic(); 
             while(state == NONE)
-            {   
+            {       
                 state = gameTick(100);
                 usleep(100000);
             }
@@ -36,6 +36,7 @@ void menu_1 (int option){
             break;
         case TOP:
             usleep(500000);
+            // jugadores = reading_top(arr);
             topTen(jugadores);
             usleep(500000);
             open_menu_1 ();
