@@ -78,7 +78,7 @@ static const independent_object_t * iobjs[10] = {[0]=&ranita,NULL,NULL,NULL,NULL
     -Update the objects on the map
     -Check for the interactions between the map and the ranita
 */
-void gameTick(int32_t ms_since_last_tick)
+int gameTick(int32_t ms_since_last_tick)
 {
     uint32_t i,j;
     static int64_t ms_cooldown=0;

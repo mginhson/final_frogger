@@ -116,7 +116,7 @@ bestPlayers_t reading_top (void){
         printf ("The file was succesfully opened\n");
     }
     bestPlayers_t top10;
-    char arr_top10 [70];
+    static char arr_top10 [70];
     int c, i, j, k;
     for (i=0; (i<(sizeof(arr_top10)/sizeof*arr_top10)) && (c = fgetc (pfile))!= EOF ; i++){
         arr_top10[i] = c;
