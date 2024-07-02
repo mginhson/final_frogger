@@ -13,6 +13,7 @@ int contador = 0;
 int flag_parpadeo = 1;
 int paso = 0;
 void renderWorld (map_t * map, independent_object_t * frog[], int size, int tiempoRestante){
+    
     disp_clear();
     int contador = (tiempoRestante * 1000 * 16)/TIME_PER_LEVEL_MS;
     if(contador > 2 && contador <= 4 && !paso){
@@ -30,20 +31,19 @@ void renderWorld (map_t * map, independent_object_t * frog[], int size, int tiem
     int aux, existe, position;
     
     horizontalLine(12, (dcoord_t) {2, 15});
-    
     for(int row = 0; row < LANES_COUNT; row++){
         if(map->lanes[row].kind == &empty_object || map->lanes[row].kind == NULL){
             continue;
         }
         switch ((map->lanes[row]).background){
             case water:
-                horizontalLine(LANE_X_PIXELS,COORDENADA(2, OFFSET_y(row)));
+                horizontalLine(12,COORDENADA(2, OFFSET_y(row)));
                 break;
             case finish_line:
-                horizontalLine(LANE_X_PIXELS,COORDENADA(2, OFFSET_y(row))); 
+                horizontalLine(12,COORDENADA(2, OFFSET_y(row))); 
                 break;
             default:
-                horizontalLineOff(LANE_X_PIXELS,COORDENADA(2, OFFSET_y(row)) );
+                horizontalLineOff(12,COORDENADA(2, OFFSET_y(row)) );
                 break;
         }
         

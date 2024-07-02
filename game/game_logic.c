@@ -89,6 +89,7 @@ int gameTick(int32_t ms_since_last_tick)
 
      //puts("Map before executing gameTick:\n");
     printMap(&map,0);
+    
     ms_cooldown -= ms_since_last_tick;
     time_left_on_level -= ms_since_last_tick;
     
@@ -146,7 +147,8 @@ int gameTick(int32_t ms_since_last_tick)
                 break;
                 
             case _PAUSE:
-                //return PAUSAA;
+                
+                return PAUSAA;
                 break;
 
             default:
@@ -156,7 +158,6 @@ int gameTick(int32_t ms_since_last_tick)
 
     //Check for collisions after movement
     collision = collisionAnalysis();
-
 
     
     for(i=0; i < lane_bound; i++)
@@ -223,15 +224,19 @@ int gameTick(int32_t ms_since_last_tick)
         {
             map.lanes[i].flag = 0;
         }
+        
     }
-
+    
    if (collision == NULL) //no hubo una colision antes
     {
+        
         collision=collisionAnalysis();
+        
     }
-
+    
     if (collision != NULL && collision->attr.canKill)
     {
+        
         if (--remainingLives == 0)
         {
             #if defined(RPI)
@@ -254,7 +259,9 @@ int gameTick(int32_t ms_since_last_tick)
     }
     else if (collision == &small_log_object_kind || collision == &normal_log_object_kind || collision == &big_log_object_kind)
     {
+        
         //Es un tronco
+        
         if (map.lanes[ranita.y_position/LANE_PIXEL_HEIGHT].flag == 1)
         {
             if (map.lanes[ranita.y_position/LANE_PIXEL_HEIGHT].direction == RIGHT)
@@ -289,6 +296,7 @@ int gameTick(int32_t ms_since_last_tick)
     }
     else if(map.lanes[ranita.y_position / LANE_PIXEL_HEIGHT].background == water)
     {
+        
         //Check if the ranita is on water!
         triggerDeath();
         if(--remainingLives == 0)
@@ -309,6 +317,7 @@ int gameTick(int32_t ms_since_last_tick)
     }
     else if (collision == &freeSlot)
     {
+        
         resetRanitaPosition();
         uint32_t check = 0;
         for(uint32_t a =0; a < object_bound; a++)
@@ -331,9 +340,10 @@ int gameTick(int32_t ms_since_last_tick)
     }
     else    //collision == NULL
     {
+        
       //No collision, do nothing
     }
-    
+
     renderWorld(&map, iobjs, 1, time_left_on_level/1000);
 
     return NONE;
@@ -437,7 +447,6 @@ static const object_kind_t * collisionAnalysis(void)
     int32_t start_lane_y,end_lane_y;
     //puts("starting collision analysis");
     printf("ranita.y_position = %d\nranita.hitbox_height = %d\nranita.position = %d\nranita.params.hitbox_width=%d\n\n",ranita.y_position,ranita.hitbox_height,ranita.values.position,ranita.params.hitbox_width);
-    
     end_ranita_y = ranita.y_position + ranita.hitbox_height - 1;//Porque ranita.y_position ya tienen en cuenta el primer pixel
     
     start_ranita_y = ranita.y_position; 
@@ -445,7 +454,7 @@ static const object_kind_t * collisionAnalysis(void)
     end_ranita_x = ranita.values.position + ranita.params.hitbox_width - 1; //Porque position tiene en cuenta el primer pixel
 
     //printf("start_x_ranita = %d\nend_x_ranita = %d\nstart_y_ranita = %d\nend_y_ranita = %d\n",start_ranita_x,end_ranita_x,start_ranita_y,end_ranita_y);
-
+    
     for(i=lane_bound-1;i>=0;i--)
     {
         if (map.lanes[i].kind == NULL || map.lanes[i].kind == &empty_object)
@@ -486,6 +495,7 @@ static const object_kind_t * collisionAnalysis(void)
                         return &freeSlot;
                         
                     }
+                    
                     return map.lanes[i].kind;
                 }
                 
@@ -493,7 +503,7 @@ static const object_kind_t * collisionAnalysis(void)
         }
     }
     //If no collision found, return NULLPTR
-
+    
     return NULL;
 }
 
@@ -514,7 +524,7 @@ static void triggerDeath(void)
 static void resetRanitaPosition(void)
 {
     ranita.y_position = LANE_Y_PIXELS - 1 - ranita.hitbox_height + 1 ;
-    ranita.values.position = (LANE_X_PIXELS-ranita.params.hitbox_width)/2 ;
+    ranita.values.position = (LANE_X_PIXELS-ranita.params.hitbox_width)/2;
 }
 
 

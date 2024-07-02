@@ -326,7 +326,7 @@
                 [1]={.position=-1,.doesExist=1},
                 [2]={.position=5,.doesExist=1},
                 [3]={.position=14,.doesExist=1},
-                [4]={.doesExist=20}
+                [4]={.doesExist=1}
             } 
         },
         [1]=

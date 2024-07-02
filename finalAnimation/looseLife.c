@@ -6,6 +6,7 @@
 #define TOTAL 3
 
 void looseLife (int remaining){
+    
     int i;
     lifeSound();
     usleep(100000);
