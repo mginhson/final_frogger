@@ -74,7 +74,7 @@ static uint32_t whichObjectCollisioned;
     #error "No platform defined!"
 #endif
 
-int pts = 0;
+static uint32_t pts = 0;
 
 
 static const independent_object_t * iobjs[10] = {[0]=&ranita,NULL,NULL,NULL,NULL,NULL};
@@ -109,7 +109,9 @@ int gameTick(int32_t ms_since_last_tick)
         #endif
         if(remainingLives == 0)
         {
-            gameOver();
+            #if defined(RPI)
+            onceDead(intToString(pts), pts);
+            #endif
             return MENU;
         }
         
@@ -247,8 +249,6 @@ int gameTick(int32_t ms_since_last_tick)
             #if defined(RPI)
                 onceDead(intToString(pts), pts);
             #endif
-
-            gameOver();
             return MENU;
         }
         else
@@ -330,7 +330,10 @@ int gameTick(int32_t ms_since_last_tick)
         {
             if(--remainingLives == 0)
             {
-                gameOver();
+                #ifdef RPI
+                    onceDead(intToString(pts), pts);
+                #endif
+                return MENU;
             }
             else
             {
@@ -538,6 +541,7 @@ static void triggerDeath(void)
 
 static void updateMap(void)
 {
+    pts+=10;
     fillMap(&map,++level);
     resetRanitaPosition();
     time_left_on_level = TIME_PER_LEVEL_MS;
