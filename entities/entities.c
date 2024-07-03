@@ -536,7 +536,7 @@
 static const uint32_t water_arquetypes_elements = sizeof(water_arquetypes)/sizeof(*water_arquetypes);
 static const uint32_t road_arquetypes_elements = sizeof(road_arquetypes)/sizeof(*road_arquetypes);
 static const uint32_t grass_arquetypes_elements = sizeof(grass_arquetypes) / sizeof(*grass_arquetypes);
-static const uint32_t finish_line_arquetypes_elements = sizeof(finish_line_arquetypes)/sizeof(*finish_line_arquetypes);
+// static const uint32_t finish_line_arquetypes_elements = sizeof(finish_line_arquetypes)/sizeof(*finish_line_arquetypes);
 
 
 /*
@@ -575,7 +575,7 @@ int32_t fillMap(map_t *_map, uint32_t _level)
             case 3:
             case 4:
             case 5:
-                _map->lanes[i] = water_arquetypes[rand() % 2];
+                _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements];
                 break;
             case 6:
             case 7:
@@ -590,7 +590,7 @@ int32_t fillMap(map_t *_map, uint32_t _level)
             case 11:
             case 12:
             case 13:
-                _map->lanes[i] = road_arquetypes[rand() % 2];
+                _map->lanes[i] = road_arquetypes[rand() % road_arquetypes_elements];
                 break;
             case 14:
             case 15:

@@ -23,7 +23,6 @@
 
 
 static void updateMap(void);
-static void generateNewLevel(uint32_t _level);
 static const object_kind_t * collisionAnalysis(void);
 static void resetRanitaPosition(void);
 static int32_t currentLane(void);
@@ -32,8 +31,6 @@ static int32_t currentLane(void);
 
 typedef enum{RANITA_UP,RANITA_DOWN,RANITA_LEFT,RANITA_RIGHT}ranita_logic_direction_t;
 static void triggerRanitaMovement(ranita_logic_direction_t _direction);
-static void triggerDeath(void);
-static void gameOver(void);
 static char * intToString (int puntos);
 
 
@@ -87,7 +84,7 @@ static const independent_object_t * iobjs[10] = {[0]=&ranita,NULL,NULL,NULL,NULL
 */
 int gameTick(int32_t ms_since_last_tick)
 {
-    int32_t start_ranita_x, end_ranita_x,start_ranita_y,end_ranita_y;
+    // int32_t start_ranita_x, end_ranita_x,start_ranita_y,end_ranita_y;
     uint32_t i,j;
     static int64_t ms_cooldown=MS_RANITA_MOVEMENT_COOLDOWN;
     int32_t start_object_x,end_object_x;
@@ -303,7 +300,7 @@ int gameTick(int32_t ms_since_last_tick)
     {
         
         //Check if the ranita is on water!
-        triggerDeath();
+
         if(--remainingLives == 0)
         {
             #if defined(RPI)
@@ -321,9 +318,7 @@ int gameTick(int32_t ms_since_last_tick)
         }
     }
     else if(currentLane() == 0 && collision == &lilypad_object_kind)
-    {
-        start_ranita_x = ranita.values.position;
-        end_ranita_x = ranita.values.position + ranita.params.hitbox_width - 1;    
+    {   
         map.lanes[0].objects[whichObjectCollisioned].doesExist = 1;
             
         if(map.lanes[i].objects[whichObjectCollisioned].doesExist == 1)
@@ -411,7 +406,7 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
             {
                 ranita.y_position = 0;//uppermost pixel for the upper left corner
             }
-            else;
+            else
             {
                 #if defined(RPI)
                     stepSound();
@@ -527,17 +522,6 @@ static const object_kind_t * collisionAnalysis(void)
     return NULL;
 }
 
-/*
-    @BRIEF: triggerDeath:
-        - Trigger death animation
-        - Check if there are remaining lives
-        - If there are, restart the ranita at starting position
-        - Else, game ends there.
-*/
-static void triggerDeath(void)
-{
-
-}
 
 static void updateMap(void)
 {
@@ -554,11 +538,6 @@ static void resetRanitaPosition(void)
     ranita.values.position = (LANE_X_PIXELS-ranita.params.hitbox_width)/2;
 }
 
-
-static void gameOver(void)
-{
-    return ;
-}
 
 
 void initializeGameLogic(void)
@@ -628,4 +607,5 @@ static int32_t currentLane(void)
             return i;
         }
     }
+    return 0;
 }

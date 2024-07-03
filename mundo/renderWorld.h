@@ -4,7 +4,7 @@
 #include "../entities/entities.h"
 #include "../config.h"
 
-void renderWorld (map_t * map, independent_object_t * frog[],int size ,int tiempo);
+void renderWorld (map_t * map, const independent_object_t * frog[],int size ,int tiempo);
 extern int contador;
 
 enum contadorTiempo {noChanges, nextStep, restart};

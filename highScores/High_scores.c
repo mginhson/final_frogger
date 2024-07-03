@@ -122,7 +122,7 @@ bestPlayers_t reading_top (void){
     }
     bestPlayers_t top10;
     static char arr_top10 [70];
-    char c, i, j, k;
+    unsigned char c, i, j, k;
     for (i=0; (i< (sizeof(arr_top10)/sizeof*arr_top10)) && (c = fgetc (pfile))!= EOF ; i++){
         arr_top10[i] = c;
     }
