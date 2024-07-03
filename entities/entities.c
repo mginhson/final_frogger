@@ -280,7 +280,7 @@
     const object_kind_t freeSlot;
 
     const object_kind_t bus_object_kind = {
-        .hitbox_width=1,
+        .hitbox_width = 2,
         .attr = {.canKill = 1, .isEquippable = 0, .canMove = 1},
     };
 
@@ -324,25 +324,25 @@
             .background = road,
             .objects =
             {
-                [0]={.position=-10,.doesExist=1},
-                [1]={.position=-1,.doesExist=1},
-                [2]={.position=5,.doesExist=1},
-                [3]={.position=14,.doesExist=1},
-                [4]={.doesExist=1}
+                [0]={.position=-1,.doesExist=1},
+                [1]={.position=5,.doesExist=1},
+                [2]={.position=9,.doesExist=1},
+                [3]={.position=13,.doesExist=1},
+                [4]={.position = 17, .doesExist=1}
             } 
         },
         [1]=
         {
-            .direction = RIGHT,
-            .kind = &car_object_kind,
+            .direction = LEFT,
+            .kind = &bus_object_kind,
             .background = road,
             .objects =
             {
                 [0]={.position=-1,.doesExist=1},
                 [1]={.position=5,.doesExist=1},
                 [2]={.position=9,.doesExist=1},
-                [3]={.position=11,.doesExist=1},
-                [4]={.position=16,.doesExist=1}
+                [3]={.position=13,.doesExist=1},
+                [4]={.position = 17, .doesExist=1}
             } 
         },
         [2]=
@@ -419,14 +419,14 @@
         },
         [1] = 
         {
-            .direction = LEFT,
+            .direction = RIGHT,
             .background = water,
-            .kind = &big_log_object_kind,
+            .kind = &normal_log_object_kind,
             .objects = {
                 [0]={.position=-10,.doesExist=1},
                 [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.6,.doesExist=1},
-                [3]={.doesExist=0},
+                [2]={.position=LANE_X_PIXELS*0.75,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
                 [4]={.doesExist=0}
             }
         },
@@ -575,7 +575,7 @@ int32_t fillMap(map_t *_map, uint32_t _level)
             case 3:
             case 4:
             case 5:
-                _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements];
+                _map->lanes[i] = water_arquetypes[rand() % 2];
                 break;
             case 6:
             case 7:
@@ -590,7 +590,7 @@ int32_t fillMap(map_t *_map, uint32_t _level)
             case 11:
             case 12:
             case 13:
-                _map->lanes[i] = road_arquetypes[rand() % road_arquetypes_elements];
+                _map->lanes[i] = road_arquetypes[rand() % 2];
                 break;
             case 14:
             case 15:
