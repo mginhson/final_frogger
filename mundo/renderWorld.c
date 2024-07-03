@@ -79,7 +79,7 @@ void renderWorld (map_t * map, const independent_object_t * frog[], int size, in
                         for(int led = 0; led < aux; led++){
                             if((position + led < 12) && (position + led >= 0)){
                                 disp_write(COORDENADA(OFFSET(position) + 2 - led, OFFSET_y(row)), D_ON);
-                            }else if((position + led < 12)){
+                            }else if((position + led > 12)){
                                 led = aux;
                             }
                         }
