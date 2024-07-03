@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "High_scores.h"
-#include <string.h>
 
 void writing_top (char* str, int ptj){
     FILE* pfile;
@@ -122,8 +121,7 @@ bestPlayers_t reading_top (void){
         printf ("The file was succesfully opened\n");
     }
     bestPlayers_t top10;
-    static char arr_top10 [100];
-    memset(arr_top10, '\0', sizeof(arr_top10)/sizeof(*arr_top10));
+    static char arr_top10 [70];
     char c, i, j, k;
     for (i=0; (i< (sizeof(arr_top10)/sizeof*arr_top10)) && (c = fgetc (pfile))!= EOF ; i++){
         arr_top10[i] = c;
@@ -135,6 +133,5 @@ bestPlayers_t reading_top (void){
         (top10.puntajes)[k] = &(arr_top10 [3 + k*7]);
     }
     fclose (pfile);
-
     return top10;
 }

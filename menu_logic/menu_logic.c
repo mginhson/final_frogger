@@ -11,9 +11,9 @@
 
 // bestPlayers_t jugadores = {{"VIC","SAN","LOR","MAR","AGU","PAP","SOS","MAT","NOA","JOR"},{"202","100","089","076","067","043","025","010","007","003"}};
 
-bestPlayers_t jugadores; 
-// char arr[100];
-void menu_1 (int option){    
+
+void menu_1 (int option){
+    bestPlayers_t jugadores = reading_top(); 
     int state = NONE;
     switch (option){
         case START:
@@ -36,7 +36,9 @@ void menu_1 (int option){
             break;
         case TOP:
             usleep(500000);
-            jugadores = reading_top();
+            for(int i = 0; i < 10; i++){
+
+            }
             topTen(jugadores);
             usleep(500000);
             open_menu_1 ();
