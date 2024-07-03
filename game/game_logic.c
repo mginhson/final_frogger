@@ -317,48 +317,71 @@ int gameTick(int32_t ms_since_last_tick)
             resetRanitaPosition();
         }
     }
-    else if(currentLane() == 0 && collision == &lilypad_object_kind)
+    else if(currentLane() == 0)
     {   
-        map.lanes[0].objects[whichObjectCollisioned].doesExist = 1;
-            
-        if(map.lanes[i].objects[whichObjectCollisioned].doesExist == 1)
+        if(collision != &lilypad_object_kind)
         {
-            if(--remainingLives == 0)
+             if(--remainingLives == 0)
             {
-                #ifdef RPI
+                #if defined(RPI)
                     onceDead(intToString(pts), pts);
                 #endif
                 return MENU;
             }
             else
             {
-                #ifdef RPI
+                time_left_on_level = TIME_PER_LEVEL_MS;
+                #if defined(RPI)
                     looseLife(remainingLives);
                 #endif
-                time_left_on_level = TIME_PER_LEVEL_MS;
                 resetRanitaPosition();
             }
         }
         else
         {
-            map.lanes[i].objects[whichObjectCollisioned].doesExist = 1;
-            int32_t check,z;
-            for(z=0,check = 0; z < object_bound;z++)
+             map.lanes[0].objects[whichObjectCollisioned].doesExist = 1;
+                
+            if(map.lanes[i].objects[whichObjectCollisioned].doesExist == 1)
             {
-                if (map.lanes[0].objects[z].doesExist == 0) 
+                if(--remainingLives == 0)
                 {
-                    check = 1;
+                    #ifdef RPI
+                        onceDead(intToString(pts), pts);
+                    #endif
+                    return MENU;
                 }
-            }
-            if (check == 0)
-            {
-                updateMap();
+                else
+                {
+                    #ifdef RPI
+                        looseLife(remainingLives);
+                    #endif
+                    time_left_on_level = TIME_PER_LEVEL_MS;
+                    resetRanitaPosition();
+                }
             }
             else
             {
-                time_left_on_level = TIME_PER_LEVEL_MS;
-                resetRanitaPosition();
+                map.lanes[i].objects[whichObjectCollisioned].doesExist = 1;
+                int32_t check,z;
+                for(z=0,check = 0; z < object_bound;z++)
+                {
+                    if (map.lanes[0].objects[z].doesExist == 0) 
+                    {
+                        check = 1;
+                    }
+                }
+                if (check == 0)
+                {
+                    updateMap();
+                }
+                else
+                {
+                    time_left_on_level = TIME_PER_LEVEL_MS;
+                    resetRanitaPosition();
+                }
             }
+           
+                
             
         }
         
