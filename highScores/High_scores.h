@@ -4,6 +4,6 @@
     #include "../menus/top.h"
     
     void writing_top (char* str, int ptj);
-    bestPlayers_t reading_top (char arr_top10[100]);
+    bestPlayers_t reading_top (void);
 
 #endif

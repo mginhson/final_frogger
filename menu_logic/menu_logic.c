@@ -9,10 +9,10 @@
 #include "../driv/disdrv.h"
 #include "../highScores/High_scores.h"
 
-bestPlayers_t jugadores = {{"VIC","SAN","LOR","MAR","AGU","PAP","SOS","MAT","NOA","JOR"},{"202","100","089","076","067","043","025","010","007","003"}};
+// bestPlayers_t jugadores = {{"VIC","SAN","LOR","MAR","AGU","PAP","SOS","MAT","NOA","JOR"},{"202","100","089","076","067","043","025","010","007","003"}};
 
-// bestPlayers_t jugadores; 
-char arr[100];
+bestPlayers_t jugadores; 
+// char arr[100];
 void menu_1 (int option){    
     int state = NONE;
     switch (option){
@@ -36,7 +36,7 @@ void menu_1 (int option){
             break;
         case TOP:
             usleep(500000);
-            // jugadores = reading_top(arr);
+            jugadores = reading_top();
             topTen(jugadores);
             usleep(500000);
             open_menu_1 ();
