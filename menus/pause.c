@@ -3,7 +3,8 @@
 #include "../driv/formas.h"
 #include "pause.h"
 #include <unistd.h>
-
+#include "../audio/audio.h"
+#include "../audio/soundTrack.h"
 
 static void cont(void);
 static void restart(void);
@@ -15,6 +16,7 @@ int pause(void){
     joyinfo_t inputJ = {0, 0, 0};
     int state = CONTINUE;
     cont();
+    pauseAudio();
     while(reading(&inputJ) && (inputJ.sw != J_PRESS)){
         switch(state){
             case CONTINUE:
@@ -39,6 +41,16 @@ int pause(void){
                 }
         }
         usleep(100000);
+    }
+    if(state == RESTART){
+        endAudio();
+        initAudio();
+        music();
+    }else if(state == CONTINUE){
+        unpauseAudio();
+    }else{
+        endAudio();
+        initAudio();
     }
     return state;
 }

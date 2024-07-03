@@ -5,6 +5,7 @@
 #include "final.h"
 #include <stdio.h>
 #include <unistd.h>
+#include "../audio/audio.h"
 
 #include "../highScores/High_scores.h"
 
@@ -17,6 +18,8 @@ static char * signIn (void);
 static void name (void);
 
 void onceDead (char * points, int pts){
+    endAudio();
+    initAudio();
 
     finalAnimation(points);
 
