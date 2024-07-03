@@ -320,18 +320,50 @@ int gameTick(int32_t ms_since_last_tick)
             resetRanitaPosition();
         }
     }
-    else if(currentLane() == 0)
+    else if(currentLane() == 0 && collision == &lilypad_object_kind)
     {
         start_ranita_x = ranita.values.position;
-        end_ranita_x = ranita.values.position + ranita.params.hitbox_width - 1;
-        
-        if (collision == &lilypad_object_kind)
-        {
+        end_ranita_x = ranita.values.position + ranita.params.hitbox_width - 1;    
+        map.lanes[0].objects[whichObjectCollisioned].doesExist = 1;
             
-            map.lanes[0].objects[whichObjectCollisioned].doesExist = 1;
+        if(map.lanes[i].objects[whichObjectCollisioned].doesExist == 1)
+        {
+            if(--remainingLives == 0)
+            {
+                gameOver();
+            }
+            else
+            {
+                #ifdef RPI
+                    looseLife(remainingLives);
+                #endif
+                time_left_on_level = TIME_PER_LEVEL_MS;
+                resetRanitaPosition();
+            }
+        }
+        else
+        {
+            map.lanes[i].objects[whichObjectCollisioned].doesExist = 1;
+            int32_t check,z;
+            for(z=0,check = 0; z < object_bound;z++)
+            {
+                if (map.lanes[0].objects[z].doesExist == 0) 
+                {
+                    check = 1;
+                }
+            }
+            if (check == 0)
+            {
+                updateMap();
+            }
+            else
+            {
+                time_left_on_level = TIME_PER_LEVEL_MS;
+                resetRanitaPosition();
+            }
             
         }
-        resetRanitaPosition();
+        
     }
     else    //collision == NULL
     {
@@ -504,7 +536,13 @@ static void triggerDeath(void)
 
 }
 
-
+static void updateMap(void)
+{
+    fillMap(&map,++level);
+    resetRanitaPosition();
+    time_left_on_level = TIME_PER_LEVEL_MS;
+    return ;
+}
 
 static void resetRanitaPosition(void)
 {
