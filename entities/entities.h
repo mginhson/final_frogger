@@ -38,7 +38,7 @@ typedef struct{
 
 
 typedef enum{
-    turtle_is_up,turtle_is_down,turtle_is_halfway_down,turtle_is_halfway_up,
+    turtle_is_up,turtle_is_down,turtle_is_halfway,
 }state_t;
 
 typedef struct{

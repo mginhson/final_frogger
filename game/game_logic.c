@@ -180,26 +180,24 @@ int gameTick(int32_t ms_since_last_tick)
                 
                 if(map.lanes[i].objects[j].timer <= 0)
                 {
-                    map.lanes[i].objects[j].timer = map.lanes[i].ms_reload * 35;
+                    map.lanes[i].objects[j].timer = MS_BASE_OBJECT_SPEED * 5;
                     if(map.lanes[i].objects[j].canDisappear == 1)
                     {
                         
                         switch(map.lanes[i].objects[j].state)
                         {
                             case turtle_is_down:
+                                map.lanes[i].objects[j].doesExist = 1;
                                 map.lanes[i].objects[j].state = turtle_is_up;
-                                map.lanes[i].objects[j].doesExist =1 ;
                                 break;
 
-                            case turtle_is_halfway_down:
+                            case turtle_is_halfway:
                                 map.lanes[i].objects[j].state = turtle_is_down;
                                 map.lanes[i].objects[j].doesExist = 0;
                                 break;
                                 
-                            
-
                             case turtle_is_up:
-                                map.lanes[i].objects[j].state = turtle_is_halfway_down;
+                                map.lanes[i].objects[j].state = turtle_is_halfway;
                                 break;
 
                             default:
@@ -231,7 +229,7 @@ int gameTick(int32_t ms_since_last_tick)
             for(j=0; j<object_bound; ++j)
             { 
                 
-                if(map.lanes[i].kind->attr.canMove == 0)
+                if(map.lanes[i].objects[j].doesExist==0 || map.lanes[i].kind->attr.canMove == 0)
                 {
                     continue;
                 }   
