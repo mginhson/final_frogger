@@ -5,6 +5,7 @@
 #include "../../config.h"
 #include "../../entities/entities.h"
 #include <stdio.h>
+//#define HITBOX_CORRECTION(x) ((x) +)
 void draw_car_v1(char direction, float dx, float dy){
     assets_t * cars_collection = get_cars_assets();
     int random;
@@ -27,18 +28,20 @@ void draw_car_v2(char direction, float dx, float dy){
     float sw = cars_collection[random].sw;
     float sh = cars_collection[random].sh;
 
-    al_draw_scaled_bitmap(general_information.bitmap,sx,sy,sw,sh,dx,dy, REZISE(sw), REZISE(sh), 0);
+    al_draw_scaled_bitmap(general_information.bitmap,sx,sy,sw,sh,dx, dy, REZISE(sw), REZISE(sh), 0);
     free(cars_collection);
     return;
 }
 void draw_log(int size, float dx, float dy){
     assets_t * logs = get_log_assets();
+    dx -= REZISE(8);
     al_draw_scaled_bitmap(general_information.bitmap, logs[start_log].sx, logs[start_log].sy, logs[start_log].sw, logs[start_log].sh, dx, dy, REZISE(logs[start_log].sw), REZISE(logs[start_log].sh), 0);
     int i;
-    for (i = 1; i<=size;i++){
+    
+    for (i = 1; i<=size;i++){ 
         al_draw_scaled_bitmap(general_information.bitmap, logs[log].sx, logs[log].sy, logs[log].sw, logs[log].sh, dx + i * REZISE(logs[log].sw), dy, REZISE(logs[log].sw), REZISE(logs[log].sh), 0);
     }    
-    al_draw_scaled_bitmap(general_information.bitmap, logs[2].sx, logs[2].sy, logs[2].sw, logs[2].sh, dx + i * REZISE(logs[log].sw), dy, REZISE(logs[2].sw), REZISE(logs[2].sh), 0);
+    al_draw_scaled_bitmap(general_information.bitmap, logs[2].sx, logs[2].sy, logs[2].sw, logs[2].sh, dx + i * REZISE(logs[2].sw), dy, REZISE(logs[2].sw), REZISE(logs[2].sh), 0);
     free(logs);
     return;
 }
@@ -75,6 +78,19 @@ void draw_frog(const independent_object_t * frog, float dx, float dy){
     float sw = frogs_assets->sw;
     float sh = frogs_assets->sh;
 
-    al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx , dy + REZISE(SHORT_SIZE), REZISE(sw), REZISE(sh), 0);
+    al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx , dy + REZISE(sw/2), REZISE(sw), REZISE(sh), 0);
     free(frogs_assets);
+}
+
+void turtle_squad(const object_t * p_turtles, float dx, float dy){
+    assets_t * turtle_assets = get_turtle_assets();
+    float sx = turtle_assets[p_turtles->state].sx;
+    float sy = turtle_assets[p_turtles->state].sy;
+    float sw = turtle_assets[p_turtles->state].sw;
+    float sh = turtle_assets[p_turtles->state].sh;
+    int i;
+    for (i = 0; i < 3; i++){
+        al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx * i, dy,REZISE(sw), REZISE(sh), 0);
+    }
+    return; 
 }

@@ -29,17 +29,17 @@
     };
 
     const object_kind_t small_log_object_kind={
-        .hitbox_width=REZISE(3* NORMAL_SIZE),
+        .hitbox_width=REZISE(3* NORMAL_SIZE - NORMAL_SIZE),
         .attr = {.canKill = 0, .isEquippable = 0, .canMove = 1},
-    };
+    }; 
 
     const object_kind_t normal_log_object_kind = {
-        .hitbox_width=REZISE(4 * NORMAL_SIZE),
+        .hitbox_width=REZISE(4 * NORMAL_SIZE - NORMAL_SIZE),
         .attr = {.canKill = 0, .isEquippable = 0, .canMove = 1},
     };
 
     const object_kind_t big_log_object_kind = {
-        .hitbox_width= REZISE(5 * NORMAL_SIZE),
+        .hitbox_width= REZISE(5 * NORMAL_SIZE - NORMAL_SIZE),
         .attr = {.canKill = 0, .isEquippable = 0, .canMove = 1},
     };
 
