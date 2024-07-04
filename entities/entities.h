@@ -22,8 +22,7 @@ typedef struct{
     uint32_t canKill :1;
     uint32_t isEquippable :1;
     uint32_t canMove :1;
-    uint32_t timer;
-    uint8_t state;
+    
 }object_attributes_t;
 
 
@@ -37,11 +36,17 @@ typedef struct{
 }object_kind_t;
 
 
+typedef enum{
+    turtle_is_up,turtle_is_down,turtle_is_halfway,
+}state_t;
+
 typedef struct{
     int32_t position;
     animation_t animation;
+    int32_t timer;
+    state_t state;
+    uint32_t canDisappear :1;
     uint32_t doesExist :1;
-
 }object_t;
 
 typedef struct{
@@ -92,6 +97,7 @@ extern const object_kind_t snake_object_kind;
 extern const object_kind_t final_frog_object_kind;
 extern const object_kind_t lilypad_object_kind;
 extern const object_kind_t freeSlot;
+extern const object_kind_t turtle_object_kind;
 
 int32_t fillMap(map_t *_map,uint32_t _level);
 void printMap(map_t *_map,int32_t a);

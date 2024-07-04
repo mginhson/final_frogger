@@ -172,6 +172,37 @@ int gameTick(int32_t ms_since_last_tick)
         //map.lanes[i].ms_to_next = map.lanes[i].ms_to_next - ms_since_last_tick;
         //printf("map.lanes[%d].ms_to_next = %d\n",i,map.lanes[i].ms_to_next);
         
+        if(map.lanes[j].kind == &turtle_object_kind)
+        {
+            for(j=0; j<object_bound; ++j)
+            {
+                map.lanes[i].objects[j].timer -= ms_since_last_tick;
+                if(map.lanes[i].objects[j].timer <= 0)
+                {
+                    map.lanes[i].objects[j].timer = 2*map.lanes[i].ms_reload;
+                    if(map.lanes[i].objects[j].canDisappear == 1)
+                    {
+                        switch(map.lanes[i].objects[j].state)
+                        {
+                            case turtle_is_down:
+                                map.lanes[i].objects[j].state = turtle_is_up;
+                                break;
+                            case turtle_is_halfway:
+                                map.lanes[i].objects[j].state = turtle_is_down;
+                                break;
+                            case turtle_is_up:
+                                map.lanes[i].objects[j].state = turtle_is_halfway;
+                                break;
+
+                            default:
+                                map.lanes[i].objects[j].state = turtle_is_up;
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+        
         
         if(map.lanes[i].ms_to_next <= 0) //Lane should move a pixel
         {
