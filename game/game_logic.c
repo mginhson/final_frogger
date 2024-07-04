@@ -187,7 +187,8 @@ int gameTick(int32_t ms_since_last_tick)
                         switch(map.lanes[i].objects[j].state)
                         {
                             case turtle_is_down:
-                                map.lanes[i].objects[j].state = turtle_is_halfway_up;
+                                map.lanes[i].objects[j].state = turtle_is_up;
+                                map.lanes[i].objects[j].doesExist =1 ;
                                 break;
 
                             case turtle_is_halfway_down:
@@ -195,13 +196,10 @@ int gameTick(int32_t ms_since_last_tick)
                                 map.lanes[i].objects[j].doesExist = 0;
                                 break;
                                 
-                            case turtle_is_halfway_up:
-                                map.lanes[i].objects[j].state = turtle_is_up;
-                                map.lanes[i].objects[j].doesExist = 1;
-                                break;
+                            
 
                             case turtle_is_up:
-                                map.lanes[i].objects[j].state = turtle_is_halfway;
+                                map.lanes[i].objects[j].state = turtle_is_halfway_down;
                                 break;
 
                             default:
