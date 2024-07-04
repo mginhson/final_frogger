@@ -201,7 +201,7 @@ int gameTick(int32_t ms_since_last_tick)
                                 break;
 
                             case turtle_is_up:
-                                map.lanes[i].objects[j].state = turtle_is_halfway;
+                                map.lanes[i].objects[j].state = turtle_is_halfway_down;
                                 break;
 
                             default:
