@@ -180,7 +180,7 @@ int gameTick(int32_t ms_since_last_tick)
                 
                 if(map.lanes[i].objects[j].timer <= 0)
                 {
-                    map.lanes[i].objects[j].timer = MS_BASE_OBJECT_SPEED;
+                    map.lanes[i].objects[j].timer = MS_BASE_OBJECT_SPEED * 5;
                     if(map.lanes[i].objects[j].canDisappear == 1)
                     {
                         
