@@ -53,7 +53,12 @@
         .attr = {.canKill = 1, .isEquippable = 0, .canMove = 0},
         .lilyflag=1,
     };
+    
+    const object_kind_t turtle_object_kind = {
+        .hitbox_width=REZISE(3* NORMAL_SIZE),
+        .attr = {.canKill = 0, .isEquippable = 0,.canMove = 1},
 
+    };
 
     static const lane_t road_arquetypes[] = 
     {
@@ -220,6 +225,58 @@
                 [2]={.position=LANE_X_PIXELS*0.8,.doesExist=0},
                 [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
                 [4]={.doesExist=0}
+            }
+        },
+        [6] = 
+        {
+            .direction = RIGHT,
+            .background = water,
+            .kind = &turtle_object_kind,
+            .objects = {
+                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
+                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+            }
+        },
+        [6] = 
+        {
+            .direction = RIGHT,
+            .background = water,
+            .kind = &turtle_object_kind,
+            .objects = {
+                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
+                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+            }
+        },
+        [6] = 
+        {
+            .direction = RIGHT,
+            .background = water,
+            .kind = &turtle_object_kind,
+            .objects = {
+                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
+                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+            }
+        },
+        [6] = 
+        {
+            .direction = LEFT,
+            .background = water,
+            .kind = &turtle_object_kind,
+            .objects = {
+                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
+                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
             }
         }
     };
