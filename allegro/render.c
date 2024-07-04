@@ -6,6 +6,7 @@
 #include <allegro5/allegro_primitives.h>
 #include "../config.h"
 #include "components/objects.h"
+#include <stdio.h>
 static void draw_lane(lane_t* lane, int row);
 static void draw_lane_background(lane_t * lane, int row);
 static void draw_lane_objects(lane_t * lane, int row);
@@ -56,6 +57,7 @@ static void draw_lane_objects(lane_t *lane, int row){
             } else if (lane->kind == &snake_object_kind){
                 draw_snake(&(lane->objects[i]), x, y); //checkear este acceso, .objects[j], no ->objects
             } else if (lane->kind == &lilypad_object_kind){
+                printf("DRAW\n");
                 draw_final_frog(x,y);
             } else if (lane->kind == &turtle_object_kind){
                 draw_turtle_squad(&(lane->objects[i]), x, y);

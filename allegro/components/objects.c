@@ -69,7 +69,13 @@ void draw_bus(char direction, float dx, float dy){
     return;
 }
 void draw_final_frog(float dx, float dy){
-    //assets_t * final_frog = get_special_assets() + spaecial
+    assets_t * special_assets = get_special_assets();
+    float sx = special_assets[happy_frog].sx;
+    float sy = special_assets[happy_frog].sy;
+    float sw = special_assets[happy_frog].sw;
+    float sh = special_assets[happy_frog].sh;
+    
+    al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx, dy, REZISE(sw), REZISE(sh), 0);
 }
 void draw_frog(const independent_object_t * frog, float dx, float dy){
     assets_t * frogs_assets = get_frog_assets();

@@ -319,11 +319,11 @@
             .background = finish_line,
             .kind = &lilypad_object_kind, //why not lilypad here?
             .objects = {
-                [0]={.position=REZISE(NORMAL_SIZE*1),.doesExist=0,},
-                [1]={.position=REZISE(NORMAL_SIZE*3),.doesExist=0,},
-                [2]={.position=REZISE(NORMAL_SIZE*5),.doesExist=0,},
-                [3]={.position=REZISE(NORMAL_SIZE*7),.doesExist=0,},
-                [4]={.position=REZISE(NORMAL_SIZE*9),.doesExist=0,}
+                [0]={.position=REZISE(WALL_SIZE *1),.doesExist=0,},
+                [1]={.position=REZISE(WALL_SIZE *4),.doesExist=0,},
+                [2]={.position=REZISE(WALL_SIZE *5),.doesExist=0,},
+                [3]={.position=REZISE(WALL_SIZE *7),.doesExist=0,},
+                [4]={.position=REZISE(WALL_SIZE *9),.doesExist=0,}
             }   
             
         }
