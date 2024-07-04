@@ -85,6 +85,7 @@ static const independent_object_t * iobjs[10] = {[0]=&ranita,NULL,NULL,NULL,NULL
 int gameTick(int32_t ms_since_last_tick)
 {
     // int32_t start_ranita_x, end_ranita_x,start_ranita_y,end_ranita_y;
+    
     uint32_t i,j;
     static int64_t ms_cooldown=MS_RANITA_MOVEMENT_COOLDOWN;
     int32_t start_object_x,end_object_x;
@@ -171,14 +172,19 @@ int gameTick(int32_t ms_since_last_tick)
         map.lanes[i].ms_to_next = a - ms_since_last_tick;
         //map.lanes[i].ms_to_next = map.lanes[i].ms_to_next - ms_since_last_tick;
         //printf("map.lanes[%d].ms_to_next = %d\n",i,map.lanes[i].ms_to_next);
+        //printf("%p\n", (map.lanes[i]).kind);
         
         if(map.lanes[i].kind == &turtle_object_kind)
         {
-            for(j=0; j<object_bound; ++j)
+            
+            for(j=0; j<object_bound; j++)
             {
+                
                 map.lanes[i].objects[j].timer -= ms_since_last_tick;
+                
                 if(map.lanes[i].objects[j].timer <= 0)
                 {
+                    
                     map.lanes[i].objects[j].timer = map.lanes[i].ms_reload *10;
                     if(map.lanes[i].objects[j].canDisappear == 1)
                     {
@@ -203,11 +209,11 @@ int gameTick(int32_t ms_since_last_tick)
                         }
                         
                     }
-                }
+                } 
             }
         }
         
-        
+    
         if(map.lanes[i].ms_to_next <= 0) //Lane should move a pixel
         {
             map.lanes[i].flag = 1;
@@ -266,7 +272,7 @@ int gameTick(int32_t ms_since_last_tick)
         }
         
     }
-    
+
     if (collision == NULL) //no hubo una colision antes
     {
         

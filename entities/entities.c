@@ -49,13 +49,13 @@
     };
 
     const object_kind_t lilypad_object_kind = {
-        .hitbox_width=1,
+        .hitbox_width=40,
         .attr = {.canKill = 1, .isEquippable = 0, .canMove = 0},
         .lilyflag=1,
     };
     
     const object_kind_t turtle_object_kind = {
-        .hitbox_width=REZISE(3* NORMAL_SIZE - NORMAL_SIZE),
+        .hitbox_width=REZISE(3* NORMAL_SIZE - SHORT_SIZE),
         .attr = {.canKill = 0, .isEquippable = 0,.canMove = 1},
 
     };
@@ -240,7 +240,7 @@
                 [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
             }
         },
-        [6] = 
+        [7] = 
         {
             .direction = RIGHT,
             .background = water,
@@ -253,7 +253,7 @@
                 [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
             }
         },
-        [6] = 
+        [8] = 
         {
             .direction = RIGHT,
             .background = water,
@@ -266,7 +266,7 @@
                 [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
             }
         },
-        [6] = 
+        [9] = 
         {
             .direction = LEFT,
             .background = water,
@@ -278,7 +278,33 @@
                 [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
                 [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
             }
-        }
+        },
+        [10] = 
+        {
+            .direction = LEFT,
+            .background = water,
+            .kind = &turtle_object_kind,
+            .objects = {
+                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
+                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+            }
+        },
+        [11] = 
+        {
+            .direction = LEFT,
+            .background = water,
+            .kind = &turtle_object_kind,
+            .objects = {
+                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
+                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+            }
+        },
     };
 
     static const lane_t grass_arquetypes[] = 
@@ -319,11 +345,11 @@
             .background = finish_line,
             .kind = &lilypad_object_kind, //why not lilypad here?
             .objects = {
-                [0]={.position=REZISE(WALL_SIZE / 2),.doesExist=0,},
-                [1]={.position=REZISE((WALL_SIZE + SHORT_SIZE) + WALL_SIZE / 2),.doesExist=0,},
-                [2]={.position=REZISE((WALL_SIZE + SHORT_SIZE) * 2 + WALL_SIZE / 2),.doesExist=0,},
-                [3]={.position=REZISE((WALL_SIZE + SHORT_SIZE) * 3 + WALL_SIZE / 2),.doesExist=0,},
-                [4]={.position=REZISE((WALL_SIZE + SHORT_SIZE) * 4 + WALL_SIZE / 2),.doesExist=0,}
+                [0]={.position=REZISE(BIG_SIZE / 2),.doesExist=0,},
+                [1]={.position=REZISE((BIG_SIZE + SHORT_SIZE) + BIG_SIZE / 2),.doesExist=0,},
+                [2]={.position=REZISE((BIG_SIZE + SHORT_SIZE) * 2 + BIG_SIZE / 2),.doesExist=0,},
+                [3]={.position=REZISE((BIG_SIZE + SHORT_SIZE) * 3 + BIG_SIZE / 2),.doesExist=0,},
+                [4]={.position=REZISE((BIG_SIZE + SHORT_SIZE) * 4 + BIG_SIZE / 2),.doesExist=0,}
             }   
             
         }
@@ -798,10 +824,11 @@ int32_t fillMap(map_t *_map, uint32_t _level)
                 _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements];
                 break;
             case 2:
-                _map->lanes[i] = water_arquetypes[rand() % 6];
+                _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements / 2];
                 break;
             case 3:
-                _map->lanes[i] = water_arquetypes[rand() % 6 + 6];
+                _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements/2 + water_arquetypes_elements/2];
+            printf("%p\n", _map->lanes[i].kind);
                 break;
             
             case 6:
@@ -835,6 +862,9 @@ int32_t fillMap(map_t *_map, uint32_t _level)
         _map->lanes[i].virtual_lane_end =LANE_X_PIXELS*2; //CAMBIAR ESTO, DEBERIA SER CONST Y PREDEFINIDO EN PATRON
     }
     //printMap(_map);
+    for (i = 0; i <= 16; i++){
+        printf("%p\n", _map->lanes[i].kind);
+    }
     return 0;
 }
 

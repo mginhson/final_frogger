@@ -5,6 +5,7 @@
 #include "../../config.h"
 #include "../../entities/entities.h"
 #include <stdio.h>
+#include <unistd.h>
 //#define HITBOX_CORRECTION(x) ((x) +)
 void draw_car_v1(char direction, float dx, float dy){
     assets_t * cars_collection = get_cars_assets();
@@ -74,8 +75,9 @@ void draw_final_frog(float dx, float dy){
     float sy = special_assets[happy_frog].sy;
     float sw = special_assets[happy_frog].sw;
     float sh = special_assets[happy_frog].sh;
-    
-    al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx, dy, REZISE(sw), REZISE(sh), 0);
+    printf("FINAL POSITION%f\n", dx);
+    //sleep(12);
+    al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx - REZISE(sw/2), dy, REZISE(sw), REZISE(sh), 0);
 }
 void draw_frog(const independent_object_t * frog, float dx, float dy){
     assets_t * frogs_assets = get_frog_assets();
@@ -89,6 +91,7 @@ void draw_frog(const independent_object_t * frog, float dx, float dy){
 }
 
 void draw_turtle_squad(const object_t * p_turtles, float dx, float dy){
+
     assets_t * turtle_assets = get_turtle_assets();
     float sx = turtle_assets[p_turtles->state + 2].sx;
     float sy = turtle_assets[p_turtles->state + 2].sy;
