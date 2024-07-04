@@ -48,8 +48,6 @@ typedef struct{
     state_t state;
     uint32_t canDisappear :1;
     uint32_t doesExist :1;
-    uint32_t timer;
-    uint8_t state;
 }object_t;
 
 typedef struct{

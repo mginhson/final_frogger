@@ -180,7 +180,7 @@ int gameTick(int32_t ms_since_last_tick)
                 
                 if(map.lanes[i].objects[j].timer <= 0)
                 {
-                    map.lanes[i].objects[j].timer = MS_BASE_OBJECT_SPEED * 5;
+                    map.lanes[i].objects[j].timer = map.lanes[i].ms_reload * 35;
                     if(map.lanes[i].objects[j].canDisappear == 1)
                     {
                         
@@ -194,6 +194,7 @@ int gameTick(int32_t ms_since_last_tick)
                                 map.lanes[i].objects[j].state = turtle_is_down;
                                 map.lanes[i].objects[j].doesExist = 0;
                                 break;
+
                             case turtle_is_up:
                                 map.lanes[i].objects[j].state = turtle_is_halfway;
                                 break;
@@ -296,10 +297,10 @@ int gameTick(int32_t ms_since_last_tick)
         }
             
     }
-    else if (collision == &small_log_object_kind || collision == &normal_log_object_kind || collision == &big_log_object_kind)
+    else if (collision == &turtle_object_kind ||collision == &small_log_object_kind || collision == &normal_log_object_kind || collision == &big_log_object_kind)
     {
         
-        //Es un tronco
+        //Es un tronco o turtuga
         
         if (map.lanes[ranita.y_position/LANE_PIXEL_HEIGHT].flag == 1)
         {

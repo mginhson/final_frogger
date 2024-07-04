@@ -55,7 +55,7 @@
     };
     
     const object_kind_t turtle_object_kind = {
-        .hitbox_width=REZISE(3* NORMAL_SIZE),
+        .hitbox_width=REZISE(3* NORMAL_SIZE - NORMAL_SIZE),
         .attr = {.canKill = 0, .isEquippable = 0,.canMove = 1},
 
     };
