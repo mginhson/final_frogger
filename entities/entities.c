@@ -49,7 +49,7 @@
     };
 
     const object_kind_t lilypad_object_kind = {
-        .hitbox_width=REZISE(NORMAL_SIZE),
+        .hitbox_width=1,
         .attr = {.canKill = 1, .isEquippable = 0, .canMove = 0},
         .lilyflag=1,
     };
@@ -319,11 +319,11 @@
             .background = finish_line,
             .kind = &lilypad_object_kind, //why not lilypad here?
             .objects = {
-                [0]={.position=REZISE(WALL_SIZE *1),.doesExist=0,},
-                [1]={.position=REZISE(WALL_SIZE *4),.doesExist=0,},
-                [2]={.position=REZISE(WALL_SIZE *5),.doesExist=0,},
-                [3]={.position=REZISE(WALL_SIZE *7),.doesExist=0,},
-                [4]={.position=REZISE(WALL_SIZE *9),.doesExist=0,}
+                [0]={.position=REZISE(WALL_SIZE / 2),.doesExist=0,},
+                [1]={.position=REZISE((WALL_SIZE + SHORT_SIZE) + WALL_SIZE / 2),.doesExist=0,},
+                [2]={.position=REZISE((WALL_SIZE + SHORT_SIZE) * 2 + WALL_SIZE / 2),.doesExist=0,},
+                [3]={.position=REZISE((WALL_SIZE + SHORT_SIZE) * 3 + WALL_SIZE / 2),.doesExist=0,},
+                [4]={.position=REZISE((WALL_SIZE + SHORT_SIZE) * 4 + WALL_SIZE / 2),.doesExist=0,}
             }   
             
         }
