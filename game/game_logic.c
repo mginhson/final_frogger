@@ -370,9 +370,9 @@ int gameTick(int32_t ms_since_last_tick)
         }
         else
         {
-             map.lanes[0].objects[whichObjectCollisioned].doesExist = 1;
+             
                 
-            if(map.lanes[i].objects[whichObjectCollisioned].doesExist == 1)
+            if(map.lanes[0].objects[whichObjectCollisioned].doesExist == 1)
             {
                 if(--remainingLives == 0)
                 {
@@ -392,7 +392,7 @@ int gameTick(int32_t ms_since_last_tick)
             }
             else
             {
-                map.lanes[i].objects[whichObjectCollisioned].doesExist = 1;
+                map.lanes[0].objects[whichObjectCollisioned].doesExist = 1;
                 int32_t check,z;
                 for(z=0,check = 0; z < object_bound;z++)
                 {
