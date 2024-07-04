@@ -49,7 +49,7 @@
     };
 
     const object_kind_t lilypad_object_kind = {
-        .hitbox_width=REZISE(10),
+        .hitbox_width=3,
         .attr = {.canKill = 1, .isEquippable = 0, .canMove = 0},
         .lilyflag=1,
     };
