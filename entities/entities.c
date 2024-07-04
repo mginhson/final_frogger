@@ -64,7 +64,7 @@
     {
         [0]=
         {
-            .direction = RIGHT,
+            .direction = LEFT,
             .kind = &bus_object_kind,
             .background = road,
             .objects =
@@ -335,7 +335,11 @@
     };
 
     const object_kind_t freeSlot;
+    const object_kind_t turtle_object_kind = {
+        .hitbox_width=0,
+        .attr = {.canKill = 0, .isEquippable = 0,.canMove = 1},
 
+    };
     const object_kind_t bus_object_kind = {
         .hitbox_width = 2,
         .attr = {.canKill = 1, .isEquippable = 0, .canMove = 1},
@@ -347,12 +351,12 @@
     };
 
     const object_kind_t small_log_object_kind={
-        .hitbox_width=2,
+        .hitbox_width=3,
         .attr = {.canKill = 0, .isEquippable = 0, .canMove = 1},
     };
 
     const object_kind_t normal_log_object_kind = {
-        .hitbox_width=3,
+        .hitbox_width=4,
         .attr = {.canKill = 0, .isEquippable = 0, .canMove = 1},
     };
 
@@ -381,11 +385,11 @@
             .background = road,
             .objects =
             {
-                [0]={.position=-1,.doesExist=1},
+                [0]={.position=-5,.doesExist=1},
                 [1]={.position=5,.doesExist=1},
                 [2]={.position=9,.doesExist=1},
-                [3]={.position=13,.doesExist=1},
-                [4]={.position = 17, .doesExist=1}
+                [3]={.position=16,.doesExist=1},
+                [4]={.position = 21, .doesExist=1}
             } 
         },
         [1]=
@@ -395,39 +399,39 @@
             .background = road,
             .objects =
             {
-                [0]={.position=-1,.doesExist=1},
-                [1]={.position=5,.doesExist=1},
-                [2]={.position=9,.doesExist=1},
+                [0]={.position=-9,.doesExist=1},
+                [1]={.position=2,.doesExist=1},
+                [2]={.position=7,.doesExist=1},
                 [3]={.position=13,.doesExist=1},
-                [4]={.position = 17, .doesExist=1}
+                [4]={.position = 19, .doesExist=1}
             } 
         },
         [2]=
-        {
-            .direction = LEFT,
-            .kind = &car_object_kind,
-            .background = road,
-            .objects =
-            {
-                [0]={.position=-10,.doesExist=1},
-                [1]={.position=2,.doesExist=1},
-                [2]={.position=7,.doesExist=1},
-                [3]={.position=14,.doesExist=1},
-                [4]={.doesExist=0}
-            } 
-        },
-        [3]=
         {
             .direction = LEFT,
             .kind = &bus_object_kind,
             .background = road,
             .objects =
             {
-                [0]={.position=-10,.doesExist=1},
-                [1]={.position=-3,.doesExist=1},
-                [2]={.position=0,.doesExist=1},
-                [3]={.position=8,.doesExist=1},
-                [4]={.position=15,.doesExist=1}
+                [0]={.position=-7,.doesExist=1},
+                [1]={.position=8,.doesExist=1},
+                [2]={.position=12,.doesExist=1},
+                [3]={.position=21,.doesExist=1},
+                [4]={.position=0,.doesExist=1}
+            } 
+        },
+        [3]=
+        {
+            .direction = LEFT,
+            .kind = &car_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-7,.doesExist=1},
+                [1]={.position=3,.doesExist=1},
+                [2]={.position=7,.doesExist=1},
+                [3]={.position=14,.doesExist=1},
+                [4]={.position = 19, .doesExist=1}
             } 
         },
         [4]=
@@ -437,27 +441,111 @@
             .background = road,
             .objects =
             {
-                [0]={.position=-5,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.3,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.7,.doesExist=1},
-                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
-                [4]={.doesExist=0}
+                [0]={.position=-12,.doesExist=1},
+                [1]={.position=-1,.doesExist=1},
+                [2]={.position=4,.doesExist=1},
+                [3]={.position=10,.doesExist=1},
+                [4]={.position = 16, .doesExist=1}
             } 
         },
         [5]=
+        {
+            .direction = RIGHT,
+            .kind = &bus_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-3,.doesExist=1},
+                [1]={.position=12,.doesExist=1},
+                [2]={.position=16,.doesExist=1},
+                [3]={.position=-12,.doesExist=1},
+                [4]={.position=4,.doesExist=1}
+            } 
+        },
+        [6]=
         {
             .direction = LEFT,
             .kind = &bus_object_kind,
             .background = road,
             .objects =
             {
-                [0]={.position=LANE_X_PIXELS*0.3,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.7,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
-                [3]={.doesExist=0},
-                [4]={.doesExist=0}
+                [0]={.position=-5,.doesExist=1},
+                [1]={.position=5,.doesExist=1},
+                [2]={.position=9,.doesExist=1},
+                [3]={.position=16,.doesExist=1},
+                [4]={.position = 21, .doesExist=1}
             } 
         },
+        [7]=
+        {
+            .direction = RIGHT,
+            .kind = &bus_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-9,.doesExist=1},
+                [1]={.position=2,.doesExist=1},
+                [2]={.position=7,.doesExist=1},
+                [3]={.position=13,.doesExist=1},
+                [4]={.position = 19, .doesExist=1}
+            } 
+        },
+        [8]=
+        {
+            .direction = RIGHT,
+            .kind = &bus_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-7,.doesExist=1},
+                [1]={.position=8,.doesExist=1},
+                [2]={.position=12,.doesExist=1},
+                [3]={.position=21,.doesExist=1},
+                [4]={.position=0,.doesExist=1}
+            } 
+        },
+        [9]=
+        {
+            .direction = RIGHT,
+            .kind = &car_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-7,.doesExist=1},
+                [1]={.position=3,.doesExist=1},
+                [2]={.position=7,.doesExist=1},
+                [3]={.position=14,.doesExist=1},
+                [4]={.position = 19, .doesExist=1}
+            } 
+        },
+        [10]=
+        {
+            .direction = LEFT,
+            .kind = &car_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-12,.doesExist=1},
+                [1]={.position=-1,.doesExist=1},
+                [2]={.position=4,.doesExist=1},
+                [3]={.position=10,.doesExist=1},
+                [4]={.position = 16, .doesExist=1}
+            } 
+        },
+        [11]=
+        {
+            .direction = LEFT,
+            .kind = &bus_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-3,.doesExist=1},
+                [1]={.position=12,.doesExist=1},
+                [2]={.position=16,.doesExist=1},
+                [3]={.position=-12,.doesExist=1},
+                [4]={.position=4,.doesExist=1}
+            } 
+        }
     };
 
     static const lane_t water_arquetypes[] = {
@@ -467,24 +555,24 @@
             .background = water,
             .kind = &normal_log_object_kind,
             .objects = {
-                [0]={.position=-10,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.75,.doesExist=1},
-                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
-                [4]={.doesExist=0}
+                [0]={.position=-5,.doesExist=1},
+                [1]={.position=5,.doesExist=1},
+                [2]={.position=10,.doesExist=1},
+                [3]={.position=16,.doesExist=1},
+                [4]={.position = 19, .doesExist=1}
             }
         },
         [1] = 
         {
-            .direction = RIGHT,
+            .direction = LEFT,
             .background = water,
             .kind = &normal_log_object_kind,
             .objects = {
-                [0]={.position=-10,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.75,.doesExist=1},
-                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
-                [4]={.doesExist=0}
+                [0]={.position=-9,.doesExist=1},
+                [1]={.position=2,.doesExist=1},
+                [2]={.position=8,.doesExist=1},
+                [3]={.position=13,.doesExist=1},
+                [4]={.position = 19, .doesExist=1}
             }
         },
         [2] = 
@@ -493,51 +581,130 @@
             .background = water,
             .kind = &small_log_object_kind,
             .objects = {
-                [0]={.position=-10,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.6,.doesExist=1},
-                [3]={.doesExist=0},
-                [4]={.doesExist=0}
+                [0]={.position=-7,.doesExist=1},
+                [1]={.position=5,.doesExist=1},
+                [2]={.position=11,.doesExist=1},
+                [3]={.position=19,.doesExist=1},
+                [4]={.position=0,.doesExist=1}
             }        
         
         },
         [3] = 
         {
-            .direction = RIGHT,
+            .direction = LEFT,
             .background = water,
             .kind = &small_log_object_kind,
             .objects = {
-                [0]={.position=-LANE_X_PIXELS*0.3,.doesExist=1},
-                [1]={.position=-LANE_X_PIXELS*0.5,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
-                [3]={.position=20,    .doesExist=1},
-                [4]={.position=0,                .doesExist=1}
+                [0]={.position=-7,.doesExist=1},
+                [1]={.position=3,.doesExist=1},
+                [2]={.position=8,.doesExist=1},
+                [3]={.position=14,.doesExist=1},
+                [4]={.position = 19, .doesExist=1}
             }
         },
         [4] = 
+        {
+            .direction = LEFT,
+            .background = water,
+            .kind = &big_log_object_kind,
+            .objects = {
+                [0]={.position=-12,.doesExist=1},
+                [1]={.position=-1,.doesExist=1},
+                [2]={.position=4,.doesExist=1},
+                [3]={.position=10,.doesExist=1},
+                [4]={.position = 16, .doesExist=1}
+            }
+        },
+        [5] = 
+        {
+            .direction = LEFT,
+            .background = water,
+            .kind = &big_log_object_kind,
+            .objects = {
+                [0]={.position=-3,.doesExist=1},
+                [1]={.position=10,.doesExist=1},
+                [2]={.position=16,.doesExist=1},
+                [3]={.position=-12,.doesExist=1},
+                [4]={.position=4,.doesExist=1}
+            }
+        },
+        [6] = 
         {
             .direction = RIGHT,
             .background = water,
             .kind = &normal_log_object_kind,
             .objects = {
-                [0]={.position=-10,.doesExist=1},
-                [1]={.position=-LANE_X_PIXELS*0.25,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.5,.doesExist=1},
-                [3]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
-                [4]={.position=LANE_X_PIXELS*1.8,.doesExist=1}
+                [0]={.position=-5,.doesExist=1},
+                [1]={.position=5,.doesExist=1},
+                [2]={.position=10,.doesExist=1},
+                [3]={.position=16,.doesExist=1},
+                [4]={.position = 19, .doesExist=1}
             }
         },
-        [5] = 
+        [7] = 
+        {
+            .direction = RIGHT,
+            .background = water,
+            .kind = &normal_log_object_kind,
+            .objects = {
+                [0]={.position=-9,.doesExist=1},
+                [1]={.position=2,.doesExist=1},
+                [2]={.position=8,.doesExist=1},
+                [3]={.position=13,.doesExist=1},
+                [4]={.position = 19, .doesExist=1}
+            }
+        },
+        [8] = 
+        {
+            .direction = RIGHT,
+            .background = water,
+            .kind = &small_log_object_kind,
+            .objects = {
+                [0]={.position=-7,.doesExist=1},
+                [1]={.position=5,.doesExist=1},
+                [2]={.position=11,.doesExist=1},
+                [3]={.position=19,.doesExist=1},
+                [4]={.position=0,.doesExist=1}
+            }        
+        
+        },
+        [9] = 
+        {
+            .direction = RIGHT,
+            .background = water,
+            .kind = &small_log_object_kind,
+            .objects = {
+                [0]={.position=-7,.doesExist=1},
+                [1]={.position=3,.doesExist=1},
+                [2]={.position=8,.doesExist=1},
+                [3]={.position=14,.doesExist=1},
+                [4]={.position = 19, .doesExist=1}
+            }
+        },
+        [10] = 
         {
             .direction = RIGHT,
             .background = water,
             .kind = &big_log_object_kind,
             .objects = {
-                [0]={.position= -LANE_X_PIXELS*0.25,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
-                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
-                [4]={.doesExist=0}
+                [0]={.position=-12,.doesExist=1},
+                [1]={.position=-1,.doesExist=1},
+                [2]={.position=4,.doesExist=1},
+                [3]={.position=10,.doesExist=1},
+                [4]={.position = 16, .doesExist=1}
+            }
+        },
+        [11] = 
+        {
+            .direction = RIGHT,
+            .background = water,
+            .kind = &big_log_object_kind,
+            .objects = {
+                [0]={.position=-3,.doesExist=1},
+                [1]={.position=10,.doesExist=1},
+                [2]={.position=16,.doesExist=1},
+                [3]={.position=-12,.doesExist=1},
+                [4]={.position=4,.doesExist=1}
             }
         }
     };
@@ -627,13 +794,16 @@ int32_t fillMap(map_t *_map, uint32_t _level)
                 _map->lanes[i] = finish_line_arquetypes[0];
                 break;
 
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
+            case 1: case 4: case 5:
                 _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements];
                 break;
+            case 2:
+                _map->lanes[i] = water_arquetypes[rand() % 6];
+                break;
+            case 3:
+                _map->lanes[i] = water_arquetypes[rand() % 6 + 6];
+                break;
+            
             case 6:
             case 7:
                 _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
