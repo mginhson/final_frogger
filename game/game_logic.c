@@ -294,7 +294,7 @@ int gameTick(int32_t ms_since_last_tick)
         }
             
     }
-    else if (collision == &small_log_object_kind || collision == &normal_log_object_kind || collision == &big_log_object_kind)
+    else if (collision == &turtle_object_kind|| collision == &small_log_object_kind || collision == &normal_log_object_kind || collision == &big_log_object_kind)
     {
         
         //Es un tronco
