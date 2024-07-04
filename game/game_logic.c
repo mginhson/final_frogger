@@ -172,23 +172,27 @@ int gameTick(int32_t ms_since_last_tick)
         //map.lanes[i].ms_to_next = map.lanes[i].ms_to_next - ms_since_last_tick;
         //printf("map.lanes[%d].ms_to_next = %d\n",i,map.lanes[i].ms_to_next);
         
-        if(map.lanes[j].kind == &turtle_object_kind)
+        if(map.lanes[i].kind == &turtle_object_kind)
         {
             for(j=0; j<object_bound; ++j)
             {
                 map.lanes[i].objects[j].timer -= ms_since_last_tick;
+                
                 if(map.lanes[i].objects[j].timer <= 0)
                 {
-                    map.lanes[i].objects[j].timer = 2*map.lanes[i].ms_reload;
+                    map.lanes[i].objects[j].timer = MS_BASE_OBJECT_SPEED;
                     if(map.lanes[i].objects[j].canDisappear == 1)
                     {
+                        
                         switch(map.lanes[i].objects[j].state)
                         {
                             case turtle_is_down:
+                                map.lanes[i].objects[j].doesExist = 1;
                                 map.lanes[i].objects[j].state = turtle_is_up;
                                 break;
                             case turtle_is_halfway:
                                 map.lanes[i].objects[j].state = turtle_is_down;
+                                map.lanes[i].objects[j].doesExist = 0;
                                 break;
                             case turtle_is_up:
                                 map.lanes[i].objects[j].state = turtle_is_halfway;
@@ -198,8 +202,10 @@ int gameTick(int32_t ms_since_last_tick)
                                 map.lanes[i].objects[j].state = turtle_is_up;
                                 break;
                         }
+                        
                     }
                 }
+                
             }
         }
         
@@ -370,9 +376,9 @@ int gameTick(int32_t ms_since_last_tick)
         }
         else
         {
-             map.lanes[0].objects[whichObjectCollisioned].doesExist = 1;
+             
                 
-            if(map.lanes[i].objects[whichObjectCollisioned].doesExist == 1)
+            if(map.lanes[0].objects[whichObjectCollisioned].doesExist == 1)
             {
                 if(--remainingLives == 0)
                 {
@@ -392,7 +398,7 @@ int gameTick(int32_t ms_since_last_tick)
             }
             else
             {
-                map.lanes[i].objects[whichObjectCollisioned].doesExist = 1;
+                map.lanes[0].objects[whichObjectCollisioned].doesExist = 1;
                 int32_t check,z;
                 for(z=0,check = 0; z < object_bound;z++)
                 {
@@ -410,6 +416,7 @@ int gameTick(int32_t ms_since_last_tick)
                     time_left_on_level = TIME_PER_LEVEL_MS;
                     resetRanitaPosition();
                 }
+                pts+=5;
             }
            
                 
@@ -439,7 +446,7 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
             temp = ranita.y_position + ranita.hitbox_height - 1; //y position of the bottom
             printf("%d %d\n",temp, temp+ranita.hitbox_height);
            
-            if (temp + ranita.hitbox_height > LANE_Y_PIXELS) //would go below map, set is as low as possible
+            if (temp + ranita.hitbox_height >= LANE_Y_PIXELS) //would go below map, set is as low as possible
             {
                 ranita.y_position = LANE_Y_PIXELS  - 1 - ranita.hitbox_height + 1; //lowest pixel for the upper left corner
             }
