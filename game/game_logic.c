@@ -172,34 +172,29 @@ int gameTick(int32_t ms_since_last_tick)
         //map.lanes[i].ms_to_next = map.lanes[i].ms_to_next - ms_since_last_tick;
         //printf("map.lanes[%d].ms_to_next = %d\n",i,map.lanes[i].ms_to_next);
         
-        if(map.lanes[i].kind == &turtle_object_kind)
+        if(map.lanes[j].kind == &turtle_object_kind)
         {
             for(j=0; j<object_bound; ++j)
             {
                 map.lanes[i].objects[j].timer -= ms_since_last_tick;
-                
                 if(map.lanes[i].objects[j].timer <= 0)
                 {
-                    map.lanes[i].objects[j].timer = map.lanes[i].ms_reload * 35;
+                    map.lanes[i].objects[j].timer = MS_BASE_OBJECT_SPEED;
                     if(map.lanes[i].objects[j].canDisappear == 1)
                     {
                         
                         switch(map.lanes[i].objects[j].state)
                         {
                             case turtle_is_down:
+                                map.lanes[i].objects[j].doesExist = 1;
                                 map.lanes[i].objects[j].state = turtle_is_up;
-                                map.lanes[i].objects[j].doesExist =1 ;
                                 break;
-
-                            case turtle_is_halfway_down:
+                            case turtle_is_halfway:
                                 map.lanes[i].objects[j].state = turtle_is_down;
                                 map.lanes[i].objects[j].doesExist = 0;
                                 break;
-                                
-                            
-
                             case turtle_is_up:
-                                map.lanes[i].objects[j].state = turtle_is_halfway_down;
+                                map.lanes[i].objects[j].state = turtle_is_halfway;
                                 break;
 
                             default:
@@ -209,7 +204,6 @@ int gameTick(int32_t ms_since_last_tick)
                         
                     }
                 }
-                
             }
         }
         
@@ -300,7 +294,7 @@ int gameTick(int32_t ms_since_last_tick)
         }
             
     }
-    else if (collision == &small_log_object_kind || collision == &normal_log_object_kind || collision == &big_log_object_kind)
+    else if (collision == &turtle_object_kind|| collision == &small_log_object_kind || collision == &normal_log_object_kind || collision == &big_log_object_kind)
     {
         
         //Es un tronco
@@ -311,7 +305,6 @@ int gameTick(int32_t ms_since_last_tick)
             {
                 ranita.values.position += 1;
             }
-
             else
             {
                 ranita.values.position-=1;
