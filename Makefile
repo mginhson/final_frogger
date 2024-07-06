@@ -3,7 +3,7 @@ CFLAGS := -Wall
 DEFINE_ARGS := -D PC 
 EXEC_NAME := frogger
 MODULES := input.o game_logic.o frogger.o entities.o init.o assets.o menu.o util.o highscore.o text.o pause.o objects.o render.o
-ALLEGRO_INCLUDES := -lallegro -lallegro_font -lallegro_image -lallegro_primitives
+ALLEGRO_INCLUDES := -lallegro -lallegro_font -lallegro_image -lallegro_primitives -lallegro_audio -lallegro_acodec
 
 all: pc
 
@@ -38,5 +38,7 @@ render.o: allegro/render.c allegro/render.h entities/entities.h allegro/assets.h
 	gcc allegro/render.c -c ${DEFINE_ARGS}
 input.o: allegro/input/input.c allegro/input/input.h allegro/init.h 
 	gcc allegro/input/input.c -c ${DEFINE_ARGS}
+soundTrack.o: allegro/audio/soundTrack.c allegro/audio/soundTrack.h allegro/init.h
+	gcc allegro/audio/soundTrack.c -c ${DEFINE_ARGS}
 clean:
 	rm ${MODULES} ${EXEC_NAME} 
