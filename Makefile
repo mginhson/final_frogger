@@ -2,7 +2,7 @@ CC := gcc
 CFLAGS := -Wall
 DEFINE_ARGS := -D PC 
 EXEC_NAME := frogger
-MODULES := input.o game_logic.o frogger.o entities.o init.o assets.o menu.o util.o highscore.o text.o pause.o objects.o render.o
+MODULES := input.o game_logic.o frogger.o entities.o init.o assets.o menu.o util.o highscore.o text.o pause.o objects.o render.o soundTrack.o
 ALLEGRO_INCLUDES := -lallegro -lallegro_font -lallegro_image -lallegro_primitives -lallegro_audio -lallegro_acodec
 
 all: pc
