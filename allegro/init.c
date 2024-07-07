@@ -5,7 +5,18 @@
 #include <stdio.h>
 #include <allegro5/allegro_primitives.h>
 #include "../config.h"
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
+#include <unistd.h>
+static void load_sounds(void);
+static void destroy_sounds(void);
 g_info_t general_information;
+
+#define STEP "audio/src/step.wav"
+#define LIFE "audio/src/looseLife.wav"
+#define TIME "audio/src/runningOutOfTime.wav"
+#define LEVEL "audio/src/nextLevel.wav"
+#define MUSIC "audio/src/music.wav"
 // Funcion que incializa allegro
 void *init_allegro(void){
     // Inicialización de allegro
@@ -16,7 +27,9 @@ void *init_allegro(void){
     al_install_mouse();
     // Inicialización de la libreria para imagenes
     al_init_image_addon();
-
+    // Incialización de la libreria para audio
+    al_install_audio();
+    printf("%d", al_init_acodec_addon());
     if (!al_init_primitives_addon()){
         printf("No se pudo INICIALIZAR");
     };
@@ -46,13 +59,18 @@ void *init_allegro(void){
     if ((general_information.bitmap) == NULL){
         return NULL;
     }
+    load_sounds();
     
+  
+    //al_play_sample(general_information.audios[4], 1, 0, 1, ALLEGRO_PLAYMODE_LOOP, 0);
+    //sleep(1);
+   al_play_sample_instance(general_information.song);
     return NULL;
 }
 // Funcion que cierra allegro
 void destroy_allegro(void){
    // al_destroy_font(g_info->font);
-    
+    destroy_sounds();
     al_destroy_display(general_information.disp);
     al_destroy_timer(general_information.timer);
     al_destroy_event_queue(general_information.queue);
@@ -62,3 +80,27 @@ void destroy_allegro(void){
     return;
 }
 
+static void load_sounds(void){
+    al_reserve_samples(MAX_AUDIOS + 10);
+    general_information.audios[0] = al_load_sample(STEP);
+    general_information.audios[1] = al_load_sample(LIFE);
+    general_information.audios[2] = al_load_sample(TIME);
+    general_information.audios[3] = al_load_sample(LEVEL);
+    general_information.audios[4] = al_load_sample(MUSIC);
+    
+    general_information.song = al_create_sample_instance(general_information.audios[4]);
+    al_set_sample_instance_playmode(general_information.song, ALLEGRO_PLAYMODE_LOOP);
+    al_attach_sample_instance_to_mixer(general_information.song, al_get_default_mixer());
+    //al_play_sample_instance(general_information.song);
+    //printf("%p\n", general_information.audios[3]);
+    
+    return;
+}
+static void destroy_sounds(void){
+    int i;
+    for (i = 0; i < MAX_AUDIOS; i++){
+        al_destroy_sample(general_information.audios[i]);
+    }
+    al_destroy_sample_instance(general_information.song);
+    return;
+}
