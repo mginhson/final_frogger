@@ -41,6 +41,10 @@ typedef enum{
     turtle_is_up,turtle_is_down,turtle_is_halfway,
 }state_t;
 
+enum frog_states{
+    alive, death
+};
+
 typedef struct{
     int32_t position;
     animation_t animation;

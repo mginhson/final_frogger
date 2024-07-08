@@ -3,5 +3,5 @@
 
 typedef enum {_EMPTY,  _LEFT, _RIGHT, _PAUSE, _UP, _DOWN}dato_entrada;
 dato_entrada input_reader(void);
-
+void input_flush(void);
 #endif

@@ -79,15 +79,54 @@ void draw_final_frog(float dx, float dy){
     //sleep(12);
     al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx - REZISE(sw/2), dy, REZISE(sw), REZISE(sh), 0);
 }
-void draw_frog(const independent_object_t * frog, float dx, float dy){
-    assets_t * frogs_assets = get_frog_assets();
+void draw_frog(float dx, float dy, int frame, int state){
+    assets_t * all_frogs_assets = get_frog_assets();
+    assets_t * all_death_assets = get_death_assets();
+    
+    assets_t * death_assets = all_death_assets + 3;
+    assets_t * frogs_assets;
+    if (state == alive){
+        frogs_assets = &(all_frogs_assets[frog_top]);
+    } else if (state == death){
+        frogs_assets = &(death_assets[frame]);
+    }
+    /*
+    switch (state)
+    {
+    case alive:
+        frogs_assets = &(all_frogs_assets[frog_top]);
+    case death1:
+        frogs_assets = &(death_assets[death_1]);
+        break;
+    case death2:
+        frogs_assets = &(death_assets[death_2]);
+        break;
+    case death3:
+        frogs_assets = &(death_assets[death_3]);
+        break;
+    case death4:
+        frogs_assets = &(death_assets[death_4]);
+        break;
+    case death5:
+        frogs_assets = &(death_assets[death_5]);
+        break;
+    case death6:
+        frogs_assets = &(death_assets[death_6]);
+        break;
+    case death7:
+        frogs_assets = &(death_assets[death_7]);
+        break;
+    default:
+        break;
+    }*/
     float sx = frogs_assets->sx;
     float sy = frogs_assets->sy;
     float sw = frogs_assets->sw;
     float sh = frogs_assets->sh;
 
     al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx , dy + REZISE(sw/2), REZISE(sw), REZISE(sh), 0);
-    free(frogs_assets);
+    free(all_frogs_assets);
+    free(all_death_assets);
 }
 
 void draw_turtle_squad(const object_t * p_turtles, float dx, float dy){

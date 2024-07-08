@@ -13,16 +13,35 @@ static void draw_lane_objects(lane_t * lane, int row);
 
 
 
-void renderWorld(map_t *map, const independent_object_t* frog[], int size, int tiempo){
-    
+
+int renderWorld(map_t *map, const independent_object_t* frog[], int size, int tiempo){
+    static short int death_counter = 0;
     int i;
     al_clear_to_color(al_map_rgb(0, 0, 0));
     for (i=0; i < LANES_COUNT; i++){
         draw_lane(&map->lanes[i], i);
     }
-    // La ranita
-    draw_frog(frog[0], frog[0]->values.position,frog[0]->y_position);
+    //sleep(1);
+    // La ranita esta muerta
+    
+    if (frog[0]->values.state == death && death_counter == 0){
+        death_counter = 1;
+    }
+    if (death_counter > 0 && frog[0]->values.timer == MAX_FROG_TIMER){
+        printf("AUMENTO\n");
+        draw_frog(frog[0]->values.position,frog[0]->y_position, death_counter, death);
+        death_counter = death_counter + 1 < 4 ? death_counter + 1 : 0;
+    } else if (frog[0]->values.state == alive){
+    // La ranita esta viva
+        draw_frog(frog[0]->values.position, frog[0]->y_position, 0, alive);    
+    } else if (frog[0]->values.state == death){
+        draw_frog(frog[0]->values.position, frog[0]->y_position, death_counter, death);
+    }
+    printf("%d\n", death_counter);
+    
+    
     al_flip_display();
+    return death_counter > 0 ? death : alive;
 }
 static void draw_lane(lane_t * lane, int row){
     draw_lane_background(lane, row);

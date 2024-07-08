@@ -22,6 +22,7 @@
 #endif
 
 
+
 static void updateMap(void);
 static const object_kind_t * collisionAnalysis(void);
 static void resetRanitaPosition(void);
@@ -53,6 +54,7 @@ static uint32_t whichObjectCollisioned;
         .hitbox_height = REZISE(NORMAL_SIZE),
         .y_position = LANE_Y_PIXELS-1 - REZISE(NORMAL_SIZE) + 1,
         .values.position = 0,
+        .values.state = alive
     };
 #elif defined(RPI)
     independent_object_t ranita = {
@@ -92,7 +94,7 @@ int gameTick(int32_t ms_since_last_tick)
     const object_kind_t * collision ;
 
     //puts("Map before executing gameTick:\n");
-    printMap(&map,0);
+    //printMap(&map,0);
     
     ms_cooldown -= ms_since_last_tick;
     time_left_on_level -= ms_since_last_tick;
@@ -116,7 +118,7 @@ int gameTick(int32_t ms_since_last_tick)
     }
 
 
-    if(ms_cooldown <= 0) //we can check for movement again 
+    if(ms_cooldown <= 0 && ranita.values.state != death) //we can check for movement again 
     {
         
         ms_cooldown = 0;
@@ -295,8 +297,11 @@ int gameTick(int32_t ms_since_last_tick)
             #if defined(RPI)
                 looseLife(remainingLives);
             #endif
+            printf("Restando Vidas\n");
+            ranita.values.state = death;
+            
             time_left_on_level = TIME_PER_LEVEL_MS;
-            resetRanitaPosition();
+           // resetRanitaPosition();
         }
             
     }
@@ -397,7 +402,7 @@ int gameTick(int32_t ms_since_last_tick)
                         looseLife(remainingLives);
                     #endif
                     time_left_on_level = TIME_PER_LEVEL_MS;
-                    resetRanitaPosition();
+                    
                 }
             }
             else
@@ -433,9 +438,22 @@ int gameTick(int32_t ms_since_last_tick)
         
       //No collision, do nothing
     }
-    printf("\ncurrent lane %d\n",currentLane());
-    renderWorld(&map, iobjs, 1, time_left_on_level/1000);
+    //printf("\ncurrent lane %d\n",currentLane());
+    int prev = ranita.values.state;
+    #if defined PC
+    if (ranita.values.state == death){
+        input_flush();
+    }
+    #endif
+    ranita.values.state = renderWorld(&map, iobjs, 1, time_left_on_level/1000);
+    if (prev == death && ranita.values.state == alive){
+        printf("RESET\n");
+        resetRanitaPosition();
+    }  
 
+    printf("%d\n", ranita.values.state);
+    ranita.values.timer = ranita.values.timer == MAX_FROG_TIMER ? 0 : ranita.values.timer + 1;
+    printf("%d\n", ranita.values.timer);
     return NONE;
 }
 
@@ -448,7 +466,7 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
     {
         case RANITA_DOWN:            
             temp = ranita.y_position + ranita.hitbox_height - 1; //y position of the bottom
-            printf("%d %d\n",temp, temp+ranita.hitbox_height);
+            //printf("%d %d\n",temp, temp+ranita.hitbox_height);
            
             if (temp + ranita.hitbox_height >= LANE_Y_PIXELS) //would go below map, set is as low as possible
             {
@@ -518,7 +536,7 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
             break;
 
         default:
-            printf("Unknown direction input at triggerRanitaMovement()\n");
+            //printf("Unknown direction input at triggerRanitaMovement()\n");
             break;
     }
 }
@@ -536,7 +554,7 @@ static const object_kind_t * collisionAnalysis(void)
     int32_t i,j,start_object_x,end_object_x,start_ranita_x,end_ranita_x,start_ranita_y,end_ranita_y;
     int32_t start_lane_y,end_lane_y;
     //puts("starting collision analysis");
-    printf("ranita.y_position = %d\nranita.hitbox_height = %d\nranita.position = %d\nranita.params.hitbox_width=%d\n\n",ranita.y_position,ranita.hitbox_height,ranita.values.position,ranita.params.hitbox_width);
+    //printf("ranita.y_position = %d\nranita.hitbox_height = %d\nranita.position = %d\nranita.params.hitbox_width=%d\n\n",ranita.y_position,ranita.hitbox_height,ranita.values.position,ranita.params.hitbox_width);
     end_ranita_y = ranita.y_position + ranita.hitbox_height - 1;//Porque ranita.y_position ya tienen en cuenta el primer pixel
     
     start_ranita_y = ranita.y_position; 

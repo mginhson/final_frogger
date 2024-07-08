@@ -80,14 +80,14 @@ enum frog_sprites {
 };
 // Constantes para acceder a las animaciones de muerte
 enum death_sprites{
-    death1,
-    death2,
-    death3,
-    death4,
-    death5,
-    death6,
-    death7,
-    death8
+    death_1,
+    death_2,
+    death_3,
+    death_4,
+    death_5,
+    death_6,
+    death_7,
+    death_8
 };
 // Constantes para acceder a los autos. l y r hacen referencia al sentido
 enum cars_sprites {
