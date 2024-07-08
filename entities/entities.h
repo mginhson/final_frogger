@@ -6,6 +6,8 @@
 
 #define LANE_ARQUETYPE_PIXELS ((LANE_X_PIXELS) * 3)
 
+#define MAX_FROG_TIMER 10
+
 typedef struct {
     char is_animating;
     assets_t * animation_frame;
