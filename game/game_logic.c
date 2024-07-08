@@ -28,7 +28,7 @@ static const object_kind_t * collisionAnalysis(void);
 static void resetRanitaPosition(void);
 static int32_t currentLane(void);
 
-
+static uint32_t pasosAtras = 0;
 
 typedef enum{RANITA_UP,RANITA_DOWN,RANITA_LEFT,RANITA_RIGHT}ranita_logic_direction_t;
 static void triggerRanitaMovement(ranita_logic_direction_t _direction);
@@ -445,15 +445,16 @@ int gameTick(int32_t ms_since_last_tick)
         input_flush();
     }
     #endif
-    ranita.values.state = renderWorld(&map, iobjs, 1, time_left_on_level/1000);
+    printf("=====================%d=========================", pts);
+    ranita.values.state = renderWorld(&map, iobjs, 1, time_left_on_level/1000, remainingLives);
     if (prev == death && ranita.values.state == alive){
         printf("RESET\n");
         resetRanitaPosition();
     }  
 
-    printf("%d\n", ranita.values.state);
+    // printf("%d\n", ranita.values.state);
     ranita.values.timer = ranita.values.timer == MAX_FROG_TIMER ? 0 : ranita.values.timer + 1;
-    printf("%d\n", ranita.values.timer);
+    // printf("%d\n", ranita.values.timer);
     return NONE;
 }
 
@@ -478,7 +479,7 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
                     stepSound();
                 #endif
                 ranita.y_position += ranita.hitbox_height;
-                pts--;
+                pasosAtras++;
             }
             break;
 
@@ -495,7 +496,12 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
                     stepSound();
                 #endif
                 ranita.y_position -= ranita.hitbox_height;
-                pts++;
+                if(pasosAtras == 0){
+                    pts++;    
+                }else{
+                    pasosAtras--;
+                }
+                
             }
 
             break;
@@ -608,7 +614,7 @@ static const object_kind_t * collisionAnalysis(void)
 
 static void updateMap(void)
 {
-    pts+=10;
+    pts += (10 * level);
     fillMap(&map,++level);
     resetRanitaPosition();
     time_left_on_level = TIME_PER_LEVEL_MS;
@@ -619,6 +625,7 @@ static void resetRanitaPosition(void)
 {
     ranita.y_position = LANE_Y_PIXELS - 1 - ranita.hitbox_height + 1 ;
     ranita.values.position = (LANE_X_PIXELS-ranita.params.hitbox_width)/2;
+    pasosAtras = 0;
 }
 
 
@@ -627,7 +634,7 @@ void initializeGameLogic(void)
 {
     pts = 0;
     srand(time(NULL));
-    level = 0;
+    level = 1;
     remainingLives = 3;
     time_left_on_level = TIME_PER_LEVEL_MS;
     fillMap(&map,level);
