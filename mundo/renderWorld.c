@@ -14,7 +14,7 @@ int contador = 0;
 int flag_parpadeo = 1;
 int paso = 0;
 int renderWorld (map_t * map, const independent_object_t * frog[], int size, int tiempoRestante, int vidasRestantes){
-    
+    tiempoRestante = tiempoRestante / 1000;
     disp_clear();
     int contador = (tiempoRestante * 1000 * 16)/TIME_PER_LEVEL_MS;
     if(contador > 2 && contador <= 4 && !paso){
