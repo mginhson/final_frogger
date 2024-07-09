@@ -133,5 +133,5 @@ bestPlayers_t reading_top (void){
         (top10.puntajes)[k] = &(arr_top10 [3 + k*7]);
     }
     fclose (pfile);
-    return top10; 
-}
+    return top10;
+} 

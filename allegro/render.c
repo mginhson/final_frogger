@@ -10,7 +10,13 @@
 static void draw_lane(lane_t* lane, int row);
 static void draw_lane_background(lane_t * lane, int row);
 static void draw_lane_objects(lane_t * lane, int row);
-
+static void draw_rectangle_timer(int time);
+#define TIMER_SIZE 5.
+// EL tiempo maximo es 60 y algo
+void draw_rectangle_timer(int time){
+    al_draw_filled_rectangle(WALL_SIZE, TOTAL_HEIGHT - WALL_SIZE, WALL_SIZE + (time * TIMER_SIZE) / 1000 ,TOTAL_HEIGHT - SHORT_SIZE, al_map_rgb(255, 255, 255));
+    return;
+}
 
 
 
@@ -18,6 +24,7 @@ int renderWorld(map_t *map, const independent_object_t* frog[], int size, int ti
     static short int death_counter = 0;
     int i;
     al_clear_to_color(al_map_rgb(0, 0, 0));
+    
     for (i=0; i < LANES_COUNT; i++){
         draw_lane(&map->lanes[i], i);
     }
@@ -39,7 +46,7 @@ int renderWorld(map_t *map, const independent_object_t* frog[], int size, int ti
     }
     printf("%d\n", death_counter);
     
-    
+    draw_rectangle_timer(tiempo);
     al_flip_display();
     return death_counter > 0 ? death : alive;
 }

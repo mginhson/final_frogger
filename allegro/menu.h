@@ -9,5 +9,5 @@ int menu(void);
 void set_background( assets_t * wall_assets, assets_t * street_asset);
 void set_title(assets_t *title_font, float x, float y);
 
-enum options_principal {NONE, START, TOP, END};
+enum options_principal {START = 1, TOP, END};
 #endif
