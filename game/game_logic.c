@@ -445,7 +445,7 @@ int gameTick(int32_t ms_since_last_tick)
         input_flush();
     }
     #endif
-    printf("=====================%d=========================", pts);
+    printf("%d \n", pts);
     ranita.values.state = renderWorld(&map, iobjs, 1, time_left_on_level, remainingLives);
     if (prev == death && ranita.values.state == alive){
         printf("RESET\n");
@@ -614,7 +614,8 @@ static const object_kind_t * collisionAnalysis(void)
 
 static void updateMap(void)
 {
-    pts += (10 * level);
+    pts += (10 * (level + 1));
+    animationLevel();
     fillMap(&map,++level);
     resetRanitaPosition();
     time_left_on_level = TIME_PER_LEVEL_MS;
@@ -634,7 +635,7 @@ void initializeGameLogic(void)
 {
     pts = 0;
     srand(time(NULL));
-    level = 1;
+    level = 0;
     remainingLives = 3;
     time_left_on_level = TIME_PER_LEVEL_MS;
     fillMap(&map,level);

@@ -33,6 +33,21 @@ void onceDead (char * points, int pts){
     disp_update();
 }
 
+void animationLevel (void){
+    disp_clear();
+
+    letterN((dcoord_t) {13, 9});
+    letterE((dcoord_t) {9, 9});
+    letterW((dcoord_t) {5, 9});
+
+    letterL((dcoord_t) {13, 3});
+    letterV((dcoord_t) {9, 3});
+    letterL((dcoord_t) {5, 3});
+
+    disp_update();
+
+    usleep(1500000);
+}
 static void finalAnimation (char * points){
     disp_clear();
     int state = 0;
