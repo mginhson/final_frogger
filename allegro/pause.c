@@ -13,12 +13,12 @@ int pause(void){
     text_t * pause_text = create_text("PAUSA",  violet_font,TOTAL_WIDTH / 2 ,ROW(2), 55, CENTERED);
     text_t * continue_text = create_text("CONTINUE", blue_font, TOTAL_WIDTH/2, ROW(5), 30, CENTERED);
     text_t * restart_text = create_text("RESTART",  blue_font, TOTAL_WIDTH/2, ROW(7), 30, CENTERED);
-    text_t * menu_text = create_text("MENU",  blue_font, TOTAL_WIDTH/2, ROW(9), 30, CENTERED);
-    text_t * quit_text = create_text("QUIT GAME",  blue_font, TOTAL_WIDTH/2, ROW(11), 30, CENTERED);    
+    //text_t * menu_text = create_text("MENU",  blue_font, TOTAL_WIDTH/2, ROW(9), 30, CENTERED);
+    text_t * quit_text = create_text("QUIT GAME",  blue_font, TOTAL_WIDTH/2, ROW(9), 30, CENTERED);    
     
     draw_text(continue_text);
     draw_text(restart_text);
-    draw_text(menu_text);
+    //draw_text(menu_text);
     draw_text(quit_text);
     draw_text(pause_text);
     ALLEGRO_EVENT event_capture;
@@ -35,9 +35,8 @@ int pause(void){
                     // En el caso de que hayamos hecho click, debemos ver si fue en alguno de los textos.
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:{
                 
-                if (text_was_selected(menu_text, event_capture.mouse.x, event_capture.mouse.y)){
-                    return_value = MENU;
-                } else if (text_was_selected(continue_text, event_capture.mouse.x, event_capture.mouse.y)){
+                
+                if (text_was_selected(continue_text, event_capture.mouse.x, event_capture.mouse.y)){
                     return_value = CONTINUE;
                 } else if (text_was_selected(quit_text, event_capture.mouse.x, event_capture.mouse.y)){
                     return_value = QUIT;
@@ -50,7 +49,7 @@ int pause(void){
             case ALLEGRO_EVENT_TIMER:{
                 counter++;
                 if (counter == 5 || selected_change){
-                    twinkle(4, selected,blue_font, violet_font , continue_text, restart_text, menu_text, quit_text);
+                    twinkle(4, selected,blue_font, violet_font , continue_text, restart_text, quit_text);
                     counter = 0;
                     selected_change = 0;
                     al_flip_display();
@@ -66,10 +65,8 @@ int pause(void){
                         } else if (selected == 1){
                             return_value = RESTART;
                         } else if (selected == 2){
-                            return_value = MENU;
-                        } else if (selected == 3){
                             return_value = QUIT;
-                        }
+                        } 
                         break;
                     }
                     case ALLEGRO_KEY_DOWN:{
@@ -96,6 +93,6 @@ int pause(void){
     free(continue_text);
     free(quit_text);
     free(restart_text);
-    free(menu_text);
+    //free(menu_text);
     return return_value;
 }

@@ -134,4 +134,4 @@ bestPlayers_t reading_top (void){
     }
     fclose (pfile);
     return top10;
-}
+} 

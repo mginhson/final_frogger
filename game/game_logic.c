@@ -445,7 +445,7 @@ int gameTick(int32_t ms_since_last_tick)
         input_flush();
     }
     #endif
-    ranita.values.state = renderWorld(&map, iobjs, 1, time_left_on_level/1000);
+    ranita.values.state = renderWorld(&map, iobjs, 1, time_left_on_level);
     if (prev == death && ranita.values.state == alive){
         printf("RESET\n");
         resetRanitaPosition();
