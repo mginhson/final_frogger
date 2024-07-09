@@ -9,7 +9,7 @@
 #define MUSIC "audio/src/music.wav"
 
 void music (void){
-    playMusic(MUSIC, SDL_MIX_MAXVOLUME/2);
+    playMusic(MUSIC, SDL_MIX_MAXVOLUME /10 * 7);
 }
 void levelSound (void){
     playSound(LEVEL, SDL_MIX_MAXVOLUME);
