@@ -858,7 +858,7 @@ int32_t fillMap(map_t *_map, uint32_t _level)
         }
         _map->lanes[i].virtual_lane_start = -LANE_X_PIXELS;
         _map->lanes[i].ms_to_next= 10;
-        _map->lanes[i].ms_reload = speeds[rand() % (sizeof(speeds)/sizeof(*speeds))] / (_level/3+1);
+        _map->lanes[i].ms_reload = speeds[rand() % (sizeof(speeds)/sizeof(*speeds))] / (_level/2+1);
         _map->lanes[i].virtual_lane_end =LANE_X_PIXELS*2; //CAMBIAR ESTO, DEBERIA SER CONST Y PREDEFINIDO EN PATRON
     }
     //printMap(_map);
