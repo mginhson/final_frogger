@@ -55,12 +55,12 @@ int menu(void){
     */
     al_flip_display();
     ALLEGRO_EVENT event_capture;
-    int return_value = NONE;
+    int return_value = 0;
     // Hasta que no cambie el valor de lo que devolvemos no retornamos nada
     int selected = 0;
     int counter = 0;
     short int selected_change = 0;
-    while (return_value == NONE){
+    while (return_value == 0){
         // Leemos todos los eventos de la lista de espera
         al_wait_for_event(general_information.queue, &event_capture);
         

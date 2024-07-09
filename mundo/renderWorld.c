@@ -13,8 +13,8 @@
 int contador = 0;
 int flag_parpadeo = 1;
 int paso = 0;
-void renderWorld (map_t * map, const independent_object_t * frog[], int size, int tiempoRestante){
-    
+int renderWorld (map_t * map, const independent_object_t * frog[], int size, int tiempoRestante, int vidasRestantes){
+    tiempoRestante = tiempoRestante / 1000;
     disp_clear();
     int contador = (tiempoRestante * 1000 * 16)/TIME_PER_LEVEL_MS;
     if(contador > 2 && contador <= 4 && !paso){
@@ -25,7 +25,7 @@ void renderWorld (map_t * map, const independent_object_t * frog[], int size, in
         timeSound();
         paso = 0;
     }
-
+    
     verticalLine(contador, COORDENADA(0, 16 - contador));
     verticalLine(contador, COORDENADA(15, 16 - contador));
     
@@ -79,7 +79,7 @@ void renderWorld (map_t * map, const independent_object_t * frog[], int size, in
                         for(int led = 0; led < aux; led++){
                             if((position + led < 12) && (position + led >= 0)){
                                 disp_write(COORDENADA(OFFSET(position) + 2 - led, OFFSET_y(row)), D_ON);
-                            }else if((position + led < 12)){
+                            }else if((position + led > 12)){
                                 led = aux;
                             }
                         }
@@ -105,4 +105,5 @@ void renderWorld (map_t * map, const independent_object_t * frog[], int size, in
 
 
     disp_update();
+    return alive;
 }

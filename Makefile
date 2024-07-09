@@ -2,8 +2,8 @@ CC := gcc
 CFLAGS := -Wall
 DEFINE_ARGS := -D PC 
 EXEC_NAME := frogger
-MODULES := input.o game_logic.o frogger.o entities.o init.o assets.o menu.o util.o highscore.o text.o pause.o objects.o render.o
-ALLEGRO_INCLUDES := -lallegro -lallegro_font -lallegro_image -lallegro_primitives
+MODULES := High_scores.o menu_logic.o input.o game_logic.o frogger.o entities.o init.o assets.o menu.o util.o highscore.o text.o pause.o objects.o render.o soundTrack.o
+ALLEGRO_INCLUDES := -lallegro -lallegro_font -lallegro_image -lallegro_primitives -lallegro_audio -lallegro_acodec
 
 all: pc
 
@@ -38,5 +38,11 @@ render.o: allegro/render.c allegro/render.h entities/entities.h allegro/assets.h
 	gcc allegro/render.c -c ${DEFINE_ARGS}
 input.o: allegro/input/input.c allegro/input/input.h allegro/init.h 
 	gcc allegro/input/input.c -c ${DEFINE_ARGS}
+soundTrack.o: allegro/audio/soundTrack.c allegro/audio/soundTrack.h allegro/init.h
+	gcc allegro/audio/soundTrack.c -c ${DEFINE_ARGS}
+menu_logic.o:config.h menu_logic/menu_logic.c allegro/menu.h allegro/highscore.h allegro/pause.h game/game_logic.h allegro/audio/soundTrack.h
+	gcc menu_logic/menu_logic.c -c ${DEFINE_ARGS}
+High_scores.o: highScores/High_scores.h highScores/High_scores.c allegro/highscore.h
+	gcc -Wall -c highScores/High_scores.c ${DEFINE_ARGS}
 clean:
 	rm ${MODULES} ${EXEC_NAME} 

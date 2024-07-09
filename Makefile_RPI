@@ -46,13 +46,13 @@ formas.o: driv/formas.c driv/formas.h driv/disdrv.h
 menu.o: menus/menu.c menus/menu.h driv/disdrv.h driv/joydrv.h driv/formas.h
 	gcc -Wall -c menus/menu.c ${LIBRARIES} ${DEFINE_ARGS}
 
-pause.o: menus/pause.c menus/pause.h driv/disdrv.h driv/joydrv.h driv/formas.h
+pause.o: menus/pause.c menus/pause.h driv/disdrv.h driv/joydrv.h driv/formas.h audio/audio.h audio/soundTrack.h
 	gcc -Wall -c menus/pause.c ${LIBRARIES} ${DEFINE_ARGS}
  
 top.o: menus/top.c menus/top.h driv/disdrv.h driv/joydrv.h driv/formas.h 
 	gcc -Wall -c menus/top.c ${LIBRARIES} ${DEFINE_ARGS}
 
-final.o: finalAnimation/final.c finalAnimation/final.h driv/disdrv.h driv/joydrv.h driv/formas.h highScores/High_scores.h
+final.o: finalAnimation/final.c finalAnimation/final.h driv/disdrv.h driv/joydrv.h driv/formas.h highScores/High_scores.h audio/audio.h
 	gcc -Wall -c finalAnimation/final.c ${LIBRARIES} ${DEFINE_ARGS}
 
 looseLife.o: finalAnimation/looseLife.c finalAnimation/looseLife.h driv/disdrv.h driv/joydrv.h driv/formas.h audio/soundTrack.h

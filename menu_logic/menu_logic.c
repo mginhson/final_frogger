@@ -1,23 +1,34 @@
 #include <stdio.h>
-#include "menu_logic.h"
+
+#ifdef RPI
+
 #include "../menus/menu.h"
 #include "../menus/top.h"
 #include "../menus/pause.h"
-#include <unistd.h>
-#include "../game/game_logic.h" 
+
 #include "../audio/soundTrack.h"
 #include "../driv/disdrv.h"
+#endif
+
+#ifdef PC
+#include "../allegro/menu.h"
+#include "../allegro/pause.h"
+#include "../allegro/highscore.h"
+#include "../allegro/audio/soundTrack.h"
+#endif
+#include "../game/game_logic.h" 
+#include <unistd.h>
+#include "menu_logic.h"
+#include "../config.h"
 #include "../highScores/High_scores.h"
-
-// bestPlayers_t jugadores = {{"VIC","SAN","LOR","MAR","AGU","PAP","SOS","MAT","NOA","JOR"},{"202","100","089","076","067","043","025","010","007","003"}};
-
-
 void menu_1 (int option){
     bestPlayers_t jugadores = reading_top(); 
     int state = NONE;
     switch (option){
         case START:
+            #ifdef RPI
             music();
+            #endif
             usleep(100000);
             initializeGameLogic(); 
             while(state == NONE)
@@ -44,8 +55,10 @@ void menu_1 (int option){
             open_menu_1 ();
             break;
         case END:
+            #ifdef RPI
             disp_clear();
             disp_update();
+            #endif
             break;
     }
 

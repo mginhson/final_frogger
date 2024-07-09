@@ -1,9 +1,18 @@
 #include "input.h"
 #include "../init.h"
 #include <allegro5/allegro5.h>
+
+void input_flush(void){
+    ALLEGRO_EVENT event;
+    while(!al_is_event_queue_empty(general_information.queue)){
+        al_get_next_event(general_information.queue, &event);
+    }
+    return;
+}
 dato_entrada input_reader(void){
     int return_value = _EMPTY;
     ALLEGRO_EVENT event_capture;
+    
     //printf("%d\n", al_is_event_queue_empty());
     while(!al_is_event_queue_empty(general_information.queue) && return_value == _EMPTY){
        

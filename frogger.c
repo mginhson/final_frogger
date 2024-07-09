@@ -7,11 +7,12 @@
     #include "inicialization/inicialization.h"
     #include "menus/menu.h"
     #include "audio/soundTrack.h"
-    #include "menu_logic/menu_logic.h"
+    
 #elif defined(PC)
     #include "allegro/init.h"
     #include "config.h"
 #endif
+#include "menu_logic/menu_logic.h"
 int main(int argc, char **argv)
 {
     
@@ -20,6 +21,7 @@ int main(int argc, char **argv)
         puts("frogger");
         open_menu_1();
     #elif defined(PC)
+        open_menu_1();
         puts("frogger");
         init_allegro();
         initializeGameLogic();   

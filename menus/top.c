@@ -3,7 +3,7 @@
 #include "../driv/joydrv.h"
 #include "../driv/formas.h"
 #include <unistd.h>
-
+#include "../config.h"
 static int reading (joyinfo_t * inputJ);
 static void top (char * name, char * puntaje, char puesto);
 static void top2 (char * name, char * puntaje, char puesto);
