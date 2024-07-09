@@ -36,7 +36,7 @@
     #define ENDSLOT_5 10
     #define LILYPAD_SIZE 1
     #define MS_RANITA_MOVEMENT_COOLDOWN 150
-    #define MS_BASE_OBJECT_SPEED 2000
+    #define MS_BASE_OBJECT_SPEED 1300
     #define TIME_PER_LEVEL_MS 60000
 
 #endif
