@@ -7,6 +7,10 @@ ALLEGRO_INCLUDES := -lallegro -lallegro_font -lallegro_image -lallegro_primitive
 
 all: pc
 
+rpi: 
+	make clean
+	make -f Makefile_RPI all
+	
 pc: ${MODULES}
 	${CC} -o ${EXEC_NAME} ${MODULES} ${ALLEGRO_INCLUDES} ${CFLAGS} ${DEFINE_ARGS}
 
