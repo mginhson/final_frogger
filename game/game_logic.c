@@ -22,12 +22,13 @@
 #endif
 
 
+
 static void updateMap(void);
 static const object_kind_t * collisionAnalysis(void);
 static void resetRanitaPosition(void);
 static int32_t currentLane(void);
 
-
+static uint32_t pasosAtras = 0;
 
 typedef enum{RANITA_UP,RANITA_DOWN,RANITA_LEFT,RANITA_RIGHT}ranita_logic_direction_t;
 static void triggerRanitaMovement(ranita_logic_direction_t _direction);
@@ -53,6 +54,7 @@ static uint32_t whichObjectCollisioned;
         .hitbox_height = REZISE(NORMAL_SIZE),
         .y_position = LANE_Y_PIXELS-1 - REZISE(NORMAL_SIZE) + 1,
         .values.position = 0,
+        .values.state = alive
     };
 #elif defined(RPI)
     independent_object_t ranita = {
@@ -85,13 +87,14 @@ static const independent_object_t * iobjs[10] = {[0]=&ranita,NULL,NULL,NULL,NULL
 int gameTick(int32_t ms_since_last_tick)
 {
     // int32_t start_ranita_x, end_ranita_x,start_ranita_y,end_ranita_y;
+    
     uint32_t i,j;
     static int64_t ms_cooldown=MS_RANITA_MOVEMENT_COOLDOWN;
     int32_t start_object_x,end_object_x;
     const object_kind_t * collision ;
 
     //puts("Map before executing gameTick:\n");
-    printMap(&map,0);
+    //printMap(&map,0);
     
     ms_cooldown -= ms_since_last_tick;
     time_left_on_level -= ms_since_last_tick;
@@ -115,7 +118,7 @@ int gameTick(int32_t ms_since_last_tick)
     }
 
 
-    if(ms_cooldown <= 0) //we can check for movement again 
+    if(ms_cooldown <= 0 && ranita.values.state != death) //we can check for movement again 
     {
         
         ms_cooldown = 0;
@@ -171,15 +174,20 @@ int gameTick(int32_t ms_since_last_tick)
         map.lanes[i].ms_to_next = a - ms_since_last_tick;
         //map.lanes[i].ms_to_next = map.lanes[i].ms_to_next - ms_since_last_tick;
         //printf("map.lanes[%d].ms_to_next = %d\n",i,map.lanes[i].ms_to_next);
+        //printf("%p\n", (map.lanes[i]).kind);
         
-        if(map.lanes[j].kind == &turtle_object_kind)
+        if(map.lanes[i].kind == &turtle_object_kind)
         {
-            for(j=0; j<object_bound; ++j)
+            
+            for(j=0; j<object_bound; j++)
             {
+                
                 map.lanes[i].objects[j].timer -= ms_since_last_tick;
+                
                 if(map.lanes[i].objects[j].timer <= 0)
                 {
-                    map.lanes[i].objects[j].timer = MS_BASE_OBJECT_SPEED;
+                    
+                    map.lanes[i].objects[j].timer = map.lanes[i].ms_reload *10;
                     if(map.lanes[i].objects[j].canDisappear == 1)
                     {
                         
@@ -203,11 +211,11 @@ int gameTick(int32_t ms_since_last_tick)
                         }
                         
                     }
-                }
+                } 
             }
         }
         
-        
+    
         if(map.lanes[i].ms_to_next <= 0) //Lane should move a pixel
         {
             map.lanes[i].flag = 1;
@@ -218,7 +226,7 @@ int gameTick(int32_t ms_since_last_tick)
                 The .position attribute correspond to the leftmost side of an object.
             */
             
-            if(map.lanes[i].kind == NULL || map.lanes[i].kind == &empty_object) //No objects in the lane!!
+            if(map.lanes[i].kind == &empty_object) //No objects in the lane!!
             {
                 continue;
             }
@@ -266,7 +274,7 @@ int gameTick(int32_t ms_since_last_tick)
         }
         
     }
-    
+
     if (collision == NULL) //no hubo una colision antes
     {
         
@@ -289,8 +297,11 @@ int gameTick(int32_t ms_since_last_tick)
             #if defined(RPI)
                 looseLife(remainingLives);
             #endif
+            printf("Restando Vidas\n");
+            ranita.values.state = death;
+            
             time_left_on_level = TIME_PER_LEVEL_MS;
-            resetRanitaPosition();
+           // resetRanitaPosition();
         }
             
     }
@@ -394,7 +405,7 @@ int gameTick(int32_t ms_since_last_tick)
                         looseLife(remainingLives);
                     #endif
                     time_left_on_level = TIME_PER_LEVEL_MS;
-                    resetRanitaPosition();
+                    
                 }
             }
             else
@@ -449,6 +460,9 @@ int gameTick(int32_t ms_since_last_tick)
         return MENU;
     }
 
+    // printf("%d\n", ranita.values.state);
+    ranita.values.timer = ranita.values.timer == MAX_FROG_TIMER ? 0 : ranita.values.timer + 1;
+    // printf("%d\n", ranita.values.timer);
     return NONE;
 }
 
@@ -461,7 +475,7 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
     {
         case RANITA_DOWN:            
             temp = ranita.y_position + ranita.hitbox_height - 1; //y position of the bottom
-            printf("%d %d\n",temp, temp+ranita.hitbox_height);
+            //printf("%d %d\n",temp, temp+ranita.hitbox_height);
            
             if (temp + ranita.hitbox_height >= LANE_Y_PIXELS) //would go below map, set is as low as possible
             {
@@ -473,7 +487,7 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
                     stepSound();
                 #endif
                 ranita.y_position += ranita.hitbox_height;
-                pts--;
+                pasosAtras++;
             }
             break;
 
@@ -490,7 +504,12 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
                     stepSound();
                 #endif
                 ranita.y_position -= ranita.hitbox_height;
-                pts++;
+                if(pasosAtras == 0){
+                    pts++;    
+                }else{
+                    pasosAtras--;
+                }
+                
             }
 
             break;
@@ -531,7 +550,7 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
             break;
 
         default:
-            printf("Unknown direction input at triggerRanitaMovement()\n");
+            //printf("Unknown direction input at triggerRanitaMovement()\n");
             break;
     }
 }
@@ -540,16 +559,16 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
     @BRIEF: collisionAnalysis
         Checks if the ranita collided with something that could kill her
         start_y----->|------|
-                     |      |
-        end_y------->|------|
-        start_x----->       <--end_x 
+                   |      |
+        end_y--->|------|
+        start_x--->        <--end_x 
 */
 static const object_kind_t * collisionAnalysis(void)
 {
     int32_t i,j,start_object_x,end_object_x,start_ranita_x,end_ranita_x,start_ranita_y,end_ranita_y;
     int32_t start_lane_y,end_lane_y;
     //puts("starting collision analysis");
-    printf("ranita.y_position = %d\nranita.hitbox_height = %d\nranita.position = %d\nranita.params.hitbox_width=%d\n\n",ranita.y_position,ranita.hitbox_height,ranita.values.position,ranita.params.hitbox_width);
+    //printf("ranita.y_position = %d\nranita.hitbox_height = %d\nranita.position = %d\nranita.params.hitbox_width=%d\n\n",ranita.y_position,ranita.hitbox_height,ranita.values.position,ranita.params.hitbox_width);
     end_ranita_y = ranita.y_position + ranita.hitbox_height - 1;//Porque ranita.y_position ya tienen en cuenta el primer pixel
     
     start_ranita_y = ranita.y_position; 
@@ -566,6 +585,7 @@ static const object_kind_t * collisionAnalysis(void)
         }
         end_lane_y = (i+1)*LANE_PIXEL_HEIGHT - 1;
         start_lane_y = (i) * LANE_PIXEL_HEIGHT;
+        //printf("Analyzing lane %d:\n\tstart_lane_y = %d\n\tend_lane_y = %d\n",i,start_lane_y,end_lane_y);
         //First,analyze if the ranita is on the y coordinate capable of interacting with the lane
         if  ((start_ranita_y>= start_lane_y\
             && start_ranita_y <= end_lane_y)\
@@ -573,6 +593,7 @@ static const object_kind_t * collisionAnalysis(void)
             (end_ranita_y >= start_lane_y\
             && end_ranita_y <= end_lane_y))
         {
+            //printf("Ranita was found to appear on lane %d\n",i);
             for(j=0;j<object_bound;j++)
             {
                 if (map.lanes[i].objects[j].doesExist == 0 && map.lanes[i].kind->lilyflag == 0) //Este objeto no existe en esta lane
@@ -581,6 +602,7 @@ static const object_kind_t * collisionAnalysis(void)
                 }
                 start_object_x = map.lanes[i].objects[j].position;
                 end_object_x = map.lanes[i].objects[j].position + map.lanes[i].kind->hitbox_width - 1;
+                //printf("Analyzing object index %d:\n\tstart_object_x = %d\n\tend_object_x = %d\n",j,start_object_x,end_object_x);
                 
                 if((start_ranita_x >= start_object_x && start_ranita_x <= end_object_x)\
                 ||(end_ranita_x >= start_object_x && end_ranita_x <= end_object_x))
@@ -597,10 +619,7 @@ static const object_kind_t * collisionAnalysis(void)
     return NULL;
 }
 
-/*
-    @BRIEF: updateMap(void)
-        Called to advance to a new level
-*/
+
 static void updateMap(void)
 {
     pts += (10 * (level + 1));
@@ -613,21 +632,15 @@ static void updateMap(void)
     return ;
 }
 
-/*
-    @BRIEF: resetRanitaPosition()
-        Sets the ranita position to the starting lane, mid position.
-*/
 static void resetRanitaPosition(void)
 {
     ranita.y_position = LANE_Y_PIXELS - 1 - ranita.hitbox_height + 1 ;
     ranita.values.position = (LANE_X_PIXELS-ranita.params.hitbox_width)/2;
+    pasosAtras = 0;
 }
 
 
-/*
-    @BRIEF: initializeGameLogic
-        Self explanatory, sets the time, lives, pts
-*/
+
 void initializeGameLogic(void)
 {
     pts = 0;
