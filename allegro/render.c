@@ -20,7 +20,7 @@ void draw_rectangle_timer(int time){
 
 
 
-int renderWorld(map_t *map, const independent_object_t* frog[], int size, int tiempo, int remainingLives){
+int renderWorld(map_t *map, const independent_object_t* frog[], int size, int tiempo){
     static short int death_counter = 0;
     int i;
     al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -35,17 +35,16 @@ int renderWorld(map_t *map, const independent_object_t* frog[], int size, int ti
         death_counter = 1;
     }
     if (death_counter > 0 && frog[0]->values.timer == MAX_FROG_TIMER){
-        //printf("AUMENTO\n");
+        printf("AUMENTO\n");
         draw_frog(frog[0]->values.position,frog[0]->y_position, death_counter, death);
         death_counter = death_counter + 1 < 4 ? death_counter + 1 : 0;
     } else if (frog[0]->values.state == alive){
     // La ranita esta viva
-        death_counter = 0;
         draw_frog(frog[0]->values.position, frog[0]->y_position, 0, alive);    
     } else if (frog[0]->values.state == death){
         draw_frog(frog[0]->values.position, frog[0]->y_position, death_counter, death);
     }
-    //printf("%d\n", death_counter);
+    printf("%d\n", death_counter);
     
     draw_rectangle_timer(tiempo);
     al_flip_display();
@@ -84,7 +83,7 @@ static void draw_lane_objects(lane_t *lane, int row){
             } else if (lane->kind == &snake_object_kind){
                 draw_snake(&(lane->objects[i]), x, y); //checkear este acceso, .objects[j], no ->objects
             } else if (lane->kind == &lilypad_object_kind){
-                //printf("DRAW\n");
+                printf("DRAW\n");
                 draw_final_frog(x,y);
             } else if (lane->kind == &turtle_object_kind){
                 draw_turtle_squad(&(lane->objects[i]), x, y);

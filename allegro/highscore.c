@@ -5,7 +5,6 @@
 #include "components/text.h"
 #include <allegro5/allegro5.h>
 #include <stdio.h>
-#include <string.h>
 #include "../config.h"
 void topTen(bestPlayers_t bestPlayers){
     // Cargo la fuente amarilla y roja
@@ -19,17 +18,11 @@ void topTen(bestPlayers_t bestPlayers){
         // Bucle for mostrando cada jugador y su respectivo puntaje
     int i;
     text_t *texts[25];
-    char strings_copy_1[10][7];
-    char strings_copy_2[10][7];
     for (i=0; i < TOP_10 && (bestPlayers.name)[i] != NULL; i++){
         
-       
-        strcpy(strings_copy_1[i], bestPlayers.name[i]);
-        strcpy(strings_copy_2[i], bestPlayers.puntajes[i]);
-        strings_copy_1[i][3] = '\0';
-        strings_copy_2[i][3] = '\0';
-        texts[i *2 + 1] = create_text(strings_copy_2[i], red_font,TOTAL_WIDTH * (3/4.),ROW(i + 4), REZISE(SHORT_SIZE), CENTERED);
-        texts[i*2] = create_text(strings_copy_1[i], yellow_font,TOTAL_WIDTH * (1./4),ROW(i + 4), REZISE(SHORT_SIZE),CENTERED);
+        texts[i*2] = create_text((bestPlayers.name)[i], yellow_font,TOTAL_WIDTH * (1./4),ROW(i + 4), REZISE(SHORT_SIZE),CENTERED);
+        texts[i *2 + 1] = create_text((bestPlayers.puntajes)[i], red_font,TOTAL_WIDTH * (3/4.),ROW(i + 4), REZISE(SHORT_SIZE), CENTERED);
+
     }
     i *= 2;
     texts[i++] = create_text("Nombre", yellow_font, TOTAL_WIDTH * (1./4),ROW(3),  REZISE(SHORT_SIZE),CENTERED);
