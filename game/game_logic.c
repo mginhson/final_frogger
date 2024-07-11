@@ -36,7 +36,7 @@ static char * intToString (int puntos);
 
 
 static uint32_t remainingLives = 3;
-static map_t map; 
+static map_t map;
 static uint32_t level;
 static const uint32_t lane_bound = sizeof(map.lanes)/sizeof(map.lanes[0]);
 static const uint32_t object_bound = sizeof(map.lanes[0].objects)/sizeof(map.lanes[0].objects[0]);
@@ -281,10 +281,10 @@ int gameTick(int32_t ms_since_last_tick)
         collision=collisionAnalysis();
         
     }
-    if (collision != NULL && collision->attr.canKill && collision != &lilypad_object_kind && ranita.values.state == alive)
+    if (collision != NULL && collision->attr.canKill && collision != &lilypad_object_kind)
     {
         
-        if (remainingLives == 0)
+        if (--remainingLives == 0)
         {
             #if defined(RPI)
                 onceDead(intToString(pts), pts);
@@ -323,7 +323,7 @@ int gameTick(int32_t ms_since_last_tick)
 
             if(ranita.values.position < 0 || ranita.values.position+ranita.params.hitbox_width-1 >= LANE_X_PIXELS)
             {
-                if(remainingLives == 0 && ranita.values.state == alive)
+                if(--remainingLives == 0)
                 {
                     #if defined(RPI)
                         onceDead(intToString(pts), pts);
@@ -336,21 +336,18 @@ int gameTick(int32_t ms_since_last_tick)
                     #if defined(RPI)
                         looseLife(remainingLives);
                     #endif
-                    ranita.values.state = death;
                     resetRanitaPosition();
                 }
             }
         }   
         
     }
-    else if(map.lanes[ranita.y_position / LANE_PIXEL_HEIGHT].background == water && ranita.values.state == alive)
+    else if(map.lanes[ranita.y_position / LANE_PIXEL_HEIGHT].background == water)
     {
         
         //Check if the ranita is on water!
-        
-        ranita.values.state = death;
-        
-        if(remainingLives == 0)
+
+        if(--remainingLives == 0)
         {
             #if defined(RPI)
                 onceDead(intToString(pts), pts);
@@ -363,14 +360,14 @@ int gameTick(int32_t ms_since_last_tick)
             #if defined(RPI)
                 looseLife(remainingLives);
             #endif
-            //resetRanitaPosition();
+            resetRanitaPosition();
         }
     }
     else if(currentLane() == 0)
     {   
         if(collision != &lilypad_object_kind)
         {
-             if(remainingLives == 0)
+             if(--remainingLives == 0)
             {
                 #if defined(RPI)
                     onceDead(intToString(pts), pts);
