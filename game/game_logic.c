@@ -616,7 +616,9 @@ static const object_kind_t * collisionAnalysis(void)
 static void updateMap(void)
 {
     pts += (10 * (level + 1));
-    animationLevel();
+    #ifdef RPI
+        animationLevel();
+    #endif
     fillMap(&map,++level);
     resetRanitaPosition();
     time_left_on_level = TIME_PER_LEVEL_MS;
