@@ -799,6 +799,11 @@ static const uint32_t object_bound = sizeof(((lane_t*)NULL)->objects) / sizeof((
 static void printLane(lane_t * _lane);
 
 
+/*
+    @BRIEF: fillMap
+        Receives a pointer to an already allocated map, and the level it should fill the map to.
+        Based on the level, the difficulty are adjusted.
+*/
 
 int32_t fillMap(map_t *_map, uint32_t _level)
 {
@@ -806,10 +811,7 @@ int32_t fillMap(map_t *_map, uint32_t _level)
     static const uint32_t speeds[] = {MS_BASE_OBJECT_SPEED*0.9f,MS_BASE_OBJECT_SPEED*1.1f,
     MS_BASE_OBJECT_SPEED * 1.3f,MS_BASE_OBJECT_SPEED * 1.5f,MS_BASE_OBJECT_SPEED * 1.7f,
     MS_BASE_OBJECT_SPEED*1.9f,MS_BASE_OBJECT_SPEED,MS_BASE_OBJECT_SPEED*2.0f};
-    //printf("lane bound on fill map = %d\n",lane_bound);
-    //printf("Available Arquetypes Element:\n\troad: %d\n\tgrass: %d\n\twater: %d\n\tfinish_line: %d\n\n"
-    //,road_arquetypes_elements,grass_arquetypes_elements,water_arquetypes_elements,finish_line_arquetypes_elements);
-
+  
     //Difficulty can be fine tuned here, by choosing harder arquetypes and modifying the .ms_reload
     for (i=0; i < lane_bound; i++)
     {
@@ -824,11 +826,10 @@ int32_t fillMap(map_t *_map, uint32_t _level)
                 _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements];
                 break;
             case 2:
-                _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements / 2];
+                _map->lanes[i] = water_arquetypes[(rand() % (water_arquetypes_elements / 2)) % water_arquetypes_elements];
                 break;
             case 3:
-                _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements/2 + water_arquetypes_elements/2];
-            printf("%p\n", _map->lanes[i].kind);
+                _map->lanes[i] = water_arquetypes[(rand() % (water_arquetypes_elements/2) + water_arquetypes_elements/2) %  water_arquetypes_elements];
                 break;
             
             case 6:
@@ -856,18 +857,18 @@ int32_t fillMap(map_t *_map, uint32_t _level)
                 _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
                 break;
         }
+        //The virtual lane is 3 times the LANE_X_PIXELS
         _map->lanes[i].virtual_lane_start = -LANE_X_PIXELS;
         _map->lanes[i].ms_to_next= 10;
         _map->lanes[i].ms_reload = speeds[rand() % (sizeof(speeds)/sizeof(*speeds))] / (_level+1);
-        _map->lanes[i].virtual_lane_end =LANE_X_PIXELS*2; //CAMBIAR ESTO, DEBERIA SER CONST Y PREDEFINIDO EN PATRON
+        _map->lanes[i].virtual_lane_end =LANE_X_PIXELS*2; 
     }
     //printMap(_map);
-    for (i = 0; i <= 16; i++){
-        printf("%p\n", _map->lanes[i].kind);
-    }
     return 0;
 }
 
+
+//Just some debug functions
 
 void printLaneObjects(lane_t *_lane,int32_t index)
 {
@@ -891,9 +892,9 @@ void printMap(map_t *_map,int32_t a)
             printf("\n");
         }
     }
-    else //Print objects;
+    else //Print objects:
     {
-        //printf("Map settings:\n\tLANE_X_PIXELS = %d\n\n",LANE_X_PIXELS);
+        
         for(i=0; i < lane_bound;i++)
         {
             printf("Lane %d: direction = %d \n",i, _map->lanes[i].direction);
