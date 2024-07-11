@@ -20,7 +20,7 @@ void draw_rectangle_timer(int time){
 
 
 
-int renderWorld(map_t *map, const independent_object_t* frog[], int size, int tiempo){
+int renderWorld(map_t *map, const independent_object_t* frog[], int size, int tiempo, int remainingLives){
     static short int death_counter = 0;
     int i;
     al_clear_to_color(al_map_rgb(0, 0, 0));
