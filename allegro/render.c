@@ -20,7 +20,7 @@ void draw_rectangle_timer(int time){
 
 
 
-int renderWorld(map_t *map, const independent_object_t* frog[], int size, int tiempo){
+int renderWorld(map_t *map, const independent_object_t* frog[], int size, int tiempo, int renderLives, int renderFrog){
     static short int death_counter = 0;
     int i;
     al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -30,21 +30,9 @@ int renderWorld(map_t *map, const independent_object_t* frog[], int size, int ti
     }
     //sleep(1);
     // La ranita esta muerta
-    
-    if (frog[0]->values.state == death && death_counter == 0){
-        death_counter = 1;
-    }
-    if (death_counter > 0 && frog[0]->values.timer == MAX_FROG_TIMER){
-        printf("AUMENTO\n");
-        draw_frog(frog[0]->values.position,frog[0]->y_position, death_counter, death);
-        death_counter = death_counter + 1 < 4 ? death_counter + 1 : 0;
-    } else if (frog[0]->values.state == alive){
-    // La ranita esta viva
-        draw_frog(frog[0]->values.position, frog[0]->y_position, 0, alive);    
-    } else if (frog[0]->values.state == death){
-        draw_frog(frog[0]->values.position, frog[0]->y_position, death_counter, death);
-    }
-    printf("%d\n", death_counter);
+    if (renderFrog){
+        draw_frog(frog[0]->values.position, frog[0]->y_position, 0, alive);
+    } 
     
     draw_rectangle_timer(tiempo);
     al_flip_display();

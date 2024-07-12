@@ -2,7 +2,7 @@ CC := gcc
 CFLAGS := -Wall
 DEFINE_ARGS := -D PC 
 EXEC_NAME := frogger
-MODULES := High_scores.o menu_logic.o input.o game_logic.o frogger.o entities.o init.o assets.o menu.o util.o highscore.o text.o pause.o objects.o render.o soundTrack.o
+MODULES :=onceDead.o animation.o High_scores.o menu_logic.o input.o game_logic.o frogger.o entities.o init.o assets.o menu.o util.o highscore.o text.o pause.o objects.o render.o soundTrack.o
 ALLEGRO_INCLUDES := -lallegro -lallegro_font -lallegro_image -lallegro_primitives -lallegro_audio -lallegro_acodec
 
 all: pc
@@ -44,5 +44,9 @@ menu_logic.o:config.h menu_logic/menu_logic.c allegro/menu.h allegro/highscore.h
 	gcc menu_logic/menu_logic.c -c ${DEFINE_ARGS}
 High_scores.o: highScores/High_scores.h highScores/High_scores.c allegro/highscore.h
 	gcc -Wall -c highScores/High_scores.c ${DEFINE_ARGS}
+animation.o: allegro/animation.c allegro/animation.h entities/entities.h allegro/render.h allegro/components/objects.h
+	gcc  -c allegro/animation.c ${DEFINE_ARGS}
+onceDead.o: allegro/onceDead.c allegro/onceDead.h config.h allegro/assets.h allegro/components/text.h
+	gcc -c allegro/onceDead.c ${DEFINE_ARGS}
 clean:
 	rm ${MODULES} ${EXEC_NAME} 

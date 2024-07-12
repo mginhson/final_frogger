@@ -9,7 +9,9 @@
 #if defined(PC)
     #include "../allegro/input/input.h"
     #include "../allegro/render.h"
-
+    #include "../allegro/animation.h"
+    #include "../allegro/assets.h"
+    #include "../allegro/onceDead.h"
 #elif defined(RPI)
     #include "../input/input.h"
     #include "../finalAnimation/looseLife.h"
@@ -104,21 +106,22 @@ int gameTick(int32_t ms_since_last_tick)
         resetRanitaPosition();
         time_left_on_level = TIME_PER_LEVEL_MS;
         remainingLives--;
+
+        
         #if defined(RPI)
             looseLife(remainingLives);
         #endif
         if(remainingLives == 0)
         {
-            #if defined(RPI)
             onceDead(intToString(pts), pts);
-            #endif
+            
             return MENU;
         }
-        
+        resetRanitaPosition();
     }
 
 
-    if(ms_cooldown <= 0 && ranita.values.state != death) //we can check for movement again 
+    if(ms_cooldown <= 0) //we can check for movement again 
     {
         
         ms_cooldown = 0;
@@ -286,20 +289,20 @@ int gameTick(int32_t ms_since_last_tick)
         
         if (--remainingLives == 0)
         {
-            #if defined(RPI)
-                onceDead(intToString(pts), pts);
-            #endif
+            
+            onceDead(intToString(pts), pts);
+            
             return MENU;
         }
         else
         {
-            
+  
             #if defined(RPI)
                 looseLife(remainingLives);
             #endif
             printf("Restando Vidas\n");
-            ranita.values.state = death;
             
+            resetRanitaPosition();
             time_left_on_level = TIME_PER_LEVEL_MS;
            // resetRanitaPosition();
         }
@@ -325,14 +328,15 @@ int gameTick(int32_t ms_since_last_tick)
             {
                 if(--remainingLives == 0)
                 {
-                    #if defined(RPI)
-                        onceDead(intToString(pts), pts);
-                    #endif
+                    
+                    onceDead(intToString(pts), pts);
+                    
                     return MENU;
                 }   
                 else
                 {
                     time_left_on_level = TIME_PER_LEVEL_MS;
+                 
                     #if defined(RPI)
                         looseLife(remainingLives);
                     #endif
@@ -349,9 +353,9 @@ int gameTick(int32_t ms_since_last_tick)
 
         if(--remainingLives == 0)
         {
-            #if defined(RPI)
-                onceDead(intToString(pts), pts);
-            #endif
+            
+            onceDead(intToString(pts), pts);
+            
             return MENU;
         }
         else
@@ -369,9 +373,9 @@ int gameTick(int32_t ms_since_last_tick)
         {
              if(--remainingLives == 0)
             {
-                #if defined(RPI)
-                    onceDead(intToString(pts), pts);
-                #endif
+                
+                onceDead(intToString(pts), pts);
+                
                 return MENU;
             }
             else
@@ -380,6 +384,7 @@ int gameTick(int32_t ms_since_last_tick)
                 #if defined(RPI)
                     looseLife(remainingLives);
                 #endif
+                
                 resetRanitaPosition();
             }
         }
@@ -391,9 +396,9 @@ int gameTick(int32_t ms_since_last_tick)
             {
                 if(--remainingLives == 0)
                 {
-                    #ifdef RPI
-                        onceDead(intToString(pts), pts);
-                    #endif
+                    
+                    onceDead(intToString(pts), pts);
+                    
                     return MENU;
                 }
                 else
@@ -401,6 +406,7 @@ int gameTick(int32_t ms_since_last_tick)
                     #ifdef RPI
                         looseLife(remainingLives);
                     #endif
+                    resetRanitaPosition();
                     time_left_on_level = TIME_PER_LEVEL_MS;
                     
                 }
@@ -439,22 +445,14 @@ int gameTick(int32_t ms_since_last_tick)
       //No collision, do nothing
     }
     //printf("\ncurrent lane %d\n",currentLane());
-    int prev = ranita.values.state;
-    #if defined PC
-    if (ranita.values.state == death){
-        input_flush();
-    }
-    #endif
-    printf("%d \n", pts);
-    ranita.values.state = renderWorld(&map, iobjs, 1, time_left_on_level, remainingLives);
     
-    if (prev == death && ranita.values.state == alive){
-        printf("RESET\n");
-        resetRanitaPosition();
-    }  
+
+    printf("%d \n", pts);
+    renderWorld(&map, iobjs, 1, time_left_on_level, remainingLives, 1);
+    
 
     // printf("%d\n", ranita.values.state);
-    ranita.values.timer = ranita.values.timer == MAX_FROG_TIMER ? 0 : ranita.values.timer + 1;
+    //ranita.values.timer = ranita.values.timer == MAX_FROG_TIMER ? 0 : ranita.values.timer + 1;
     // printf("%d\n", ranita.values.timer);
     return NONE;
 }

@@ -7,6 +7,22 @@
 #include <stdio.h>
 #include <unistd.h>
 //#define HITBOX_CORRECTION(x) ((x) +)
+
+void draw_dead_animation(float dx, float dy){
+    assets_t * death_collection = get_death_assets();
+    int i;
+    for (i = 3; i<DEATH_ASSETS; i++){
+        usleep(100000);
+        float sx = death_collection[i].sx;
+        float sy = death_collection[i].sy;
+        float sw = death_collection[i].sw;
+        float sh = death_collection[i].sh;
+        al_draw_scaled_bitmap(general_information.bitmap,sx,sy,sw,sh,dx,dy, REZISE(sw), REZISE(sh), 0);
+        al_flip_display();
+        usleep(100000);
+    }
+    free(death_collection);
+}
 void draw_car_v1(char direction, float dx, float dy){
     assets_t * cars_collection = get_cars_assets();
     int random;

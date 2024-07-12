@@ -27,10 +27,11 @@ int pause(void){
     int selected = 0;
     int counter = 0;
     short int selected_change = 0;
+    
     while (!return_value){
     // Leemos todos los eventos de la lista de espera
     al_wait_for_event(general_information.queue, &event_capture);
-    
+    printf("CA\n");
         switch (event_capture.type){
                     // En el caso de que hayamos hecho click, debemos ver si fue en alguno de los textos.
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:{
@@ -48,8 +49,11 @@ int pause(void){
             }
             case ALLEGRO_EVENT_TIMER:{
                 counter++;
+                printf("ES ACA\n");
                 if (counter == 5 || selected_change){
-                    twinkle(4, selected,blue_font, violet_font , continue_text, restart_text, quit_text);
+                    
+                    twinkle(3, selected,blue_font, violet_font , continue_text, restart_text, quit_text);
+                
                     counter = 0;
                     selected_change = 0;
                     al_flip_display();
@@ -88,11 +92,12 @@ int pause(void){
             }       
         }
     }
-
+    printf("OUT\n");
     free(pause_text);
     free(continue_text);
     free(quit_text);
     free(restart_text);
     //free(menu_text);
+    
     return return_value;
 }

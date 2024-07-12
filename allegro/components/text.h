@@ -16,6 +16,7 @@ typedef struct {
     int font_size;
     int centered;
 } text_t;
+void update_text(text_t * text, char * new_text);
 text_t * create_text(char* text, assets_t * font, float x, float y, int font_size, int centered);
 void draw_text(text_t *text);
 void destroy_text(text_t * text);

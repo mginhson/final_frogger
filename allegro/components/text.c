@@ -32,6 +32,10 @@ int text_was_selected(text_t* text, int x, int y){
     return 0;
 
 }
+void update_text(text_t * text, char * new_text){
+    text->text = new_text;
+    return;
+}
 void destroy_text(text_t * text){
     free(text);
 }
