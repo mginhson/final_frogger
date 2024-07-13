@@ -21,11 +21,11 @@
     #define ROW(x) (REZISE(SHORT_SIZE + NORMAL_SIZE * (x)))
     #define LANE_X_PIXELS ((int32_t)TOTAL_WIDTH)
     #define LANE_Y_PIXELS ((int32_t)REZISE(NORMAL_SIZE * LANES_COUNT))
-    #define MS_RANITA_MOVEMENT_COOLDOWN 150
+    #define MS_RANITA_MOVEMENT_COOLDOWN 20
     #define MS_BASE_OBJECT_SPEED 30
     #define TIME_PER_LEVEL_MS 60000
     #define TIME_MICROSECONDS 10000
-    #define MS_GAMETICK_DELAY 10
+    
 
 #else
     #define LANE_X_PIXELS 12
