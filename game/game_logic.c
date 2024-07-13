@@ -175,9 +175,6 @@ int gameTick(int32_t ms_since_last_tick)
     {
         int32_t a = map.lanes[i].ms_to_next;
         map.lanes[i].ms_to_next = a - ms_since_last_tick;
-        //map.lanes[i].ms_to_next = map.lanes[i].ms_to_next - ms_since_last_tick;
-        //printf("map.lanes[%d].ms_to_next = %d\n",i,map.lanes[i].ms_to_next);
-        //printf("%p\n", (map.lanes[i]).kind);
         
         if(map.lanes[i].kind == &turtle_object_kind)
         {
@@ -199,13 +196,16 @@ int gameTick(int32_t ms_since_last_tick)
                             case turtle_is_down:
                                 map.lanes[i].objects[j].doesExist = 1;
                                 map.lanes[i].objects[j].state = turtle_is_up;
+                                map.lanes[i].objects[j].timer = map.lanes[i].ms_reload *75;
                                 break;
                             case turtle_is_halfway:
                                 map.lanes[i].objects[j].state = turtle_is_down;
                                 map.lanes[i].objects[j].doesExist = 0;
+                                map.lanes[i].objects[j].timer = map.lanes[i].ms_reload *40;
                                 break;
                             case turtle_is_up:
                                 map.lanes[i].objects[j].state = turtle_is_halfway;
+                                map.lanes[i].objects[j].timer = map.lanes[i].ms_reload *20;
                                 break;
 
                             default:
@@ -222,7 +222,9 @@ int gameTick(int32_t ms_since_last_tick)
         if(map.lanes[i].ms_to_next <= 0) //Lane should move a pixel
         {
             map.lanes[i].flag = 1;
-            map.lanes[i].ms_to_next = map.lanes[i].ms_reload; //Reload the ms counter
+            while(map.lanes[i].ms_to_next <= 0)
+                map.lanes[i].ms_to_next += map.lanes[i].ms_reload; //Reload the ms counter
+            
             /*
                 Now we will analyze if the object should move, and if it does, we have to check
                 wether it went out of the lane bounds, and if so, reset it to the corresponding corner
@@ -541,10 +543,12 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
             break;
 
         default:
-            //printf("Unknown direction input at triggerRanitaMovement()\n");
+            printf("Unknown direction input at triggerRanitaMovement()\n");
             break;
     }
 }
+
+
 
 /*
     @BRIEF: collisionAnalysis
@@ -558,15 +562,14 @@ static const object_kind_t * collisionAnalysis(void)
 {
     int32_t i,j,start_object_x,end_object_x,start_ranita_x,end_ranita_x,start_ranita_y,end_ranita_y;
     int32_t start_lane_y,end_lane_y;
-    //puts("starting collision analysis");
-    //printf("ranita.y_position = %d\nranita.hitbox_height = %d\nranita.position = %d\nranita.params.hitbox_width=%d\n\n",ranita.y_position,ranita.hitbox_height,ranita.values.position,ranita.params.hitbox_width);
+   
     end_ranita_y = ranita.y_position + ranita.hitbox_height - 1;//Porque ranita.y_position ya tienen en cuenta el primer pixel
     
     start_ranita_y = ranita.y_position; 
     start_ranita_x = ranita.values.position;
     end_ranita_x = ranita.values.position + ranita.params.hitbox_width - 1; //Porque position tiene en cuenta el primer pixel
     end_ranita_y = ranita.y_position+ranita.hitbox_height-1;
-    //printf("start_x_ranita = %d\nend_x_ranita = %d\nstart_y_ranita = %d\nend_y_ranita = %d\n",start_ranita_x,end_ranita_x,start_ranita_y,end_ranita_y);
+   
     
     for(i=lane_bound-1;i>=0;i--)
     {
@@ -576,7 +579,7 @@ static const object_kind_t * collisionAnalysis(void)
         }
         end_lane_y = (i+1)*LANE_PIXEL_HEIGHT - 1;
         start_lane_y = (i) * LANE_PIXEL_HEIGHT;
-        //printf("Analyzing lane %d:\n\tstart_lane_y = %d\n\tend_lane_y = %d\n",i,start_lane_y,end_lane_y);
+       
         //First,analyze if the ranita is on the y coordinate capable of interacting with the lane
         if  ((start_ranita_y>= start_lane_y\
             && start_ranita_y <= end_lane_y)\
@@ -584,7 +587,7 @@ static const object_kind_t * collisionAnalysis(void)
             (end_ranita_y >= start_lane_y\
             && end_ranita_y <= end_lane_y))
         {
-            //printf("Ranita was found to appear on lane %d\n",i);
+
             for(j=0;j<object_bound;j++)
             {
                 if (map.lanes[i].objects[j].doesExist == 0 && map.lanes[i].kind->lilyflag == 0) //Este objeto no existe en esta lane
@@ -593,7 +596,7 @@ static const object_kind_t * collisionAnalysis(void)
                 }
                 start_object_x = map.lanes[i].objects[j].position;
                 end_object_x = map.lanes[i].objects[j].position + map.lanes[i].kind->hitbox_width - 1;
-                //printf("Analyzing object index %d:\n\tstart_object_x = %d\n\tend_object_x = %d\n",j,start_object_x,end_object_x);
+                
                 
                 if((start_ranita_x >= start_object_x && start_ranita_x <= end_object_x)\
                 ||(end_ranita_x >= start_object_x && end_ranita_x <= end_object_x))
