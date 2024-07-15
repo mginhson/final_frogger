@@ -62,6 +62,7 @@
 
     };
 
+    
     static const lane_t road_arquetypes[] = 
     {
         [0]=
@@ -72,52 +73,52 @@
             .objects =
             {
                 [0]={.position=0,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=-LANE_X_PIXELS*0.8,.doesExist=1},
                 [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
                 [4]={.doesExist=0}
             } 
         },
         [1]=
         {
-            .direction = RIGHT,
-            .kind = &car_object_kind_v1,
+			.direction = LEFT,
+            .kind = &bus_object_kind,
             .background = road,
             .objects =
             {
-                [0]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
-                [3]={.position=LANE_X_PIXELS*1.2,.doesExist=1},
-                [4]={.position=LANE_X_PIXELS*1.5,.doesExist=1}
-            } 
+                [0]={.position=-LANE_X_PIXELS*0.3,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.7,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [3]={.doesExist=0},
+                [4]={.doesExist=0}
+            }  
         },
         [2]=
         {
-            .direction = LEFT,
-            .kind = &car_object_kind_v2,
-            .background = road,
-            .objects =
-            {
-                [0]={.position=0,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.5,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
-                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
-                [4]={.doesExist=0}
-            } 
-        },
-        [3]=
-        {
-            .direction = LEFT,
+			.direction = LEFT,
             .kind = &bus_object_kind,
             .background = road,
             .objects =
             {
                 [0]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0.6,.doesExist=1},
-                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [3]={.position=-LANE_X_PIXELS*1.5,.doesExist=1},
                 [4]={.position=LANE_X_PIXELS*1.8,.doesExist=1}
+            } 
+        },
+        [3]=
+        {
+            .direction = RIGHT,
+            .kind = &car_object_kind_v2,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.2,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [4]={.doesExist=0}
             } 
         },
         [4]=
@@ -127,38 +128,312 @@
             .background = road,
             .objects =
             {
-                [0]={.position=0,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.3,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.7,.doesExist=1},
+                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
                 [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
                 [4]={.doesExist=0}
             } 
         },
         [5]=
         {
+            
+            .direction = RIGHT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.2,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS*1.5,.doesExist=1}
+            }
+        },
+		[6]=
+        {
+            .direction = LEFT,
+            .kind = &car_object_kind_v2,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.2,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [4]={.doesExist=0}
+            } 
+        },
+        [7]=
+        {
+            .direction = LEFT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [4]={.doesExist=0}
+            } 
+        },
+        [8]=
+        {
+            
+            .direction = LEFT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.2,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS*1.5,.doesExist=1}
+            }
+        },
+		[9]=
+        {
+            
+            .direction = LEFT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.4,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS*1.7,.doesExist=1}
+            }
+        },
+		[10]=
+        {
+            
+            .direction = RIGHT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.4,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS*1.7,.doesExist=1}
+            }
+        },
+		[11]=
+        {
             .direction = LEFT,
             .kind = &bus_object_kind,
             .background = road,
             .objects =
             {
-                [0]={.position=LANE_X_PIXELS*0.3,.doesExist=1},
+                [0]={.position=0,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=-LANE_X_PIXELS*0.8,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [4]={.doesExist=0}
+            } 
+        },
+        [12]=
+        {
+			.direction = LEFT,
+            .kind = &bus_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.3,.doesExist=1},
                 [1]={.position=LANE_X_PIXELS*0.7,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
                 [3]={.doesExist=0},
                 [4]={.doesExist=0}
+            }  
+        },
+        [13]=
+        {
+			.direction = LEFT,
+            .kind = &bus_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.6,.doesExist=1},
+                [3]={.position=-LANE_X_PIXELS*1.5,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS*1.8,.doesExist=1}
             } 
+        },
+		[14]=
+        {
+            .direction = LEFT,
+            .kind = &bus_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=0.2,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [2]={.position=-LANE_X_PIXELS*1,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.7,.doesExist=1},
+                [4]={.doesExist=0}
+            } 
+        },
+        [15]=
+        {
+			.direction = LEFT,
+            .kind = &bus_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.5,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1.7,.doesExist=1},
+                [3]={.doesExist=0},
+                [4]={.doesExist=0}
+            }  
+        },
+        [16]=
+        {
+			.direction = LEFT,
+            .kind = &bus_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [3]={.position=-LANE_X_PIXELS*1.7,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS*2,.doesExist=1}
+            } 
+        },
+        [17]=
+        {
+            .direction = RIGHT,
+            .kind = &car_object_kind_v2,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.5,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.3,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
+                [4]={.doesExist=0}
+            } 
+        },
+        [18]=
+        {
+            .direction = RIGHT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.7,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.7,.doesExist=1},
+                [4]={.doesExist=0}
+            } 
+        },
+        [19]=
+        {
+            
+            .direction = RIGHT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.1,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.3,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.7,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.0,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS*1.5,.doesExist=1}
+            }
+        },
+		[20]=
+        {
+            .direction = LEFT,
+            .kind = &car_object_kind_v2,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.2,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [4]={.doesExist=0}
+            } 
+        },
+        [21]=
+        {
+            .direction = LEFT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [4]={.doesExist=0}
+            } 
+        },
+        [22]=
+        {
+            
+            .direction = LEFT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.2,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS*1.5,.doesExist=1}
+            }
+        },
+		[23]=
+        {
+            
+            .direction = LEFT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.4,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS*1.7,.doesExist=1}
+            }
+        },
+		[24]=
+        {
+            
+            .direction = RIGHT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.4,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS*1.7,.doesExist=1}
+            }
         },
     };
 
     static const lane_t water_arquetypes[] = {
         [0] = 
         {
-            .direction = LEFT,
+            .direction = RIGHT,
             .background = water,
             .kind = &normal_log_object_kind,
             .objects = {
-                [0]={.position=LANE_X_PIXELS*0.1,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
+                [0]={.position=-LANE_X_PIXELS*0.75,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.1,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0.75,.doesExist=1},
                 [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
                 [4]={.doesExist=0}
@@ -179,13 +454,13 @@
         },
         [2] = 
         {
-            .direction = LEFT,
+            .direction = RIGHT,
             .background = water,
             .kind = &small_log_object_kind,
             .objects = {
                 [0]={.position=0,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.5,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0,.doesExist=1},
                 [3]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
                 [4]={.position=LANE_X_PIXELS*1.6,.doesExist=1}
             }
@@ -205,7 +480,7 @@
         },
         [4] = 
         {
-            .direction = RIGHT,
+            .direction = LEFT,
             .background = water,
             .kind = &normal_log_object_kind,
             .objects = {
@@ -235,24 +510,24 @@
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
-                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
-                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
-                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
-                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+                [0]={.position= -LANE_X_PIXELS*0.8,.doesExist=1, .canDisappear =1},
+                [1]={.position= -LANE_X_PIXELS*0.1,.doesExist=1},
+                [2]={.position= LANE_X_PIXELS*0.5,.doesExist=1,.canDisappear =1},
+                [3]={.position= LANE_X_PIXELS*1.2,.doesExist=1},
+                [4]={.position= LANE_X_PIXELS * 1.5,.doesExist=1,.canDisappear =1}
             }
         },
         [7] = 
         {
-            .direction = RIGHT,
+            .direction = LEFT,
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
-                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
-                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
-                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
-                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+                [0]={.position=-LANE_X_PIXELS,.doesExist=1, .canDisappear =1},
+                [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*1,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS * 0.5,.doesExist=1,.canDisappear =1}
             }
         },
         [8] = 
@@ -261,11 +536,11 @@
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
-                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
-                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
-                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
-                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+                [0]={.position=-LANE_X_PIXELS*0.7,.doesExist=1, .canDisappear =1},
+                [1]={.position=-LANE_X_PIXELS*0.04,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.83,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*1.32,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS * 0.33,.doesExist=1,.canDisappear =1}
             }
         },
         [9] = 
@@ -278,7 +553,7 @@
                 [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
                 [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
-                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+                [4]={.position=LANE_X_PIXELS * 0.4,.doesExist=1,.canDisappear =1}
             }
         },
         [10] = 
@@ -290,8 +565,8 @@
                 [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
                 [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
-                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
-                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+                [3]={.position=LANE_X_PIXELS*1.2,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS * 1.6,.doesExist=1,.canDisappear =1}
             }
         },
         [11] = 
@@ -300,11 +575,11 @@
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
-                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
-                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
-                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
-                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+                [0]={.position=-LANE_X_PIXELS*0.3,.doesExist=1, .canDisappear =1},
+                [1]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.3,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*1.4,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS * 0.9,.doesExist=1,.canDisappear =1}
             }
         },
     };
@@ -779,7 +1054,7 @@
                 [1]={.position=ENDSLOT_2,.doesExist=0,},
                 [2]={.position=ENDSLOT_3,.doesExist=0,},
                 [3]={.position=ENDSLOT_4,.doesExist=0,},
-                [4]={.position=ENDSLOT_5,.doesExist=0,}
+                [4]={.position=ENDSLOT_5,-doesExist=0,}
             }   
         }
     };
@@ -807,62 +1082,161 @@ int32_t fillMap(map_t *_map, uint32_t _level)
     uint32_t i;
     static const uint32_t speeds[] = {MS_BASE_OBJECT_SPEED*0.9f,MS_BASE_OBJECT_SPEED*1.1f,
     MS_BASE_OBJECT_SPEED * 1.3f,MS_BASE_OBJECT_SPEED * 1.5f,MS_BASE_OBJECT_SPEED * 1.7f,
-    MS_BASE_OBJECT_SPEED*1.9f,MS_BASE_OBJECT_SPEED,MS_BASE_OBJECT_SPEED*2.0f};
-    //printf("lane bound on fill map = %d\n",lane_bound);
-    //printf("Available Arquetypes Element:\n\troad: %d\n\tgrass: %d\n\twater: %d\n\tfinish_line: %d\n\n"
-    //,road_arquetypes_elements,grass_arquetypes_elements,water_arquetypes_elements,finish_line_arquetypes_elements);
-
-    //Difficulty can be fine tuned here, by choosing harder arquetypes and modifying the .ms_reload
+    MS_BASE_OBJECT_SPEED*1.9f,MS_BASE_OBJECT_SPEED,MS_BASE_OBJECT_SPEED*2.0f,
+    MS_BASE_OBJECT_SPEED*0.32f,MS_BASE_OBJECT_SPEED*1.39f,
+    MS_BASE_OBJECT_SPEED * 1.03f,MS_BASE_OBJECT_SPEED * 1.88f,MS_BASE_OBJECT_SPEED * 1.923f,
+    MS_BASE_OBJECT_SPEED*1.223f,MS_BASE_OBJECT_SPEED,MS_BASE_OBJECT_SPEED*0.445f};
+    
+    //Choose random arquetypes per lane
     for (i=0; i < lane_bound; i++)
     {
+        #if defined(RPI)
+            switch(i)
+            {
+                case 0: //finish line
+                    _map->lanes[i] = finish_line_arquetypes[0];
+                    break;
 
-        switch(i)
-        {
-            case 0: //finish line
-                _map->lanes[i] = finish_line_arquetypes[0];
-                break;
-
-            case 1: case 4: case 5:
-                _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements];
-                break;
-            case 2:
-                _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements / 2];
-                break;
-            case 3:
-                _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements/2 + water_arquetypes_elements/2];
-                break;
-            
-            case 6:
-            case 7:
-                _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
-                #ifdef RPI
+                case 1: case 4: case 5:
+                    _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements];
+                    break;
+                case 2:
+                    _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements / 2];
+                    break;
+                case 3:
+                    _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements/2 + water_arquetypes_elements/2];
+                    break;
+                
+                case 6:
+                case 7:
                     _map->lanes[i] = grass_arquetypes[0];
-                #endif
-                break;
-            case 8:
-            case 9:
-            case 10:
-            case 11:
-            case 12:
-            case 13:
-                _map->lanes[i] = road_arquetypes[rand() % (road_arquetypes_elements)];
-                break;
-            case 14:
-            case 15:
-                _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
-                _map->lanes[i].kind = &empty_object; //Disable enemies on starting line
-                break;
-            default:
-                printf("Couldn't find an arquetype for lane %d, defaulting to enemyless grass\n",i);
-                _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
-                break;
-        }
+                    break;
+
+                case 8:
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                    _map->lanes[i] = road_arquetypes[rand() % (road_arquetypes_elements)];
+                    break;
+                case 14:
+                case 15:
+                    _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
+                    _map->lanes[i].kind = &empty_object; //Disable enemies on starting line
+                    break;
+                default:
+                    printf("Couldn't find an arquetype for lane %d, defaulting to enemyless grass\n",i);
+                    _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
+                    break;
+            }
+
+        
+        #elif defined(PC)
+            if (_level >=2 )
+            {
+
+            
+                switch(i)
+                {
+                    case 0: //finish line
+                        _map->lanes[i] = finish_line_arquetypes[0];
+                        break;
+
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 14:
+                        switch(rand() % 5)
+                        {
+                            case 0:
+                                _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
+                                break;
+
+                            case 1:
+                            case 2:
+                                _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements];
+                                break;
+
+                            case 3:
+                            case 4:
+                                _map->lanes[i] = road_arquetypes[rand() % (road_arquetypes_elements)];
+                                break;
+
+                            default:
+                                break;
+                        }
+                        break;
+                    
+                    case 15:
+                        _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
+                        _map->lanes[i].kind = &empty_object; //Disable enemies on starting line
+                        break;
+                    default:
+                        printf("Couldn't find an arquetype for lane %d, defaulting to enemyless grass\n",i);
+                        _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
+                        break;
+                }
+            }
+            else
+            {
+                switch(i)
+                {
+                    case 0: //finish line
+                        _map->lanes[i] = finish_line_arquetypes[0];
+                        break;
+
+                    case 1: 
+                    case 2:
+                    case 3:
+                    case 4: 
+                    case 5:
+
+                        _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements];
+                        break;
+
+                    case 6:
+                    case 7:
+                        _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
+            
+                        break;
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                        _map->lanes[i] = road_arquetypes[rand() % (road_arquetypes_elements)];
+                        break;
+                    case 14:
+                    case 15:
+                        _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
+                        _map->lanes[i].kind = &empty_object; //Disable enemies on starting line
+                        break;
+                    default:
+                        printf("Couldn't find an arquetype for lane %d, defaulting to enemyless grass\n",i);
+                        _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
+                        break;
+                }
+            }
+
+        #endif
         
         _map->lanes[i].virtual_lane_start = -LANE_X_PIXELS;
         _map->lanes[i].ms_to_next= 10;
         _map->lanes[i].ms_reload = speeds[rand() % (sizeof(speeds)/sizeof(*speeds))] / (_level+1);
         
-        _map->lanes[i].virtual_lane_end =LANE_X_PIXELS*2; //CAMBIAR ESTO, DEBERIA SER CONST Y PREDEFINIDO EN PATRON
+        _map->lanes[i].virtual_lane_end =LANE_X_PIXELS*2; 
     }
     
     return 0;
