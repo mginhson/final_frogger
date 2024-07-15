@@ -137,8 +137,8 @@
         [5]=
         {
             
-            .direction = RIGHT,
-            .kind = &car_object_kind_v1,
+            .direction = LEFT,
+            .kind = &bus_object_kind,
             .background = road,
             .objects =
             {
@@ -281,7 +281,7 @@
         [15]=
         {
 			.direction = LEFT,
-            .kind = &bus_object_kind,
+            .kind = &car_object_kind_v1,
             .background = road,
             .objects =
             {
@@ -295,7 +295,7 @@
         [16]=
         {
 			.direction = LEFT,
-            .kind = &bus_object_kind,
+            .kind = &car_object_kind_v2,
             .background = road,
             .objects =
             {
@@ -323,7 +323,7 @@
         [18]=
         {
             .direction = RIGHT,
-            .kind = &car_object_kind_v1,
+            .kind = &car_object_kind_v2,
             .background = road,
             .objects =
             {
@@ -337,8 +337,8 @@
         [19]=
         {
             
-            .direction = RIGHT,
-            .kind = &car_object_kind_v1,
+            .direction = LEFT,
+            .kind = &car_object_kind_v2,
             .background = road,
             .objects =
             {
@@ -395,7 +395,7 @@
 		[23]=
         {
             
-            .direction = LEFT,
+            .direction = RIGHT,
             .kind = &car_object_kind_v1,
             .background = road,
             .objects =
@@ -505,7 +505,7 @@
         },
         [6] = 
         {
-            .direction = LEFT,
+            .direction = RIGHT,
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
@@ -518,7 +518,7 @@
         },
         [7] = 
         {
-            .direction = LEFT,
+            .direction = RIGHT,
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
@@ -531,7 +531,7 @@
         },
         [8] = 
         {
-            .direction = LEFT,
+            .direction = RIGHT,
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
@@ -544,7 +544,7 @@
         },
         [9] = 
         {
-            .direction = LEFT,
+            .direction = RIGHT,
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
@@ -557,6 +557,149 @@
         },
         [10] = 
         {
+            .direction = RIGHT,
+            .background = water,
+            .kind = &turtle_object_kind,
+            .objects = {
+                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
+                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.4,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*1.4,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS * 1.6,.doesExist=1,.canDisappear =1}
+            }
+        },
+        [11] = 
+        {
+            .direction = RIGHT,
+            .background = water,
+            .kind = &turtle_object_kind,
+            .objects = {
+                [0]={.position=-LANE_X_PIXELS*0.3,.doesExist=1, .canDisappear =1},
+                [1]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.3,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*1.4,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS * 0.9,.doesExist=1,.canDisappear =1}
+            }
+        },
+        [12] = 
+        {
+            .direction = LEFT,
+            .background = water,
+            .kind = &normal_log_object_kind,
+            .objects = {
+                [0]={.position=-LANE_X_PIXELS*0.75,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.1,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.75,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [4]={.doesExist=0}
+            }
+        },
+        [13] = 
+        {
+            .direction = LEFT,
+            .background = water,
+            .kind = &big_log_object_kind,
+            .objects = {
+                [0]={.position=-LANE_X_PIXELS * 0.5,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1.2,.doesExist=1},
+                [3]={.doesExist=0},
+                [4]={.doesExist=0}
+            }
+        },
+        [14] = 
+        {
+            .direction = LEFT,
+            .background = water,
+            .kind = &small_log_object_kind,
+            .objects = {
+                [0]={.position=0,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS*1.6,.doesExist=1}
+            }
+        },
+        [15] = 
+        {
+            .direction = LEFT,
+            .background = water,
+            .kind = &small_log_object_kind,
+            .objects = {
+                [0]={.position=-LANE_X_PIXELS*0.3,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.5,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [4]={.doesExist=0}
+            }
+        },
+        [16] = 
+        {
+            .direction = LEFT,
+            .background = water,
+            .kind = &normal_log_object_kind,
+            .objects = {
+                [0]={.position=0,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.25,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.5,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS*1.8,.doesExist=1}
+            }
+        },
+        [17] = 
+        {
+            .direction = LEFT,
+            .background = water,
+            .kind = &big_log_object_kind,
+            .objects = {
+                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=0},
+                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
+                [4]={.doesExist=0}
+            }
+        },
+        [18] = 
+        {
+            .direction = LEFT,
+            .background = water,
+            .kind = &turtle_object_kind,
+            .objects = {
+                [0]={.position= -LANE_X_PIXELS*0.8,.doesExist=1, .canDisappear =1},
+                [1]={.position= -LANE_X_PIXELS*0.1,.doesExist=1},
+                [2]={.position= LANE_X_PIXELS*0.5,.doesExist=1,.canDisappear =1},
+                [3]={.position= LANE_X_PIXELS*1.2,.doesExist=1},
+                [4]={.position= LANE_X_PIXELS * 1.5,.doesExist=1,.canDisappear =1}
+            }
+        },
+        [19] = 
+        {
+            .direction = LEFT,
+            .background = water,
+            .kind = &turtle_object_kind,
+            .objects = {
+                [0]={.position=-LANE_X_PIXELS,.doesExist=1, .canDisappear =1},
+                [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*1,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS * 0.5,.doesExist=1,.canDisappear =1}
+            }
+        },
+        [20] = 
+        {
+            .direction = LEFT,
+            .background = water,
+            .kind = &turtle_object_kind,
+            .objects = {
+                [0]={.position=-LANE_X_PIXELS*0.7,.doesExist=1, .canDisappear =1},
+                [1]={.position=-LANE_X_PIXELS*0.04,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.83,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*1.32,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS * 0.33,.doesExist=1,.canDisappear =1}
+            }
+        },
+        [21] = 
+        {
             .direction = LEFT,
             .background = water,
             .kind = &turtle_object_kind,
@@ -564,11 +707,24 @@
                 [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
                 [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS * 0.4,.doesExist=1,.canDisappear =1}
+            }
+        },
+        [22] = 
+        {
+            .direction = LEFT,
+            .background = water,
+            .kind = &turtle_object_kind,
+            .objects = {
+                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
+                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.4,.doesExist=1,.canDisappear =1},
                 [3]={.position=LANE_X_PIXELS*1.2,.doesExist=1},
                 [4]={.position=LANE_X_PIXELS * 1.6,.doesExist=1,.canDisappear =1}
             }
         },
-        [11] = 
+        [23] = 
         {
             .direction = LEFT,
             .background = water,
@@ -599,7 +755,7 @@
         },
         [1] = 
         {
-            
+            .direction = LEFT,
             .background = grass,
             .kind = &snake_object_kind,
             .objects = {
@@ -610,6 +766,21 @@
                 [4]={.doesExist=0}
             }
         },
+
+        [1] = 
+        {
+            .direction = RIGHT,
+            .background = grass,
+            .kind = &snake_object_kind,
+            .objects = {
+                [0]={.position=0,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.5,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [3]={.doesExist=0},
+                [4]={.doesExist=0}
+            }
+        },
+
     };
 
 
