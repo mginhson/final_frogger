@@ -80,24 +80,23 @@ static uint32_t pts = 0;
 
 static const independent_object_t * iobjs[10] = {[0]=&ranita,NULL,NULL,NULL,NULL,NULL};
 
+
+
+
 /*
     @BRIEF: gameTick
-    -Check if the ranita moved  
+    -Check if the ranita moved
+    -Check then for collisions  
     -Update the objects on the map
-    -Check for the interactions between the map and the ranita
+    -Check again for collisions
 */
 int gameTick(int32_t ms_since_last_tick)
 {
-    // int32_t start_ranita_x, end_ranita_x,start_ranita_y,end_ranita_y;
-    
     uint32_t i,j;
     static int64_t ms_cooldown=MS_RANITA_MOVEMENT_COOLDOWN;
     int32_t start_object_x,end_object_x;
     const object_kind_t * collision ;
 
-    //puts("Map before executing gameTick:\n");
-    //printMap(&map,0);
-    
     ms_cooldown -= ms_since_last_tick;
     time_left_on_level -= ms_since_last_tick;
     
@@ -280,12 +279,14 @@ int gameTick(int32_t ms_since_last_tick)
         
     }
 
-    if (collision == NULL) //no hubo una colision antes
+    //If there had been a collision before, DON'T TEST AGAIN, because it could be overwritten
+    if (collision == NULL) 
     {
         
         collision=collisionAnalysis();
         
     }
+    
     if (collision != NULL && collision->attr.canKill && collision != &lilypad_object_kind)
     {
         
@@ -450,7 +451,7 @@ int gameTick(int32_t ms_since_last_tick)
     
 
     printf("%d \n", pts);
-    renderWorld(&map, iobjs, 1, time_left_on_level, remainingLives, 1);
+    renderWorld(&map, iobjs, 1, time_left_on_level, remainingLives);
     
 
     // printf("%d\n", ranita.values.state);
