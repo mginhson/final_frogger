@@ -831,11 +831,9 @@ int32_t fillMap(map_t *_map, uint32_t _level)
                 
                 case 6:
                 case 7:
-                    _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
-                    #ifdef RPI
-                        _map->lanes[i] = grass_arquetypes[0];
-                    #endif
+                    _map->lanes[i] = grass_arquetypes[0];
                     break;
+                    
                 case 8:
                 case 9:
                 case 10:
@@ -857,53 +855,102 @@ int32_t fillMap(map_t *_map, uint32_t _level)
 
         
         #elif defined(PC)
-            switch(i)
+            if (_level >=2 )
             {
-                case 0: //finish line
-                    _map->lanes[i] = finish_line_arquetypes[0];
-                    break;
 
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                case 10:
-                case 11:
-                case 12:
-                case 13:
-                case 14:
-                    switch(rand() % 3)
-                    {
-                        case 0:
-                            _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements];
-                            break;
+            
+                switch(i)
+                {
+                    case 0: //finish line
+                        _map->lanes[i] = finish_line_arquetypes[0];
+                        break;
 
-                        case 1:
-                            _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
-                            break;
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 14:
+                        switch(rand() % 5)
+                        {
+                            case 0:
+                                _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
+                                break;
 
-                        case 2:
-                            _map->lanes[i] = road_arquetypes[rand() % (road_arquetypes_elements)];
-                            break;
+                            case 1:
+                            case 2:
+                                _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements];
+                                break;
 
-                        default:
-                            break;
-                    }
-                    break;
-                
-                case 15:
-                    _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
-                    _map->lanes[i].kind = &empty_object; //Disable enemies on starting line
-                    break;
-                default:
-                    printf("Couldn't find an arquetype for lane %d, defaulting to enemyless grass\n",i);
-                    _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
-                    break;
+                            case 3:
+                            case 4:
+                                _map->lanes[i] = road_arquetypes[rand() % (road_arquetypes_elements)];
+                                break;
+
+                            default:
+                                break;
+                        }
+                        break;
+                    
+                    case 15:
+                        _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
+                        _map->lanes[i].kind = &empty_object; //Disable enemies on starting line
+                        break;
+                    default:
+                        printf("Couldn't find an arquetype for lane %d, defaulting to enemyless grass\n",i);
+                        _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
+                        break;
+                }
+            }
+            else
+            {
+                switch(i)
+                {
+                    case 0: //finish line
+                        _map->lanes[i] = finish_line_arquetypes[0];
+                        break;
+
+                    case 1: case 4: case 5:
+                        _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements];
+                        break;
+                    case 2:
+                        _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements / 2];
+                        break;
+                    case 3:
+                        _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements/2 + water_arquetypes_elements/2];
+                        break;
+                    
+                    case 6:
+                    case 7:
+                        _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
+            
+                        break;
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                        _map->lanes[i] = road_arquetypes[rand() % (road_arquetypes_elements)];
+                        break;
+                    case 14:
+                    case 15:
+                        _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
+                        _map->lanes[i].kind = &empty_object; //Disable enemies on starting line
+                        break;
+                    default:
+                        printf("Couldn't find an arquetype for lane %d, defaulting to enemyless grass\n",i);
+                        _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
+                        break;
+                }
             }
 
         #endif
