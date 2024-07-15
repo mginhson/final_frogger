@@ -27,4 +27,33 @@ void sprite_to_text(char * str,assets_t * font, float x, float y, float font_siz
     }
     return;
 }
-
+static char * intToString (int puntos){
+    int arr_alpha [3];
+    static char arr_chars[3];
+    int cont=0;
+    int num_aux = puntos;
+    for (int j = 0; num_aux > 0; j++){
+        arr_alpha [j] = (num_aux%10);
+        num_aux /= 10;
+        cont++;
+    }
+    switch (cont){
+        case 3:
+            for (int k=0; k<cont; k++){
+                arr_chars[k] = arr_alpha[cont-1-k] + '0';
+            }
+            break;
+        case 2:
+            arr_chars[0] = '0';
+            for (int k=1; k<=cont; k++){
+                arr_chars[k] = arr_alpha [cont-k] + '0';
+            }
+            break;
+        case 1:
+            arr_chars[0] = '0';
+            arr_chars[1] = '0';
+            arr_chars[2] = arr_alpha[0] + '0';
+            break;
+    }
+    return arr_chars;
+}

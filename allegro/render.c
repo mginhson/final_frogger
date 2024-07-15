@@ -6,23 +6,33 @@
 #include <allegro5/allegro_primitives.h>
 #include "../config.h"
 #include "components/objects.h"
+#include "components/text.h"
 #include <stdio.h>
+#include "string.h"
 static void draw_lane(lane_t* lane, int row);
 static void draw_lane_background(lane_t * lane, int row);
 static void draw_lane_objects(lane_t * lane, int row);
 static void draw_rectangle_timer(int time);
+
 #define TIMER_SIZE 5.
 // EL tiempo maximo es 60 y algo
 static void draw_rectangle_timer(int time){
-    al_draw_filled_rectangle(WALL_SIZE, TOTAL_HEIGHT - WALL_SIZE, WALL_SIZE + (time * TIMER_SIZE) / 1000 ,TOTAL_HEIGHT - SHORT_SIZE, al_map_rgb(255, 255, 255));
+    al_draw_filled_rectangle(WALL_SIZE, TOTAL_HEIGHT - WALL_SIZE, WALL_SIZE + (time * TIMER_SIZE) / 1000 ,TOTAL_HEIGHT - SHORT_SIZE, al_map_rgb(120, 0, 0));
     return;
 }
 
-/*static void draw_score(){
+static void draw_score(char * score){
+    assets_t * yellow_font = get_chars_assets('y');
+    
+    char text[20] = "SCORE ";
+    strcpy(text + 6, score);
+    text_t * score_text = create_text(text, yellow_font, TOTAL_WIDTH * (3. / 4), ROW(16.5), 20, CENTERED);
+    draw_text(score_text);
+    free(score_text);
+    return;
+}
 
-}*/
-
-int renderWorld(map_t *map, const independent_object_t* frog[], int size, int tiempo, int renderLives){
+int renderWorld(map_t *map, const independent_object_t* frog[], int size, int tiempo, int renderLives, char * score){
     static short int death_counter = 0;
     int i;
     al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -37,6 +47,7 @@ int renderWorld(map_t *map, const independent_object_t* frog[], int size, int ti
     //draw_lifes(REZISE(NORMAL_SIZE), ROW(15), renderLives);
     draw_rectangle_timer(tiempo);
     draw_lifes(REZISE(NORMAL_SIZE), ROW(16) + REZISE(SHORT_SIZE), renderLives);
+    draw_score(score);
     al_flip_display();
     return death_counter > 0 ? death : alive;
 }

@@ -450,7 +450,7 @@ int gameTick(int32_t ms_since_last_tick)
     }
     
     
-    renderWorld(&map, iobjs, 1, time_left_on_level, remainingLives);
+    renderWorld(&map, iobjs, 1, time_left_on_level, remainingLives, intToString(pts));
     
 
     
@@ -652,9 +652,14 @@ void initializeGameLogic(void)
 
 static char * intToString (int puntos){
     int arr_alpha [3];
-    static char arr_chars[3];
+    static char arr_chars[4];// Cambie esto a 4
     int cont=0;
     int num_aux = puntos;
+    if (puntos == 0){
+        arr_chars[0] = '0';
+        arr_chars[1] = '0';
+        arr_chars[2] = '0';
+    }
     for (int j = 0; num_aux > 0; j++){
         arr_alpha [j] = (num_aux%10);
         num_aux /= 10;
@@ -678,6 +683,7 @@ static char * intToString (int puntos){
             arr_chars[2] = arr_alpha[0] + '0';
             break;
     }
+    arr_chars[3] = '\0';
     return arr_chars;
 }
 
