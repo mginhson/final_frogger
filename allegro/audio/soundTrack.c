@@ -17,7 +17,7 @@ void timeSound(void){
     al_play_sample(general_information.audios[2],1.0, 0, 1.0, ALLEGRO_PLAYMODE_ONCE, 0);
     return;
 }
-void lifeSound (void){
+void looseLife (int remainingLives){
     al_play_sample(general_information.audios[1],1.0, 0, 1.0, ALLEGRO_PLAYMODE_ONCE, 0);
     return;
 }

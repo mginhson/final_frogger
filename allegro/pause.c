@@ -87,7 +87,12 @@ int pause(void){
                 break;
             } 
             case ALLEGRO_EVENT_DISPLAY_CLOSE:{
-                return_value = QUIT;
+                free(pause_text);
+                free(continue_text);
+                free(quit_text);
+                free(restart_text);
+                destroy_allegro();
+                _exit(0);
                 break;
             }       
         }
