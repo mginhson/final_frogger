@@ -252,7 +252,7 @@
                 [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0,.doesExist=1,.canDisappear =1},
                 [3]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
-                [4]={.position=-LANE_X_PIXELS * 1.4,.doesExist=1,.canDisappear =1}
+                [4]={.position=-LANE_X_PIXELS * 0.5,.doesExist=1,.canDisappear =1}
             }
         },
         [8] = 
