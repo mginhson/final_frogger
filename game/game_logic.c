@@ -287,6 +287,7 @@ int gameTick(int32_t ms_since_last_tick)
         
     }
     
+    //Now we analyze the collison
     if (collision != NULL && collision->attr.canKill && collision != &lilypad_object_kind)
     {
         
@@ -447,19 +448,20 @@ int gameTick(int32_t ms_since_last_tick)
         
       //No collision, do nothing
     }
-    //printf("\ncurrent lane %d\n",currentLane());
     
-
-    printf("%d \n", pts);
+    
     renderWorld(&map, iobjs, 1, time_left_on_level, remainingLives);
     
 
-    // printf("%d\n", ranita.values.state);
-    //ranita.values.timer = ranita.values.timer == MAX_FROG_TIMER ? 0 : ranita.values.timer + 1;
-    // printf("%d\n", ranita.values.timer);
+    
     return NONE;
 }
 
+
+/*
+    @BRIEF: triggerRanitaMovement
+        Updates the ranita based on keyboard/joystick movement
+*/
 
 static void triggerRanitaMovement(ranita_logic_direction_t _direction)
 {
@@ -554,10 +556,10 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
 /*
     @BRIEF: collisionAnalysis
         Checks if the ranita collided with something that could kill her
-        start_y----->|------|
-                   |      |
+        start_y->|------|
+                 |      |
         end_y--->|------|
-        start_x--->        <--end_x 
+        start_x->        <--end_x 
 */
 static const object_kind_t * collisionAnalysis(void)
 {

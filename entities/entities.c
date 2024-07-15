@@ -808,11 +808,8 @@ int32_t fillMap(map_t *_map, uint32_t _level)
     static const uint32_t speeds[] = {MS_BASE_OBJECT_SPEED*0.9f,MS_BASE_OBJECT_SPEED*1.1f,
     MS_BASE_OBJECT_SPEED * 1.3f,MS_BASE_OBJECT_SPEED * 1.5f,MS_BASE_OBJECT_SPEED * 1.7f,
     MS_BASE_OBJECT_SPEED*1.9f,MS_BASE_OBJECT_SPEED,MS_BASE_OBJECT_SPEED*2.0f};
-    //printf("lane bound on fill map = %d\n",lane_bound);
-    //printf("Available Arquetypes Element:\n\troad: %d\n\tgrass: %d\n\twater: %d\n\tfinish_line: %d\n\n"
-    //,road_arquetypes_elements,grass_arquetypes_elements,water_arquetypes_elements,finish_line_arquetypes_elements);
-
-    //Difficulty can be fine tuned here, by choosing harder arquetypes and modifying the .ms_reload
+    
+    //Choose random arquetypes per lane
     for (i=0; i < lane_bound; i++)
     {
 
@@ -862,7 +859,7 @@ int32_t fillMap(map_t *_map, uint32_t _level)
         _map->lanes[i].ms_to_next= 10;
         _map->lanes[i].ms_reload = speeds[rand() % (sizeof(speeds)/sizeof(*speeds))] / (_level+1);
         
-        _map->lanes[i].virtual_lane_end =LANE_X_PIXELS*2; //CAMBIAR ESTO, DEBERIA SER CONST Y PREDEFINIDO EN PATRON
+        _map->lanes[i].virtual_lane_end =LANE_X_PIXELS*2; 
     }
     
     return 0;
