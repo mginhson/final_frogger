@@ -647,7 +647,7 @@ void initializeGameLogic(void)
     time_left_on_level = TIME_PER_LEVEL_MS;
     fillMap(&map,level);
     resetRanitaPosition();
-    printf("lane bound = %d\n",lane_bound);
+    
 }
 
 static char * intToString (int puntos){

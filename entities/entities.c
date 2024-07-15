@@ -157,8 +157,8 @@
             .background = water,
             .kind = &normal_log_object_kind,
             .objects = {
-                [0]={.position=LANE_X_PIXELS*0.1,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
+                [0]={.position=-LANE_X_PIXELS*0.75,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.1,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0.75,.doesExist=1},
                 [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
                 [4]={.doesExist=0}
@@ -184,8 +184,8 @@
             .kind = &small_log_object_kind,
             .objects = {
                 [0]={.position=0,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.5,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0,.doesExist=1},
                 [3]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
                 [4]={.position=LANE_X_PIXELS*1.6,.doesExist=1}
             }
@@ -235,11 +235,11 @@
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
-                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
-                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
-                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
-                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+                [0]={.position= -LANE_X_PIXELS*0.8,.doesExist=1, .canDisappear =1},
+                [1]={.position= -LANE_X_PIXELS*0.1,.doesExist=1},
+                [2]={.position= LANE_X_PIXELS*0.5,.doesExist=1,.canDisappear =1},
+                [3]={.position= LANE_X_PIXELS*1.2,.doesExist=1},
+                [4]={.position= LANE_X_PIXELS * 1.5,.doesExist=1,.canDisappear =1}
             }
         },
         [7] = 
@@ -248,11 +248,11 @@
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
-                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
-                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
-                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
-                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+                [0]={.position=-LANE_X_PIXELS,.doesExist=1, .canDisappear =1},
+                [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS * 1.4,.doesExist=1,.canDisappear =1}
             }
         },
         [8] = 
@@ -261,11 +261,11 @@
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
-                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
-                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
-                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
-                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+                [0]={.position=-LANE_X_PIXELS*0.7,.doesExist=1, .canDisappear =1},
+                [1]={.position=-LANE_X_PIXELS*0.04,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.83,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*1.32,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS * 0.33,.doesExist=1,.canDisappear =1}
             }
         },
         [9] = 
@@ -300,11 +300,11 @@
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
-                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
-                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
+                [0]={.position=-LANE_X_PIXELS*0.3,.doesExist=1, .canDisappear =1},
+                [1]={.position=-LANE_X_PIXELS*0.8,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
                 [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
-                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+                [4]={.position=-LANE_X_PIXELS * 1,.doesExist=1,.canDisappear =1}
             }
         },
     };
@@ -833,7 +833,7 @@ int32_t fillMap(map_t *_map, uint32_t _level)
                 case 7:
                     _map->lanes[i] = grass_arquetypes[0];
                     break;
-                    
+
                 case 8:
                 case 9:
                 case 10:
