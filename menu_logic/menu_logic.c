@@ -32,9 +32,10 @@ void menu_1 (int option){
             usleep(100000);
             initializeGameLogic(); 
             while(state == NONE)
-            {       
-                state = gameTick(100);
-                usleep(100000);
+            {
+                       
+                state = gameTick(10);
+                usleep(10000);
             }
             usleep(100000);
             if (state == MENU)
@@ -72,8 +73,8 @@ void menu_2 (int option){
             usleep(100000);
             while(state != MENU && state != PAUSAA)
             {       
-                state = gameTick(100);
-                usleep(100000);
+                state = gameTick(10);
+                usleep(10000);
             }
             usleep(100000);
             if (state == MENU)
@@ -88,8 +89,8 @@ void menu_2 (int option){
             initializeGameLogic();
             while(state != MENU && state != PAUSAA)
             {       
-                state = gameTick(100);
-                usleep(100000);
+                state = gameTick(10);
+                usleep(10000);
             }
             usleep(100000);
             if (state == MENU)
