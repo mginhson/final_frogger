@@ -62,6 +62,7 @@
 
     };
 
+    
     static const lane_t road_arquetypes[] = 
     {
         [0]=
@@ -72,52 +73,52 @@
             .objects =
             {
                 [0]={.position=0,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=-LANE_X_PIXELS*0.8,.doesExist=1},
                 [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
                 [4]={.doesExist=0}
             } 
         },
         [1]=
         {
-            .direction = RIGHT,
-            .kind = &car_object_kind_v1,
+			.direction = LEFT,
+            .kind = &bus_object_kind,
             .background = road,
             .objects =
             {
-                [0]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
-                [3]={.position=LANE_X_PIXELS*1.2,.doesExist=1},
-                [4]={.position=LANE_X_PIXELS*1.5,.doesExist=1}
-            } 
+                [0]={.position=-LANE_X_PIXELS*0.3,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.7,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [3]={.doesExist=0},
+                [4]={.doesExist=0}
+            }  
         },
         [2]=
         {
-            .direction = LEFT,
-            .kind = &car_object_kind_v2,
-            .background = road,
-            .objects =
-            {
-                [0]={.position=0,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.5,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
-                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
-                [4]={.doesExist=0}
-            } 
-        },
-        [3]=
-        {
-            .direction = LEFT,
+			.direction = LEFT,
             .kind = &bus_object_kind,
             .background = road,
             .objects =
             {
                 [0]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0.6,.doesExist=1},
-                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [3]={.position=-LANE_X_PIXELS*1.5,.doesExist=1},
                 [4]={.position=LANE_X_PIXELS*1.8,.doesExist=1}
+            } 
+        },
+        [3]=
+        {
+            .direction = RIGHT,
+            .kind = &car_object_kind_v2,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.2,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [4]={.doesExist=0}
             } 
         },
         [4]=
@@ -127,26 +128,300 @@
             .background = road,
             .objects =
             {
-                [0]={.position=0,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.3,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.7,.doesExist=1},
+                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
                 [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
                 [4]={.doesExist=0}
             } 
         },
         [5]=
         {
+            
+            .direction = RIGHT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.2,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS*1.5,.doesExist=1}
+            }
+        },
+		[6]=
+        {
+            .direction = LEFT,
+            .kind = &car_object_kind_v2,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.2,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [4]={.doesExist=0}
+            } 
+        },
+        [7]=
+        {
+            .direction = LEFT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [4]={.doesExist=0}
+            } 
+        },
+        [8]=
+        {
+            
+            .direction = LEFT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.2,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS*1.5,.doesExist=1}
+            }
+        },
+		[9]=
+        {
+            
+            .direction = LEFT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.4,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS*1.7,.doesExist=1}
+            }
+        },
+		[10]=
+        {
+            
+            .direction = RIGHT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.4,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS*1.7,.doesExist=1}
+            }
+        },
+		[11]=
+        {
             .direction = LEFT,
             .kind = &bus_object_kind,
             .background = road,
             .objects =
             {
-                [0]={.position=LANE_X_PIXELS*0.3,.doesExist=1},
+                [0]={.position=0,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=-LANE_X_PIXELS*0.8,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [4]={.doesExist=0}
+            } 
+        },
+        [12]=
+        {
+			.direction = LEFT,
+            .kind = &bus_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.3,.doesExist=1},
                 [1]={.position=LANE_X_PIXELS*0.7,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
                 [3]={.doesExist=0},
                 [4]={.doesExist=0}
+            }  
+        },
+        [13]=
+        {
+			.direction = LEFT,
+            .kind = &bus_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.6,.doesExist=1},
+                [3]={.position=-LANE_X_PIXELS*1.5,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS*1.8,.doesExist=1}
             } 
+        },
+		[14]=
+        {
+            .direction = LEFT,
+            .kind = &bus_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=0.2,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [2]={.position=-LANE_X_PIXELS*1,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.7,.doesExist=1},
+                [4]={.doesExist=0}
+            } 
+        },
+        [15]=
+        {
+			.direction = LEFT,
+            .kind = &bus_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.5,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1.7,.doesExist=1},
+                [3]={.doesExist=0},
+                [4]={.doesExist=0}
+            }  
+        },
+        [16]=
+        {
+			.direction = LEFT,
+            .kind = &bus_object_kind,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [3]={.position=-LANE_X_PIXELS*1.7,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS*2,.doesExist=1}
+            } 
+        },
+        [17]=
+        {
+            .direction = RIGHT,
+            .kind = &car_object_kind_v2,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.5,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.3,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
+                [4]={.doesExist=0}
+            } 
+        },
+        [18]=
+        {
+            .direction = RIGHT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.7,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.7,.doesExist=1},
+                [4]={.doesExist=0}
+            } 
+        },
+        [19]=
+        {
+            
+            .direction = RIGHT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.1,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.3,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.7,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.0,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS*1.5,.doesExist=1}
+            }
+        },
+		[20]=
+        {
+            .direction = LEFT,
+            .kind = &car_object_kind_v2,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.2,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [4]={.doesExist=0}
+            } 
+        },
+        [21]=
+        {
+            .direction = LEFT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
+                [4]={.doesExist=0}
+            } 
+        },
+        [22]=
+        {
+            
+            .direction = LEFT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.2,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS*1.5,.doesExist=1}
+            }
+        },
+		[23]=
+        {
+            
+            .direction = LEFT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.4,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS*1.7,.doesExist=1}
+            }
+        },
+		[24]=
+        {
+            
+            .direction = RIGHT,
+            .kind = &car_object_kind_v1,
+            .background = road,
+            .objects =
+            {
+                [0]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.4,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS*1.7,.doesExist=1}
+            }
         },
     };
 
