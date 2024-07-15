@@ -927,7 +927,7 @@ int32_t fillMap(map_t *_map, uint32_t _level)
                     case 4: 
                     case 5:
 
-                        _map->lanes[i] = water_arquetypes[11];
+                        _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements];
                         break;
 
                     case 6:
