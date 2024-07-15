@@ -62,7 +62,6 @@
 
     };
 
-    
     static const lane_t road_arquetypes[] = 
     {
         [0]=
@@ -103,8 +102,8 @@
                 [0]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
                 [1]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0.6,.doesExist=1},
-                [3]={.position=-LANE_X_PIXELS*1.5,.doesExist=1},
-                [4]={.position=LANE_X_PIXELS*1.8,.doesExist=1}
+                [3]={.position=-LANE_X_PIXELS*0.8,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS*1.7,.doesExist=1}
             } 
         },
         [3]=
@@ -261,7 +260,7 @@
                 [0]={.position=LANE_X_PIXELS*0.2,.doesExist=1},
                 [1]={.position=-LANE_X_PIXELS*0.4,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0.6,.doesExist=1},
-                [3]={.position=-LANE_X_PIXELS*1.5,.doesExist=1},
+                [3]={.position=-LANE_X_PIXELS*0.7,.doesExist=1},
                 [4]={.position=LANE_X_PIXELS*1.8,.doesExist=1}
             } 
         },
@@ -274,8 +273,8 @@
             {
                 [0]={.position=0.2,.doesExist=1},
                 [1]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
-                [2]={.position=-LANE_X_PIXELS*1,.doesExist=1},
-                [3]={.position=LANE_X_PIXELS*1.7,.doesExist=1},
+                [2]={.position=-LANE_X_PIXELS*0.9,.doesExist=1},
+                [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
                 [4]={.doesExist=0}
             } 
         },
@@ -288,7 +287,7 @@
             {
                 [0]={.position=-LANE_X_PIXELS*0.5,.doesExist=1},
                 [1]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*1.7,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
                 [3]={.doesExist=0},
                 [4]={.doesExist=0}
             }  
@@ -303,8 +302,8 @@
                 [0]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
                 [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
-                [3]={.position=-LANE_X_PIXELS*1.7,.doesExist=1},
-                [4]={.position=LANE_X_PIXELS*2,.doesExist=1}
+                [3]={.position=-LANE_X_PIXELS*0.9,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS*1.2,.doesExist=1}
             } 
         },
         [17]=
@@ -441,7 +440,7 @@
         },
         [1] = 
         {
-            .direction = LEFT,
+            .direction = RIGHT,
             .background = water,
             .kind = &big_log_object_kind,
             .objects = {
@@ -480,7 +479,7 @@
         },
         [4] = 
         {
-            .direction = LEFT,
+            .direction = RIGHT,
             .background = water,
             .kind = &normal_log_object_kind,
             .objects = {
@@ -506,7 +505,7 @@
         },
         [6] = 
         {
-            .direction = RIGHT,
+            .direction = LEFT,
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
@@ -532,7 +531,7 @@
         },
         [8] = 
         {
-            .direction = RIGHT,
+            .direction = LEFT,
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
@@ -1197,13 +1196,17 @@ int32_t fillMap(map_t *_map, uint32_t _level)
                         break;
 
                     case 1: 
-                    case 2:
-                    case 3:
                     case 4: 
                     case 5:
 
                         _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements];
                         break;
+		    case 2:
+                   	 _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements / 2];
+                    	break;
+                    case 3:
+                    	_map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements/2 + water_arquetypes_elements/2];
+                    	break;
 
                     case 6:
                     case 7:
