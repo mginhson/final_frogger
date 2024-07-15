@@ -7,9 +7,10 @@
 #include "game_logic.h"
 #include "../entities/entities.h"
 #if defined(PC)
+    #include "../allegro/audio/soundTrack.h"
     #include "../allegro/input/input.h"
     #include "../allegro/render.h"
-    #include "../allegro/animation.h"
+   // #include "../allegro/animation.h"
     #include "../allegro/assets.h"
     #include "../allegro/onceDead.h"
 #elif defined(RPI)
@@ -107,9 +108,9 @@ int gameTick(int32_t ms_since_last_tick)
         remainingLives--;
 
         
-        #if defined(RPI)
-            looseLife(remainingLives);
-        #endif
+        
+        looseLife(remainingLives);
+        
         if(remainingLives == 0)
         {
             onceDead(intToString(pts), pts);
@@ -301,9 +302,9 @@ int gameTick(int32_t ms_since_last_tick)
         else
         {
   
-            #if defined(RPI)
-                looseLife(remainingLives);
-            #endif
+            
+            looseLife(remainingLives);
+            
             printf("Restando Vidas\n");
             
             resetRanitaPosition();
@@ -341,9 +342,9 @@ int gameTick(int32_t ms_since_last_tick)
                 {
                     time_left_on_level = TIME_PER_LEVEL_MS;
                  
-                    #if defined(RPI)
+                    
                         looseLife(remainingLives);
-                    #endif
+                    
                     resetRanitaPosition();
                 }
             }
@@ -365,9 +366,9 @@ int gameTick(int32_t ms_since_last_tick)
         else
         {
             time_left_on_level = TIME_PER_LEVEL_MS;
-            #if defined(RPI)
-                looseLife(remainingLives);
-            #endif
+           
+            looseLife(remainingLives);
+            
             resetRanitaPosition();
         }
     }
@@ -385,9 +386,9 @@ int gameTick(int32_t ms_since_last_tick)
             else
             {
                 time_left_on_level = TIME_PER_LEVEL_MS;
-                #if defined(RPI)
-                    looseLife(remainingLives);
-                #endif
+                
+                looseLife(remainingLives);
+                
                 
                 resetRanitaPosition();
             }
@@ -407,9 +408,9 @@ int gameTick(int32_t ms_since_last_tick)
                 }
                 else
                 {
-                    #ifdef RPI
-                        looseLife(remainingLives);
-                    #endif
+                   
+                    looseLife(remainingLives);
+                    
                     resetRanitaPosition();
                     time_left_on_level = TIME_PER_LEVEL_MS;
                     
@@ -479,9 +480,9 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
             }
             else
             {
-                #if defined(RPI)
-                    stepSound();
-                #endif
+                
+                stepSound();
+                
                 ranita.y_position += ranita.hitbox_height;
                 pasosAtras++;
             }
@@ -496,9 +497,8 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
             }
             else
             {
-                #if defined(RPI)
-                    stepSound();
-                #endif
+                stepSound();
+                
                 ranita.y_position -= ranita.hitbox_height;
                 if(pasosAtras == 0){
                     pts++;    
@@ -521,9 +521,9 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
             }
             else
             {
-                #if defined(RPI)
+                
                     stepSound();
-                #endif
+                
                 ranita.values.position -= ranita.params.hitbox_width;
             }
 
@@ -538,9 +538,9 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
             }
             else
             {
-                #if defined(RPI)
-                    stepSound();
-                #endif
+                
+                stepSound();
+                
                 ranita.values.position+= ranita.params.hitbox_width;
             }
             break;
@@ -620,9 +620,9 @@ static const object_kind_t * collisionAnalysis(void)
 static void updateMap(void)
 {
     pts += (10 * (level + 1));
-    #ifdef RPI
-        animationLevel();
-    #endif
+    
+    animationLevel();
+    
     fillMap(&map,++level);
     resetRanitaPosition();
     time_left_on_level = TIME_PER_LEVEL_MS;

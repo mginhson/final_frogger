@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include "../highScores/High_scores.h"
-
+#include "audio/soundTrack.h"
 void onceDead(char *str, int pts){
     //al_clear_to_color(al_map_rgb(0, 0, 0));
     //al_flip_display();
@@ -31,6 +31,8 @@ void onceDead(char *str, int pts){
     char temp = 'A';
     short int counter = 0;
     short int selected = 0;
+    looseLife(0);
+    
     while(allegro_loop){
         //printf("%s\n", str);
         al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -39,6 +41,15 @@ void onceDead(char *str, int pts){
         //twinkle(3, selected, yellow_font, red_font, c1, c2, c3);
         al_wait_for_event(general_information.queue, &event);
         switch (event.type){
+            case ALLEGRO_EVENT_DISPLAY_CLOSE:
+                free(c1);
+                free(c2);
+                free(c3);
+                free(score_text);
+                free(points_text);
+                destroy_allegro();
+                _exit(0);
+                break;
             case ALLEGRO_EVENT_TIMER:{
                 counter++;
                 if (counter == 8){

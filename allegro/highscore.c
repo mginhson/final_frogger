@@ -82,8 +82,13 @@ void topTen(bestPlayers_t bestPlayers){
             }
             case ALLEGRO_EVENT_DISPLAY_CLOSE:{
                 // Cambiar esto
-               
-                return_value = 1;
+                for (i = 0; texts[i] != NULL ;i++){
+                    free(texts[i]);
+                }
+                free(yellow_font);
+                free(red_font);
+                destroy_allegro();
+                _exit(0);
                 break;
             } 
                 

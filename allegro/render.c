@@ -9,6 +9,7 @@
 #include "components/text.h"
 #include <stdio.h>
 #include "string.h"
+#include "audio/soundTrack.h"
 static void draw_lane(lane_t* lane, int row);
 static void draw_lane_background(lane_t * lane, int row);
 static void draw_lane_objects(lane_t * lane, int row);
@@ -158,5 +159,29 @@ void draw_finish_line(assets_t * wall_assets){
 
         al_draw_scaled_bitmap(general_information.bitmap,sxb,syb ,swb ,shb, dxb, dyb, dwb, dhb, 0);
         al_draw_scaled_bitmap(general_information.bitmap, sxs, sys, sws, shs, dxs, dys, dws, dhs, 0);
+    }
+}
+void animationLevel(void){
+    levelSound();
+    int i;
+    int timer;
+    ALLEGRO_EVENT event;
+    short int animation = 1;
+    while (i <= TOTAL_WIDTH){
+        al_wait_for_event(general_information.queue, &event);
+        if (event.type == ALLEGRO_EVENT_TIMER){
+            i++;
+            al_draw_filled_rectangle(0, 0, i, TOTAL_WIDTH, al_map_rgb(0 ,0 ,0));
+            al_flip_display();
+        }
+
+    }
+    i = 0;
+    while (i < 7){
+        assets_t *yellow_font = get_chars_assets('y');
+        text_t *next_level_text = create_text("NEXT LEVEL", yellow_font, TOTAL_WIDTH / 2, TOTAL_HEIGHT / 2 - REZISE(SHORT_SIZE), 60, CENTERED);
+        draw_text(next_level_text);
+        free(yellow_font);
+        free(next_level_text);
     }
 }
