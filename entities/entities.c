@@ -244,15 +244,15 @@
         },
         [7] = 
         {
-            .direction = RIGHT,
+            .direction = LEFT,
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
                 [0]={.position=-LANE_X_PIXELS,.doesExist=1, .canDisappear =1},
                 [1]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0,.doesExist=1,.canDisappear =1},
-                [3]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
-                [4]={.position=-LANE_X_PIXELS * 0.5,.doesExist=1,.canDisappear =1}
+                [3]={.position=LANE_X_PIXELS*1,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS * 0.5,.doesExist=1,.canDisappear =1}
             }
         },
         [8] = 
@@ -278,7 +278,7 @@
                 [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
                 [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
-                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+                [4]={.position=LANE_X_PIXELS * 0.4,.doesExist=1,.canDisappear =1}
             }
         },
         [10] = 
@@ -290,8 +290,8 @@
                 [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1, .canDisappear =1},
                 [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
-                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
-                [4]={.position=-LANE_X_PIXELS * 0.2,.doesExist=1,.canDisappear =1}
+                [3]={.position=LANE_X_PIXELS*1.2,.doesExist=1},
+                [4]={.position=LANE_X_PIXELS * 1.6,.doesExist=1,.canDisappear =1}
             }
         },
         [11] = 
@@ -301,10 +301,10 @@
             .kind = &turtle_object_kind,
             .objects = {
                 [0]={.position=-LANE_X_PIXELS*0.3,.doesExist=1, .canDisappear =1},
-                [1]={.position=-LANE_X_PIXELS*0.8,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1,.canDisappear =1},
-                [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
-                [4]={.position=-LANE_X_PIXELS * 1,.doesExist=1,.canDisappear =1}
+                [1]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.3,.doesExist=1,.canDisappear =1},
+                [3]={.position=LANE_X_PIXELS*1.4,.doesExist=1},
+                [4]={.position=-LANE_X_PIXELS * 0.9,.doesExist=1,.canDisappear =1}
             }
         },
     };
@@ -779,7 +779,7 @@
                 [1]={.position=ENDSLOT_2,.doesExist=0,},
                 [2]={.position=ENDSLOT_3,.doesExist=0,},
                 [3]={.position=ENDSLOT_4,.doesExist=0,},
-                [4]={.position=ENDSLOT_5,.doesExist=0,}
+                [4]={.position=ENDSLOT_5,-doesExist=0,}
             }   
         }
     };
@@ -807,7 +807,10 @@ int32_t fillMap(map_t *_map, uint32_t _level)
     uint32_t i;
     static const uint32_t speeds[] = {MS_BASE_OBJECT_SPEED*0.9f,MS_BASE_OBJECT_SPEED*1.1f,
     MS_BASE_OBJECT_SPEED * 1.3f,MS_BASE_OBJECT_SPEED * 1.5f,MS_BASE_OBJECT_SPEED * 1.7f,
-    MS_BASE_OBJECT_SPEED*1.9f,MS_BASE_OBJECT_SPEED,MS_BASE_OBJECT_SPEED*2.0f};
+    MS_BASE_OBJECT_SPEED*1.9f,MS_BASE_OBJECT_SPEED,MS_BASE_OBJECT_SPEED*2.0f,
+    MS_BASE_OBJECT_SPEED*0.32f,MS_BASE_OBJECT_SPEED*1.39f,
+    MS_BASE_OBJECT_SPEED * 1.03f,MS_BASE_OBJECT_SPEED * 1.88f,MS_BASE_OBJECT_SPEED * 1.923f,
+    MS_BASE_OBJECT_SPEED*1.223f,MS_BASE_OBJECT_SPEED,MS_BASE_OBJECT_SPEED*0.445f};
     
     //Choose random arquetypes per lane
     for (i=0; i < lane_bound; i++)
@@ -918,16 +921,15 @@ int32_t fillMap(map_t *_map, uint32_t _level)
                         _map->lanes[i] = finish_line_arquetypes[0];
                         break;
 
-                    case 1: case 4: case 5:
-                        _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements];
-                        break;
+                    case 1: 
                     case 2:
-                        _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements / 2];
-                        break;
                     case 3:
-                        _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements/2 + water_arquetypes_elements/2];
+                    case 4: 
+                    case 5:
+
+                        _map->lanes[i] = water_arquetypes[11];
                         break;
-                    
+
                     case 6:
                     case 7:
                         _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
