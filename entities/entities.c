@@ -441,7 +441,7 @@
         },
         [1] = 
         {
-            .direction = LEFT,
+            .direction = RIGHT,
             .background = water,
             .kind = &big_log_object_kind,
             .objects = {
@@ -480,7 +480,7 @@
         },
         [4] = 
         {
-            .direction = LEFT,
+            .direction = RIGHT,
             .background = water,
             .kind = &normal_log_object_kind,
             .objects = {
@@ -506,7 +506,7 @@
         },
         [6] = 
         {
-            .direction = RIGHT,
+            .direction = LEFT,
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
@@ -532,7 +532,7 @@
         },
         [8] = 
         {
-            .direction = RIGHT,
+            .direction = LEFT,
             .background = water,
             .kind = &turtle_object_kind,
             .objects = {
@@ -1197,13 +1197,17 @@ int32_t fillMap(map_t *_map, uint32_t _level)
                         break;
 
                     case 1: 
-                    case 2:
-                    case 3:
                     case 4: 
                     case 5:
 
                         _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements];
                         break;
+		    case 2:
+                   	 _map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements / 2];
+                    	break;
+                    case 3:
+                    	_map->lanes[i] = water_arquetypes[rand() % water_arquetypes_elements/2 + water_arquetypes_elements/2];
+                    	break;
 
                     case 6:
                     case 7:
