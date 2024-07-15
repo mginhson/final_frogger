@@ -25,12 +25,12 @@ int main(int argc, char **argv)
         puts("frogger");
         init_allegro();
         initializeGameLogic();   
-        while(1)
+        do
         {
             gameTick(10);
             usleep(TIME_MICROSECONDS);
-        }
-
+        }while(1);
+        
     #endif
 
     return 0;

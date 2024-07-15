@@ -11,4 +11,5 @@ void draw_final_frog(float dx, float dy);
 void draw_frog(float dx, float dy, int frame, int state);
 void draw_turtle_squad(const object_t * p_turtles, float dx, float dy); 
 void draw_dead_animation(float dx, float dy);
+void draw_lifes(float dx, float dy, int lifes);
 #endif

@@ -13,12 +13,14 @@ static void draw_lane_objects(lane_t * lane, int row);
 static void draw_rectangle_timer(int time);
 #define TIMER_SIZE 5.
 // EL tiempo maximo es 60 y algo
-void draw_rectangle_timer(int time){
+static void draw_rectangle_timer(int time){
     al_draw_filled_rectangle(WALL_SIZE, TOTAL_HEIGHT - WALL_SIZE, WALL_SIZE + (time * TIMER_SIZE) / 1000 ,TOTAL_HEIGHT - SHORT_SIZE, al_map_rgb(255, 255, 255));
     return;
 }
 
+/*static void draw_score(){
 
+}*/
 
 int renderWorld(map_t *map, const independent_object_t* frog[], int size, int tiempo, int renderLives){
     static short int death_counter = 0;
@@ -32,8 +34,9 @@ int renderWorld(map_t *map, const independent_object_t* frog[], int size, int ti
     // La ranita esta muerta
     draw_frog(frog[0]->values.position, frog[0]->y_position, 0, alive);
     
-    
+    //draw_lifes(REZISE(NORMAL_SIZE), ROW(15), renderLives);
     draw_rectangle_timer(tiempo);
+    draw_lifes(REZISE(NORMAL_SIZE), ROW(16) + REZISE(SHORT_SIZE), renderLives);
     al_flip_display();
     return death_counter > 0 ? death : alive;
 }

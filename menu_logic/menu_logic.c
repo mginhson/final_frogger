@@ -15,6 +15,7 @@
 #include "../allegro/pause.h"
 #include "../allegro/highscore.h"
 #include "../allegro/audio/soundTrack.h"
+#include "../allegro/init.h"
 #endif
 #include "../game/game_logic.h" 
 #include <unistd.h>
@@ -58,6 +59,10 @@ void menu_1 (int option){
             #ifdef RPI
             disp_clear();
             disp_update();
+            #endif
+            #ifdef PC 
+            destroy_allegro();
+            _exit(0);
             #endif
             break;
     }

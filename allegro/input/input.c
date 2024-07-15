@@ -18,8 +18,13 @@ dato_entrada input_reader(void){
        
         al_get_next_event(general_information.queue, &event_capture);
         switch (event_capture.type){
+            case ALLEGRO_EVENT_DISPLAY_CLOSE:
+                destroy_allegro();
+                _exit(0);
+                break;
             case ALLEGRO_EVENT_KEY_DOWN:{
                 switch (event_capture.keyboard.keycode){
+
                     case ALLEGRO_KEY_W:
                     case ALLEGRO_KEY_UP:{
                         return_value = _UP;

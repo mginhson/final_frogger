@@ -14,7 +14,7 @@ int pause(void){
     text_t * continue_text = create_text("CONTINUE", blue_font, TOTAL_WIDTH/2, ROW(5), 30, CENTERED);
     text_t * restart_text = create_text("RESTART",  blue_font, TOTAL_WIDTH/2, ROW(7), 30, CENTERED);
     //text_t * menu_text = create_text("MENU",  blue_font, TOTAL_WIDTH/2, ROW(9), 30, CENTERED);
-    text_t * quit_text = create_text("QUIT GAME",  blue_font, TOTAL_WIDTH/2, ROW(9), 30, CENTERED);    
+    text_t * quit_text = create_text("MENU",  blue_font, TOTAL_WIDTH/2, ROW(9), 30, CENTERED);    
     
     draw_text(continue_text);
     draw_text(restart_text);

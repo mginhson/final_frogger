@@ -94,6 +94,7 @@ void draw_final_frog(float dx, float dy){
     printf("FINAL POSITION%f\n", dx);
     //sleep(12);
     al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx - REZISE(sw/2), dy, REZISE(sw), REZISE(sh), 0);
+    free(special_assets);
 }
 void draw_frog(float dx, float dy, int frame, int state){
     assets_t * all_frogs_assets = get_frog_assets();
@@ -106,35 +107,7 @@ void draw_frog(float dx, float dy, int frame, int state){
     } else if (state == death){
         frogs_assets = &(death_assets[frame]);
     }
-    /*
-    switch (state)
-    {
-    case alive:
-        frogs_assets = &(all_frogs_assets[frog_top]);
-    case death1:
-        frogs_assets = &(death_assets[death_1]);
-        break;
-    case death2:
-        frogs_assets = &(death_assets[death_2]);
-        break;
-    case death3:
-        frogs_assets = &(death_assets[death_3]);
-        break;
-    case death4:
-        frogs_assets = &(death_assets[death_4]);
-        break;
-    case death5:
-        frogs_assets = &(death_assets[death_5]);
-        break;
-    case death6:
-        frogs_assets = &(death_assets[death_6]);
-        break;
-    case death7:
-        frogs_assets = &(death_assets[death_7]);
-        break;
-    default:
-        break;
-    }*/
+
     float sx = frogs_assets->sx;
     float sy = frogs_assets->sy;
     float sw = frogs_assets->sw;
@@ -156,5 +129,19 @@ void draw_turtle_squad(const object_t * p_turtles, float dx, float dy){
     for (i = 0; i < 3; i++){
         al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx + i * REZISE(sw), dy,REZISE(sw), REZISE(sh), 0);
     }
+    free(turtle_assets);
     return; 
+}
+void draw_lifes(float dx, float dy, int lifes){
+    assets_t * lifes_assets = get_life_assets();
+    int i;
+    float sx = lifes_assets[0].sx;
+    float sy = lifes_assets[0].sy;
+    float sw = lifes_assets[0].sw;
+    float sh = lifes_assets[0].sh;
+    for (i = 0; i < lifes; i++){
+        al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx + i * REZISE(sw), dy , REZISE(sw), REZISE(sh), 0);
+    }
+    free(lifes_assets);
+    return;
 }

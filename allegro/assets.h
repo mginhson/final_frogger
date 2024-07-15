@@ -35,6 +35,8 @@
 #define CHARS_ASSETS_X 17
 #define CHARS_ASSETS_Y 3
 #define CHARS_ASSETS 36
+
+#define LIFE_ASSET_Y 215
 // Constantes para acceder a los assets de la frog
 #define SPECIAL_ASSETS 6
 #define SPECIAL_ASSETS_X 45
@@ -194,5 +196,5 @@ assets_t * get_chars_assets(char color);
 assets_t * get_frog_chars_assets(void);
 assets_t * get_special_assets(void);
 assets_t * get_wall_assets(void);
-
+assets_t * get_life_assets(void);
 #endif

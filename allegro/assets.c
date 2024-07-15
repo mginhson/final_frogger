@@ -56,7 +56,17 @@ assets_t * get_cars_assets(void){
     }
     return assets;
 }
-
+assets_t * get_life_assets(void){
+    assets_t * assets = (assets_t *) malloc(sizeof(assets_t));
+    assets_t asset = {
+        .sh = SHORT_SIZE,
+        .sw = SHORT_SIZE,
+        .sx = 5 + NORMAL_SIZE * 2,
+        .sy = LIFE_ASSET_Y
+    }; 
+    assets[0] = asset;
+    return assets;
+}
 assets_t * get_snakes_assets(void){
     assets_t* assets = (assets_t *) malloc(sizeof(assets_t) * SNAKE_ASSETS);
     int i;
