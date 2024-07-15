@@ -118,7 +118,7 @@ void draw_frog(float dx, float dy, int frame, int state){
     free(all_death_assets);
 }
 
-void draw_turtle_squad(const object_t * p_turtles, float dx, float dy){
+void draw_turtle_squad(const object_t * p_turtles, float dx, float dy, int direction){
 
     assets_t * turtle_assets = get_turtle_assets();
     float sx = turtle_assets[p_turtles->state + 2].sx;
@@ -127,7 +127,9 @@ void draw_turtle_squad(const object_t * p_turtles, float dx, float dy){
     float sh = turtle_assets[p_turtles->state + 2].sh;
     int i;
     for (i = 0; i < 3; i++){
-        al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx + i * REZISE(sw), dy,REZISE(sw), REZISE(sh), 0);
+        
+    al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx + i * REZISE(sw), dy,REZISE(sw), REZISE(sh), direction == 1 ? ALLEGRO_FLIP_HORIZONTAL: 0);
+    
     }
     free(turtle_assets);
     return; 

@@ -87,7 +87,7 @@ static void draw_lane_objects(lane_t *lane, int row){
                 printf("DRAW\n");
                 draw_final_frog(x,y);
             } else if (lane->kind == &turtle_object_kind){
-                draw_turtle_squad(&(lane->objects[i]), x, y);
+                draw_turtle_squad(&(lane->objects[i]), x, y, lane->direction);
             }
             
             
