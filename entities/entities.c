@@ -153,7 +153,7 @@
     static const lane_t water_arquetypes[] = {
         [0] = 
         {
-            .direction = LEFT,
+            .direction = RIGHT,
             .background = water,
             .kind = &normal_log_object_kind,
             .objects = {
@@ -179,7 +179,7 @@
         },
         [2] = 
         {
-            .direction = LEFT,
+            .direction = RIGHT,
             .background = water,
             .kind = &small_log_object_kind,
             .objects = {
@@ -205,7 +205,7 @@
         },
         [4] = 
         {
-            .direction = RIGHT,
+            .direction = LEFT,
             .background = water,
             .kind = &normal_log_object_kind,
             .objects = {
