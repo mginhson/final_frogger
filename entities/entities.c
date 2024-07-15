@@ -1053,7 +1053,7 @@
                 [1]={.position=ENDSLOT_2,.doesExist=0,},
                 [2]={.position=ENDSLOT_3,.doesExist=0,},
                 [3]={.position=ENDSLOT_4,.doesExist=0,},
-                [4]={.position=ENDSLOT_5,-doesExist=0,}
+                [4]={.position=ENDSLOT_5,.doesExist=0,}
             }   
         }
     };
