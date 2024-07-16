@@ -187,6 +187,7 @@ void animationLevel(void){
             assets_t *yellow_font = get_chars_assets('y');
             text_t *next_level_text = create_text("NEXT LEVEL", yellow_font, TOTAL_WIDTH / 2, TOTAL_HEIGHT / 2 - REZISE(SHORT_SIZE), 60, CENTERED);
             draw_text(next_level_text);
+            al_flip_display();
             free(yellow_font);
             free(next_level_text);
         }
