@@ -196,16 +196,16 @@ int gameTick(int32_t ms_since_last_tick)
                             case turtle_is_down:
                                 map.lanes[i].objects[j].doesExist = 1;
                                 map.lanes[i].objects[j].state = turtle_is_up;
-                                map.lanes[i].objects[j].timer = map.lanes[i].ms_reload *75;
+                                map.lanes[i].objects[j].timer = map.lanes[i].ms_reload *100;
                                 break;
                             case turtle_is_halfway:
                                 map.lanes[i].objects[j].state = turtle_is_down;
                                 map.lanes[i].objects[j].doesExist = 0;
-                                map.lanes[i].objects[j].timer = map.lanes[i].ms_reload *40;
+                                map.lanes[i].objects[j].timer = map.lanes[i].ms_reload *60;
                                 break;
                             case turtle_is_up:
                                 map.lanes[i].objects[j].state = turtle_is_halfway;
-                                map.lanes[i].objects[j].timer = map.lanes[i].ms_reload *20;
+                                map.lanes[i].objects[j].timer = map.lanes[i].ms_reload *30;
                                 break;
 
                             default:
