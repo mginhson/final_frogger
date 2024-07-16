@@ -3,6 +3,7 @@
 #include "High_scores.h"
 
 void writing_top (char* str, int ptj){
+    
     FILE* pfile;
     pfile = fopen ("highScores/top10.txt", "r+");
     if (pfile == NULL){
