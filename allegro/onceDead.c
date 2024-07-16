@@ -1,8 +1,9 @@
 #include <allegro5/allegro5.h>
+#include "onceDead.h"
 #include "components/text.h"
 #include "assets.h"
 #include "../config.h"
-#include "string.h"
+#include <string.h>
 #include <unistd.h>
 #include <stdio.h>
 #include "../highScores/High_scores.h"

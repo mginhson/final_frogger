@@ -1,3 +1,4 @@
+#include "objects.h"
 #include "../assets.h"
 #include <stdlib.h>
 #include <allegro5/allegro5.h>

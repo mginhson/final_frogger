@@ -31,13 +31,13 @@ util.o : allegro/util.c allegro/util.h allegro/init.h allegro/assets.h config.h
 	gcc allegro/util.c -c ${DEFINE_ARGS}
 text.o : allegro/components/text.c allegro/components/text.h allegro/init.h allegro/assets.h config.h
 	gcc allegro/components/text.c -c ${DEFINE_ARGS}
-highscore.o: allegro/highscore.c allegro/highscore.h allegro/components/text.h  allegro/init.h config.h
+highscore.o: allegro/highscore.c allegro/highscore.h allegro/components/text.h  allegro/init.h config.h allegro/util.h allegro/assets.h
 	gcc allegro/highscore.c -c ${DEFINE_ARGS}
-pause.o: allegro/pause.c allegro/pause.h allegro/components/text.h allegro/init.h config.h
+pause.o: allegro/pause.c allegro/pause.h allegro/components/text.h allegro/init.h config.h allegro/assets.h allegro/components/objects.h 
 	gcc allegro/pause.c -c ${DEFINE_ARGS}
 objects.o: allegro/components/objects.c  allegro/init.h allegro/assets.h allegro/components/objects.h config.h
 	gcc allegro/components/objects.c -c ${DEFINE_ARGS}
-render.o: allegro/render.c allegro/render.h entities/entities.h allegro/assets.h allegro/init.h config.h allegro/components/objects.h
+render.o: allegro/render.c allegro/render.h entities/entities.h allegro/assets.h allegro/init.h config.h allegro/components/objects.h allegro/components/objects.h allegro/input/input.h allegro/audio/soundTrack.h
 	gcc allegro/render.c -c ${DEFINE_ARGS}
 input.o: allegro/input/input.c allegro/input/input.h allegro/init.h 
 	gcc allegro/input/input.c -c ${DEFINE_ARGS}
@@ -47,9 +47,7 @@ menu_logic.o:config.h menu_logic/menu_logic.c allegro/menu.h allegro/highscore.h
 	gcc menu_logic/menu_logic.c -c ${DEFINE_ARGS}
 High_scores.o: highScores/High_scores.h highScores/High_scores.c allegro/highscore.h
 	gcc -Wall -c highScores/High_scores.c ${DEFINE_ARGS}
-animation.o: allegro/animation.c allegro/animation.h entities/entities.h allegro/render.h allegro/components/objects.h
-	gcc  -c allegro/animation.c ${DEFINE_ARGS}
-onceDead.o: allegro/onceDead.c allegro/onceDead.h config.h allegro/assets.h allegro/components/text.h
+onceDead.o: allegro/onceDead.c allegro/onceDead.h config.h allegro/assets.h allegro/components/text.h highScores/High_scores.h allegro/audio/soundTrack.h
 	gcc -c allegro/onceDead.c ${DEFINE_ARGS}
 clean:
 	rm ${MODULES} ${EXEC_NAME} 

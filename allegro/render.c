@@ -8,7 +8,7 @@
 #include "components/objects.h"
 #include "components/text.h"
 #include <stdio.h>
-#include "string.h"
+#include <string.h>
 #include "input/input.h"
 #include "audio/soundTrack.h"
 static void draw_lane(lane_t* lane, int row);
