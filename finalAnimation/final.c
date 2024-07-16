@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "../audio/audio.h"
-
+#include "../audio/soundTrack.h"
 #include "../highScores/High_scores.h"
 
 static void finalAnimation(char * points);
@@ -35,7 +35,7 @@ void onceDead (char * points, int pts){
 
 void animationLevel (void){
     disp_clear();
-
+    levelSound();
     letterN((dcoord_t) {13, 9});
     letterE((dcoord_t) {9, 9});
     letterW((dcoord_t) {5, 9});
