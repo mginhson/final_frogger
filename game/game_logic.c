@@ -436,7 +436,7 @@ int gameTick(int32_t ms_since_last_tick)
                     time_left_on_level = TIME_PER_LEVEL_MS;
                     resetRanitaPosition();
                 }
-                pts+=5;
+                pts+=2;
             }
            
                 
@@ -619,8 +619,8 @@ static const object_kind_t * collisionAnalysis(void)
 
 static void updateMap(void)
 {
-    pts += (10 * (level + 1));
-    
+    // pts += (10 * (level + 1));
+    pts += (5 * (level + 1));
     animationLevel();
     
     fillMap(&map,++level);
