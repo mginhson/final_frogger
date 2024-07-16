@@ -1303,7 +1303,7 @@ int32_t fillMap(map_t *_map, uint32_t _level)
 
         
         #elif defined(PC)
-            if (_level >=2 )
+            if (_level >=0 )
             {
 
             

@@ -9,6 +9,7 @@
 #include "components/text.h"
 #include <stdio.h>
 #include "string.h"
+#include "input/input.h"
 #include "audio/soundTrack.h"
 static void draw_lane(lane_t* lane, int row);
 static void draw_lane_background(lane_t * lane, int row);
@@ -83,7 +84,7 @@ static void draw_lane_objects(lane_t *lane, int row){
             } else if (lane->kind == &big_log_object_kind){
                 draw_log(3, x, y);
             } else if (lane->kind == &snake_object_kind){
-                draw_snake(&(lane->objects[i]), x, y); //checkear este acceso, .objects[j], no ->objects
+                draw_snake(&(lane->objects[i]), x, y, lane->direction); //checkear este acceso, .objects[j], no ->objects
             } else if (lane->kind == &lilypad_object_kind){
                 printf("DRAW\n");
                 draw_final_frog(x,y);
@@ -162,6 +163,7 @@ void draw_finish_line(assets_t * wall_assets){
     }
 }
 void animationLevel(void){
+    input_flush();
     levelSound();
     int i;
     int timer;
@@ -170,10 +172,11 @@ void animationLevel(void){
     while (i <= TOTAL_WIDTH){
         al_wait_for_event(general_information.queue, &event);
         if (event.type == ALLEGRO_EVENT_TIMER){
-            i++;
-            al_draw_filled_rectangle(0, 0, i, TOTAL_WIDTH, al_map_rgb(0 ,0 ,0));
+            i+=3;
+            al_draw_filled_rectangle(0, 0, i, TOTAL_HEIGHT, al_map_rgb(0 ,0 ,0));
             al_flip_display();
         }
+        printf("ANIMATION\n");
 
     }
     i = 0;

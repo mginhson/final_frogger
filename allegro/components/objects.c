@@ -62,7 +62,7 @@ void draw_log(int size, float dx, float dy){
     free(logs);
     return;
 }
-void draw_snake(object_t * snake, float dx, float dy){
+void draw_snake(object_t * snake, float dx, float dy, int direction){
     assets_t * snakes = get_snakes_assets();
     int i = snake1;
     float sx = snakes[i].sx;
@@ -70,7 +70,7 @@ void draw_snake(object_t * snake, float dx, float dy){
     float sw = snakes[i].sw;
     float sh = snakes[i].sh;
     
-    al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx, dy, REZISE(sw), REZISE(sh), 0);
+    al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx, dy, REZISE(sw), REZISE(sh), direction == 1 ? ALLEGRO_FLIP_HORIZONTAL : 0);
     free(snakes);
     return;
 }
