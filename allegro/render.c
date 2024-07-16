@@ -165,14 +165,14 @@ void draw_finish_line(assets_t * wall_assets){
 void animationLevel(void){
     input_flush();
     levelSound();
-    int i;
+    int i = 0;
     int timer;
     ALLEGRO_EVENT event;
-    short int animation = 1;
+    
     while (i <= TOTAL_WIDTH){
         al_wait_for_event(general_information.queue, &event);
         if (event.type == ALLEGRO_EVENT_TIMER){
-            i+=3;
+            i+=7;
             al_draw_filled_rectangle(0, 0, i, TOTAL_HEIGHT, al_map_rgb(0 ,0 ,0));
             al_flip_display();
         }
@@ -180,7 +180,7 @@ void animationLevel(void){
 
     }
     i = 0;
-    while (i < 7){
+    while (i < 120){
         al_wait_for_event(general_information.queue, &event);
         if (event.type == ALLEGRO_EVENT_TIMER){
             i++;
